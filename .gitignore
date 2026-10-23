@@ -28,3 +28,5 @@ desktop.ini
 
 # Factory scratch
 .factory/board.json.tmp
+
+/workers/*/.wrangler/
