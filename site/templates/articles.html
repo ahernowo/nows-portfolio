@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body_class %}listing{% endblock body_class %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">{{ section.title }}</h1>
+    {%- if section.description %}<p class="page-dek">{{ section.description }}</p>{% endif %}
+    <p class="page-aside"><a href="{{ get_url(path='atom.xml', trailing_slash=false) }}">Follow with RSS</a> or browse <a href="{{ get_url(path='/tags/') }}">by topic</a>.</p>
+  </header>
+
+  {%- for year, items in section.pages | group_by(attribute="year") %}
+  <section class="year-group" aria-labelledby="year-{{ year }}">
+    <h2 class="year-title" id="year-{{ year }}">{{ year }}</h2>
+    <ol class="index-list">
+      {%- for item in items %}
+      {{ <article_item item={item} /> }}
+      {%- endfor %}
+    </ol>
+  </section>
+  {%- else %}
+  <p class="index-empty">The first article is being written.</p>
+  {%- endfor %}
+</div>
+{% endblock content %}

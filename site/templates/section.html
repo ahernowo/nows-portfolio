@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block body_class %}listing{% endblock body_class %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">{{ section.title }}</h1>
+    {%- if section.description %}<p class="page-dek">{{ section.description }}</p>{% endif %}
+  </header>
+  {%- if section.content %}<div class="prose">{{ section.content | safe }}</div>{% endif %}
+  <ol class="index-list">
+    {%- for item in section.pages %}
+    {{ <article_item item={item} /> }}
+    {%- endfor %}
+  </ol>
+</div>
+{% endblock content %}

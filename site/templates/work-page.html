@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block og_type %}article{% endblock og_type %}
+{% block head_extra %}<link rel="stylesheet" href="{{ get_url(path='giallo.css', trailing_slash=false) }}">{% endblock head_extra %}
+{% block body_class %}case-page{% endblock body_class %}
+
+{% block content %}
+<article class="case wrap">
+  <header class="case-head">
+    <p class="crumb"><a href="{{ get_url(path='@/work/_index.md') }}">Work</a></p>
+    <h1 class="case-title" data-vt="title">{{ page.title }}</h1>
+    {%- if page.description %}<p class="case-dek">{{ page.description }}</p>{% endif %}
+
+    {#- Facts laid out like a filled-in form: each box is a labelled field. #}
+    <dl class="case-form">
+      {%- if page.extra.role %}<div class="form-field"><dt>Role</dt><dd>{{ page.extra.role }}</dd></div>{% endif %}
+      {%- if page.extra.year %}<div class="form-field"><dt>Year</dt><dd>{{ page.extra.year }}</dd></div>{% endif %}
+      {%- if page.extra.status %}<div class="form-field"><dt>Status</dt><dd>{{ page.extra.status }}</dd></div>{% endif %}
+      {%- if page.extra.stack %}<div class="form-field form-field-wide"><dt>Built with</dt><dd>{{ page.extra.stack | join(sep=", ") }}</dd></div>{% endif %}
+      {%- if page.extra.link or page.extra.source %}
+      <div class="form-field form-field-wide"><dt>Links</dt><dd class="form-links">
+        {%- if page.extra.link %}<a href="{{ page.extra.link }}">Live version</a>{% endif %}
+        {%- if page.extra.source %}<a href="{{ page.extra.source }}">Source code</a>{% endif %}
+      </dd></div>
+      {%- endif %}
+    </dl>
+  </header>
+
+  <div class="prose case-body">
+    {{ page.content | safe }}
+  </div>
+
+  <nav class="pager" aria-label="More work">
+    {%- if page.lower %}<a class="pager-link" rel="prev" href="{{ page.lower.permalink }}"><span class="pager-hint">Previous</span>{{ page.lower.title }}</a>{% endif %}
+    {%- if page.higher %}<a class="pager-link pager-next" rel="next" href="{{ page.higher.permalink }}"><span class="pager-hint">Next</span>{{ page.higher.title }}</a>{% endif %}
+  </nav>
+</article>
+{% endblock content %}

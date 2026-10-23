@@ -1,0 +1,262 @@
+// Header, footer, search dialog: the parts around every page.
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: clamp(1.25rem, 3vw, 2.5rem);
+  min-height: 4.25rem;
+}
+
+.wordmark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-stretch: 72%;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-decoration: none;
+  padding-block: 0.5rem;
+}
+
+.site-nav ul {
+  display: flex;
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  display: block;
+  padding-block: 0.4rem;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.site-nav a:hover {
+  color: var(--ink);
+}
+
+.site-nav a[aria-current] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.4em;
+  text-decoration-color: var(--ink);
+}
+
+.header-tools {
+  display: flex;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.6rem;
+  font: inherit;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tool:hover {
+  color: var(--ink);
+  border-color: var(--rule);
+}
+
+.tool-kbd {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 40rem) {
+  .header-inner {
+    padding-top: 0.5rem;
+  }
+
+  .site-nav {
+    order: 3;
+    width: 100%;
+    padding-bottom: 0.4rem;
+  }
+
+  .tool-label,
+  .tool-kbd {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
+// Footer
+
+.site-footer {
+  margin-top: clamp(4rem, 10vw, 7rem);
+  border-top: 1px solid var(--rule);
+  padding-block: 2.25rem 3rem;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem 2rem;
+  align-items: baseline;
+}
+
+.footer-sign {
+  margin: 0;
+}
+
+.footer-name {
+  color: var(--ink);
+  font-weight: 750;
+  font-stretch: 80%;
+  font-size: 1.0625rem;
+  margin-right: 0.5rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-colophon {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+@media (max-width: 40rem) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Search
+
+.search-dialog {
+  width: min(40rem, 100% - 2rem);
+  max-height: min(36rem, 80vh);
+  margin: 10vh auto auto;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 24px 60px -24px rgb(20 25 56 / 55%);
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.search-dialog[open] {
+  display: flex;
+}
+
+.search-dialog::backdrop {
+  background: rgb(20 25 56 / 45%);
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 1rem 1.15rem;
+  font: inherit;
+  font-size: 1.25rem;
+  color: inherit;
+  background: transparent;
+  border: 0;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.search-input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+.search-close {
+  margin-right: 0.75rem;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: none;
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+}
+
+.search-status {
+  margin: 0;
+  padding: 0.6rem 1.15rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.5rem;
+  overflow-y: auto;
+}
+
+.search-results a {
+  display: block;
+  padding: 0.75rem 1.15rem;
+  text-decoration: none;
+}
+
+.search-results a:hover,
+.search-results a[aria-selected="true"] {
+  background: var(--highlight);
+}
+
+.result-title {
+  display: block;
+  font-weight: 650;
+}
+
+.result-snippet {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.search-results mark {
+  background: var(--copy-yellow);
+  color: inherit;
+  border-radius: 2px;
+}

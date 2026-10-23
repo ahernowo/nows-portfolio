@@ -1,0 +1,18 @@
+[package]
+name = "factory"
+version = "0.1.0"
+description = "Work orders, quality gates and a live dashboard for the Claude Code agent pipeline."
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+cms-core.workspace = true
+clap.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+
+[lints]
+workspace = true

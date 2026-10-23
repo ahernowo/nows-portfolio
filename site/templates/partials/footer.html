@@ -1,0 +1,18 @@
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-sign">
+      <span class="footer-name">{{ config.extra.name }}</span>
+      {{ config.extra.role }}{% if config.extra.location %}, based in {{ config.extra.location }}{% endif %}.
+    </p>
+    <ul class="footer-links">
+      {%- if config.extra.email %}<li><a href="mailto:{{ config.extra.email }}">Email</a></li>{% endif %}
+      {%- if config.extra.github %}<li><a href="{{ config.extra.github }}" rel="me">GitHub</a></li>{% endif %}
+      {%- if config.extra.linkedin %}<li><a href="{{ config.extra.linkedin }}" rel="me">LinkedIn</a></li>{% endif %}
+      <li><a href="{{ get_url(path='atom.xml', trailing_slash=false) }}">RSS feed</a></li>
+    </ul>
+    <p class="footer-colophon">
+      Built with Zola and Rust, hosted on Cloudflare. Set in Archivo and Newsreader.
+      {%- if config.extra.source %} <a href="{{ config.extra.source }}">Read the source</a>.{% endif %}
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ lang or config.default_language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- set item_title = (page.title if page else (section.title if section else "")) or "" %}
+  {%- set item_description = (page.description if page else (section.description if section else "")) or "" %}
+  {%- set meta_title = (item_title ~ " | " ~ config.title) if item_title else (config.title ~ ", " ~ (config.extra.role | lower)) %}
+  {%- set meta_description = item_description or config.description %}
+  {%- set canonical = current_url or config.base_url %}
+  <title>{% block title %}{{ meta_title }}{% endblock title %}</title>
+  <meta name="description" content="{{ meta_description }}">
+  <link rel="canonical" href="{{ canonical }}">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#fcfcfa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141938" media="(prefers-color-scheme: dark)">
+
+  <meta property="og:site_name" content="{{ config.title }}">
+  <meta property="og:title" content="{{ item_title or config.title }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
+  <meta property="og:image" content="{{ get_url(path=config.extra.og_image) }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="{{ config.title }}: writing" href="{{ get_url(path='atom.xml', trailing_slash=false) }}">
+  <link rel="preload" href="{{ get_url(path='fonts/archivo-latin-wdth-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ get_url(path='main.css', cachebust=true) }}">
+  {% block head_extra %}{% endblock head_extra %}
+  {#- Saved theme and page-transition setup; must run before first paint. #}
+  <script src="{{ get_url(path='js/head.js', cachebust=true) }}"></script>
+  <script src="{{ get_url(path='js/site.js', cachebust=true) }}" defer></script>
+  {% block structured_data %}
+  <script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "Person", "name": config.extra.name, "jobTitle": config.extra.role, "url": config.base_url} | json_encode | safe }}</script>
+  {% endblock structured_data %}
+</head>
+<body class="{% block body_class %}{% endblock body_class %}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include "partials/header.html" %}
+  <main id="main" tabindex="-1">
+    {% block content %}{% endblock content %}
+  </main>
+  {% include "partials/footer.html" %}
+  {% include "partials/search.html" %}
+</body>
+</html>

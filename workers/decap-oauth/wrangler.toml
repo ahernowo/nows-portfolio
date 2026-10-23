@@ -1,0 +1,18 @@
+# Decap CMS GitHub sign-in helper (stage A).
+# Deploy:   npx wrangler deploy
+# Secrets:  npx wrangler secret put GITHUB_CLIENT_ID
+#           npx wrangler secret put GITHUB_CLIENT_SECRET
+
+name = "decap-oauth"
+main = "build/index.js"
+compatibility_date = "2026-10-01"
+
+[build]
+command = "cargo install -q worker-build --version 0.8.7 --locked && worker-build --release"
+
+[vars]
+# The exact origin of your website: scheme and host, no path, no trailing slash.
+# The token is only ever handed to a CMS page on this origin.
+ALLOWED_ORIGIN = "https://your-site.pages.dev"
+# public_repo is enough for a public repository. Use "repo" for a private one.
+GITHUB_SCOPE = "public_repo"

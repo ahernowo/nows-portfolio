@@ -1,0 +1,6 @@
+# Copy to .dev.vars for `npx wrangler dev`. Never commit .dev.vars.
+GITHUB_CLIENT_ID=your-dev-oauth-app-client-id
+GITHUB_CLIENT_SECRET=your-dev-oauth-app-client-secret
+# Make one with:  openssl rand -base64 32
+SESSION_KEY=replace-with-32-random-bytes-in-base64
+GITHUB_CONTENT_TOKEN=github_pat_for_a_test_repository

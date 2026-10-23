@@ -1,0 +1,33 @@
+{#- Reusable pieces. Tera components are global: use them anywhere as
+    {{ <work_item item={page} /> }} without importing this file. -#}
+
+{% component work_item(item: map) %}
+<li class="index-item">
+  <span class="index-when">{{ item.extra.year or item.year or "" }}</span>
+  <div class="index-main">
+    <h3 class="index-title"><a class="index-link" href="{{ item.permalink }}">{{ item.title }}</a></h3>
+    {%- if item.description %}<p class="index-desc">{{ item.description }}</p>{% endif %}
+  </div>
+  {%- if item.extra.stack %}<p class="index-meta">{{ item.extra.stack | join(sep=", ") }}</p>{% endif %}
+</li>
+{% endcomponent work_item %}
+
+{% component article_item(item: map) %}
+<li class="index-item">
+  {%- if item.date %}<time class="index-when" datetime="{{ item.date }}">{{ item.date | date(format="%-d %b %Y") }}</time>{% else %}<span class="index-when"></span>{% endif %}
+  <div class="index-main">
+    <h3 class="index-title"><a class="index-link" href="{{ item.permalink }}">{{ item.title }}</a></h3>
+    {%- if item.description %}<p class="index-desc">{{ item.description }}</p>{% endif %}
+  </div>
+  <p class="index-meta">{{ item.reading_time }} min read</p>
+</li>
+{% endcomponent article_item %}
+
+{#- A figure with a caption, for use inside Markdown content:
+    {{ <figure src="/images/uploads/x.png" alt="What the image shows" caption="Optional caption" /> }} -#}
+{% component figure(src: string, alt: string, caption: string = "", wide: bool = false) %}
+<figure class="figure{% if wide %} figure-wide{% endif %}">
+  <img src="{{ src }}" alt="{{ alt }}" loading="lazy" decoding="async">
+  {%- if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>
+{% endcomponent figure %}

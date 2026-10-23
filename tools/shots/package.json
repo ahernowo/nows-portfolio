@@ -1,0 +1,13 @@
+{
+  "name": "shots",
+  "private": true,
+  "description": "Screenshots and accessibility scans of the built site, for the UI/UX reviewer.",
+  "type": "module",
+  "scripts": {
+    "shoot": "node shoot.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "playwright": "1.63.0"
+  }
+}

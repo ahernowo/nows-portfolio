@@ -1,0 +1,7 @@
+# Keep line endings the same on Windows and in CI, so the build seal,
+# shell scripts and diffs behave identically everywhere.
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.png binary
+*.woff2 binary
+*.ico binary

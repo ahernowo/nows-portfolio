@@ -1,0 +1,4 @@
+# Copy to .dev.vars for `npx wrangler dev`. Never commit .dev.vars.
+GITHUB_CLIENT_ID=your-oauth-app-client-id
+GITHUB_CLIENT_SECRET=your-oauth-app-client-secret
+ALLOWED_ORIGIN=http://localhost:1111

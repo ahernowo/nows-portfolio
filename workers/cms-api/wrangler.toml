@@ -1,0 +1,33 @@
+# Portfolio CMS API (stage B): Rust on Cloudflare Workers with D1.
+#
+# First time:
+#   npx wrangler d1 create portfolio-cms          # copy database_id below
+#   npx wrangler d1 migrations apply portfolio-cms --remote
+#   npx wrangler secret put GITHUB_CLIENT_ID
+#   npx wrangler secret put GITHUB_CLIENT_SECRET
+#   npx wrangler secret put SESSION_KEY           # 32+ random bytes, base64
+#   npx wrangler secret put GITHUB_CONTENT_TOKEN  # fine-grained PAT, Contents: read and write
+#   npx wrangler deploy
+
+name = "portfolio-cms"
+main = "build/index.js"
+compatibility_date = "2026-10-01"
+
+[build]
+command = "cargo install -q worker-build --version 0.8.7 --locked && worker-build --release"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "portfolio-cms"
+database_id = "REPLACE-WITH-YOUR-DATABASE-ID"
+migrations_dir = "migrations"
+
+[vars]
+# GitHub logins allowed to edit, comma-separated.
+ADMIN_LOGINS = "YOUR-LOGIN"
+# Repository that holds the site, and where articles go inside it.
+GITHUB_REPO = "YOUR-LOGIN/nows-portfolio"
+GITHUB_BRANCH = "main"
+CONTENT_DIR = "site/content/articles"
+# The public site, allowed to read /api/articles from the browser.
+SITE_ORIGIN = "https://your-site.pages.dev"

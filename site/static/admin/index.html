@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Content manager</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml">
+</head>
+<body>
+  <!--
+    Decap CMS, pinned to one version. The integrity hash makes the browser
+    refuse the file if the CDN ever serves something different.
+    To upgrade: change the version in both places below, then put the new
+    hash in `integrity` (see docs/cms.md, "Upgrading Decap").
+  -->
+  <script src="https://unpkg.com/decap-cms@3.17.1/dist/decap-cms.js"
+          integrity="sha384-d2pbrhjc5asvSK35gKkrgRIk0Wq+2CQynWnXtSsYWQawXCgBXhcAK737jBAKXT4T"
+          crossorigin="anonymous"></script>
+  <script src="/admin/preview.js"></script>
+</body>
+</html>

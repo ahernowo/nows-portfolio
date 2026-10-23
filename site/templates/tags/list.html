@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Topics | {{ config.title }}{% endblock title %}
+{% block body_class %}listing{% endblock body_class %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">Topics</h1>
+    <p class="page-dek">Every tag used in the writing, with how many articles carry it.</p>
+  </header>
+  <ul class="topic-list">
+    {%- for term in terms | sort(attribute="name") %}
+    <li><a href="{{ term.permalink }}">{{ term.name }}</a> <span class="topic-count">{{ term.page_count }}</span></li>
+    {%- else %}
+    <li class="index-empty">No topics yet.</li>
+    {%- endfor %}
+  </ul>
+</div>
+{% endblock content %}

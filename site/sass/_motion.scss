@@ -1,0 +1,33 @@
+// Page-to-page transitions. Browsers that support cross-document view
+// transitions cross-fade between pages, and the title you clicked in a list
+// slides into place as the new page's heading. Others just navigate.
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.22s;
+}
+
+::view-transition-group(page-title) {
+  animation-duration: 0.35s;
+  animation-timing-function: var(--ease-out);
+}
+
+[data-vt="title"] {
+  view-transition-name: page-title;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

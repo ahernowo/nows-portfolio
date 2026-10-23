@@ -1,0 +1,62 @@
+# Site settings. Change base_url to your real address before the first deploy.
+base_url = "https://your-site.pages.dev"
+title = "Nows"
+description = "Nows builds the systems behind fundraising: donation forms, payment integrations, reconciliation tools and the reports that follow."
+default_language = "en"
+
+compile_sass = true
+minify_html = true
+build_search_index = true
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+feed_limit = 20
+generate_sitemap = true
+generate_robots_txt = true
+
+taxonomies = [
+  { name = "tags", feed = true },
+]
+
+# Keep editor backups and notes out of the build.
+ignored_content = ["*.bak", "*.tmp", "_drafts/*"]
+
+[markdown]
+smart_punctuation = true
+bottom_footnotes = true
+github_alerts = true
+lazy_async_image = true
+external_links_no_referrer = true
+insert_anchor_links = "left"
+
+[markdown.highlighting]
+# One dark theme for code in both light and dark mode: code reads as a
+# separate carbon slab on the page. Class output keeps HTML free of inline
+# styles, which our Content Security Policy forbids.
+theme = "tokyo-night"
+style = "class"
+error_on_missing_language = true
+
+[search]
+index_format = "fuse_json"
+include_title = true
+include_description = true
+include_content = true
+truncate_content_length = 2000
+
+[link_checker]
+internal_level = "error"
+external_level = "warn"
+
+[extra]
+# Your public details. Leave a value empty ("") to hide it.
+name = "Nows"
+role = "Digital systems for fundraising"
+location = "Indonesia"
+email = "you@example.com"
+github = "https://github.com/YOUR-LOGIN"
+linkedin = ""
+source = "https://github.com/YOUR-LOGIN/nows-portfolio"
+# Used in link previews when a page has no image of its own.
+og_image = "images/og.png"
+# What the "now" line under the headline says. Keep it short.
+now_line = "Learning Rust by building this site and its CMS."

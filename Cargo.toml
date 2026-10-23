@@ -1,0 +1,44 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/cms-core",
+    "workers/decap-oauth",
+    "workers/cms-api",
+    "tools/newpost",
+    "tools/factory",
+]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+rust-version = "1.85"
+publish = false
+
+[workspace.dependencies]
+cms-core = { path = "crates/cms-core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.9"
+hmac = "0.12"
+sha2 = "0.10"
+base64 = "0.22"
+pulldown-cmark = { version = "0.13", default-features = false, features = ["html"] }
+unicode-normalization = "0.1"
+url = "2"
+worker = { version = "0.8", features = ["d1"] }
+getrandom = { version = "0.2", features = ["js"] }
+clap = { version = "4", features = ["derive"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"
+unwrap_used = "warn"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true

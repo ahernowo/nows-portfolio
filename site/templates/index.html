@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body_class %}home{% endblock body_class %}
+
+{% block content %}
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero-text">
+    <h1 id="hero-title" class="hero-title">{{ section.extra.headline }}</h1>
+    <p class="hero-sub">{{ section.extra.intro }}</p>
+    {%- if config.extra.now_line %}
+    <p class="hero-now">
+      <span class="now-pulse" aria-hidden="true"></span>
+      <span>{{ config.extra.now_line }} <a href="{{ get_url(path='@/now.md') }}">More on what I'm doing now</a>.</span>
+    </p>
+    {%- endif %}
+  </div>
+  {% include "partials/receipts.html" %}
+</section>
+
+{%- set work = get_section(path="work/_index.md") %}
+<section class="block wrap" aria-labelledby="work-title">
+  <div class="block-head">
+    <h2 id="work-title" class="block-title">Selected work</h2>
+    <a class="block-more" href="{{ work.permalink }}">All work</a>
+  </div>
+  <ol class="index-list">
+    {%- for item in work.pages[:4] %}
+    {{ <work_item item={item} /> }}
+    {%- else %}
+    <li class="index-empty">Case studies are on their way.</li>
+    {%- endfor %}
+  </ol>
+</section>
+
+{%- set writing = get_section(path="articles/_index.md") %}
+<section class="block wrap" aria-labelledby="writing-title">
+  <div class="block-head">
+    <h2 id="writing-title" class="block-title">Writing</h2>
+    <a class="block-more" href="{{ writing.permalink }}">All articles</a>
+  </div>
+  <ol class="index-list">
+    {%- for item in writing.pages[:4] %}
+    {{ <article_item item={item} /> }}
+    {%- else %}
+    <li class="index-empty">The first article is being written.</li>
+    {%- endfor %}
+  </ol>
+</section>
+{% endblock content %}

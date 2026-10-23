@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block body_class %}listing{% endblock body_class %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">{{ section.title }}</h1>
+    {%- if section.description %}<p class="page-dek">{{ section.description }}</p>{% endif %}
+  </header>
+  {%- if section.content %}<div class="prose prose-intro">{{ section.content | safe }}</div>{% endif %}
+  <ol class="index-list index-list-full">
+    {%- for item in section.pages %}
+    {{ <work_item item={item} /> }}
+    {%- else %}
+    <li class="index-empty">Case studies are on their way.</li>
+    {%- endfor %}
+  </ol>
+</div>
+{% endblock content %}

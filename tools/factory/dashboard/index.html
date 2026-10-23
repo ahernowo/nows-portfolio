@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factory board</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="top-title">
+      <h1>Factory board</h1>
+      <span class="project" id="project"></span>
+    </div>
+    <div class="lamp" id="lamp" role="status" aria-live="polite">
+      <span class="lamp-light" aria-hidden="true"></span>
+      <span class="lamp-text" id="lamp-text">Connecting</span>
+    </div>
+    <span class="updated" id="updated"></span>
+  </header>
+
+  <div class="andon" id="andon" role="alert" hidden>
+    <strong>The line is stopped.</strong>
+    <span id="andon-text"></span>
+    <code>factory andon --clear --note "what was done"</code>
+  </div>
+
+  <section class="shift" aria-label="Shift report">
+    <dl class="shift-list" id="shift"></dl>
+  </section>
+
+  <main class="line" id="line" aria-label="Production line"></main>
+
+  <section class="lower">
+    <div class="panel">
+      <h2>Lessons learned</h2>
+      <p class="panel-hint">Written by the approver after each order. Every agent reads them before starting.</p>
+      <ol class="lessons" id="lessons"></ol>
+    </div>
+    <div class="panel">
+      <h2>Recent activity</h2>
+      <ol class="feed" id="feed"></ol>
+    </div>
+  </section>
+
+  <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
+    <div class="drawer-head">
+      <div>
+        <p class="drawer-id" id="drawer-id"></p>
+        <h2 id="drawer-title"></h2>
+      </div>
+      <button type="button" class="close" id="drawer-close" aria-label="Close">Close</button>
+    </div>
+    <ol class="track" id="drawer-track" aria-label="Stations"></ol>
+    <div class="tabs" role="tablist" id="drawer-tabs"></div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </dialog>
+
+  <noscript>The board needs JavaScript. Use <code>factory status</code> in a terminal instead.</noscript>
+</body>
+</html>

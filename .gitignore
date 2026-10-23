@@ -1,0 +1,30 @@
+# Build output
+/target/
+/site/public/
+/workers/*/build/
+/tools/shots/node_modules/
+
+# Local secrets: never commit these
+.dev.vars
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Claude Code: personal settings and machine-local agent memory
+.claude/settings.local.json
+.claude/agent-memory-local/
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.bak
+*.tmp
+
+# Factory scratch
+.factory/board.json.tmp

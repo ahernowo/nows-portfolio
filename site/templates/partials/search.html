@@ -1,0 +1,10 @@
+<dialog id="search" class="search-dialog" aria-labelledby="search-title" data-index="{{ get_url(path='search_index.en.json', trailing_slash=false) }}">
+  <form class="search-form" role="search" method="dialog">
+    <h2 id="search-title" class="visually-hidden">Search this site</h2>
+    <label class="visually-hidden" for="search-input">Search articles and work</label>
+    <input id="search-input" class="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search articles and work">
+    <button type="submit" class="search-close" value="close" aria-label="Close search">Esc</button>
+  </form>
+  <p class="search-status" data-search-status aria-live="polite">Type at least two letters.</p>
+  <ol class="search-results" data-search-results></ol>
+</dialog>

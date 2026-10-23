@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Page not found | {{ config.title }}{% endblock title %}
+{% block body_class %}plain-page{% endblock body_class %}
+
+{% block content %}
+<div class="wrap-text missing">
+  <h1 class="page-title">This page isn't here</h1>
+  <p class="page-dek">The address may have a typo, or the page moved when the site was reorganised.</p>
+  <ul class="missing-links">
+    <li><a href="{{ get_url(path='/') }}">Go to the home page</a></li>
+    <li><a href="{{ get_url(path='@/articles/_index.md') }}">Browse the writing</a></li>
+    <li><button type="button" class="link-button" data-search-open>Search the site</button></li>
+  </ul>
+</div>
+{% endblock content %}

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>CMS articles</title>
+  <link rel="stylesheet" href="/admin/app.css">
+  <script type="module" src="/admin/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#editor">Skip to editor</a>
+
+  <header class="bar">
+    <span class="brand">Articles</span>
+    <span class="who" id="who" hidden></span>
+    <button type="button" class="quiet" id="activity-button" hidden>Activity</button>
+    <button type="button" class="quiet" id="signout-button" hidden>Sign out</button>
+  </header>
+
+  <main id="signin" class="signin" hidden>
+    <h1>Sign in to edit articles</h1>
+    <p id="signin-message">Only allowlisted GitHub accounts can edit.</p>
+    <a class="button primary" href="/auth/login">Sign in with GitHub</a>
+  </main>
+
+  <div id="app" class="app" hidden>
+    <nav class="list" aria-label="Articles">
+      <button type="button" class="button primary wide" id="new-button">New article</button>
+      <ul id="article-list"></ul>
+      <p class="empty" id="list-empty" hidden>No articles yet. Start one with New article.</p>
+    </nav>
+
+    <section id="editor" class="editor" aria-label="Editor" tabindex="-1">
+      <p class="placeholder" id="editor-placeholder">Pick an article on the left, or start a new one.</p>
+
+      <form id="form" hidden novalidate>
+        <div class="status-line">
+          <span id="status-pill" class="pill"></span>
+          <span id="save-state" class="save-state" aria-live="polite"></span>
+        </div>
+
+        <label class="field">
+          <span>Title</span>
+          <input id="title" name="title" maxlength="120" required autocomplete="off">
+          <small class="error" data-error="title"></small>
+        </label>
+
+        <div class="row">
+          <label class="field grow">
+            <span>Slug</span>
+            <input id="slug" name="slug" maxlength="80" autocomplete="off" spellcheck="false" placeholder="made from the title">
+            <small class="hint" id="slug-hint">The address: /articles/<b id="slug-preview">…</b>/</small>
+            <small class="error" data-error="slug"></small>
+          </label>
+          <label class="field">
+            <span>Date</span>
+            <input id="date" name="date" type="date">
+            <small class="hint">Empty means the publish date.</small>
+            <small class="error" data-error="date"></small>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Description <small class="count" id="description-count"></small></span>
+          <textarea id="description" name="description" rows="2" maxlength="300"></textarea>
+          <small class="hint">Shown in article lists, search results and link previews.</small>
+          <small class="error" data-error="description"></small>
+        </label>
+
+        <label class="field">
+          <span>Tags</span>
+          <input id="tags" name="tags" autocomplete="off" placeholder="rust, cloudflare">
+          <small class="hint">Separate with commas. Up to 8.</small>
+          <small class="error" data-error="tags"></small>
+        </label>
+
+        <div class="field">
+          <div class="tabs" role="tablist" aria-label="Body view">
+            <button type="button" role="tab" id="tab-write" aria-selected="true" aria-controls="body">Write</button>
+            <button type="button" role="tab" id="tab-preview" aria-selected="false" aria-controls="preview">Preview</button>
+            <span class="minutes" id="minutes"></span>
+          </div>
+          <textarea id="body" name="body" rows="22" spellcheck="true" aria-label="Article body in Markdown"></textarea>
+          <div id="preview" class="preview" role="tabpanel" hidden></div>
+          <small class="error" data-error="body"></small>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="button primary" id="save-button">Save draft</button>
+          <button type="button" class="button" id="publish-button">Publish</button>
+          <button type="button" class="button" id="unpublish-button" hidden>Unpublish</button>
+          <button type="button" class="button danger" id="delete-button">Delete</button>
+          <span class="kbd-hint">Ctrl + S saves</span>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <dialog id="confirm">
+    <form method="dialog">
+      <p id="confirm-text"></p>
+      <div class="actions">
+        <button value="cancel" class="button">Cancel</button>
+        <button value="ok" class="button danger" id="confirm-ok">Delete</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="activity" class="wide-dialog">
+    <form method="dialog">
+      <h2>Recent activity</h2>
+      <ol id="activity-list" class="activity"></ol>
+      <div class="actions"><button class="button">Close</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

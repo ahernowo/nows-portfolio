@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block og_type %}article{% endblock og_type %}
+{% block head_extra %}<link rel="stylesheet" href="{{ get_url(path='giallo.css', trailing_slash=false) }}">{% endblock head_extra %}
+{% block structured_data %}
+<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "BlogPosting", "headline": page.title, "description": page.description or "", "datePublished": page.date or "", "dateModified": page.updated or page.date or "", "author": {"@type": "Person", "name": config.extra.name, "url": config.base_url}, "mainEntityOfPage": page.permalink} | json_encode | safe }}</script>
+{% endblock structured_data %}
+{% block body_class %}article-page{% endblock body_class %}
+
+{% block content %}
+<div class="reading-progress" aria-hidden="true"></div>
+<article class="article">
+  <header class="article-head wrap-text">
+    <p class="crumb"><a href="{{ get_url(path='@/articles/_index.md') }}">Writing</a></p>
+    <h1 class="article-title" data-vt="title">{{ page.title }}</h1>
+    {%- if page.description %}<p class="article-dek">{{ page.description }}</p>{% endif %}
+    <p class="article-meta">
+      {%- if page.date %}<time datetime="{{ page.date }}">{{ page.date | date(format="%-d %B %Y") }}</time>{% endif %}
+      <span>{{ page.reading_time }} minute read</span>
+      {%- if page.updated %}<span>Updated <time datetime="{{ page.updated }}">{{ page.updated | date(format="%-d %B %Y") }}</time></span>{% endif %}
+    </p>
+  </header>
+
+  <div class="prose wrap-text">
+    {{ page.content | safe }}
+  </div>
+
+  <footer class="article-foot wrap-text">
+    {%- if page.taxonomies.tags %}
+    <p class="tag-line">Filed under
+      {%- for tag in page.taxonomies.tags %} <a class="tag" href="{{ get_taxonomy_url(kind='tags', term=tag) }}">{{ tag }}</a>{% if not loop.last %},{% endif %}{% endfor %}.
+    </p>
+    {%- endif %}
+    <nav class="pager" aria-label="More writing">
+      {%- if page.higher %}<a class="pager-link" rel="prev" href="{{ page.higher.permalink }}"><span class="pager-hint">Older</span>{{ page.higher.title }}</a>{% endif %}
+      {%- if page.lower %}<a class="pager-link pager-next" rel="next" href="{{ page.lower.permalink }}"><span class="pager-hint">Newer</span>{{ page.lower.title }}</a>{% endif %}
+    </nav>
+  </footer>
+</article>
+{% endblock content %}

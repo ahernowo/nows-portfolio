@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Writing about {{ term.name }} | {{ config.title }}{% endblock title %}
+{% block body_class %}listing{% endblock body_class %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <p class="crumb"><a href="{{ get_url(path='/tags/') }}">Topics</a></p>
+    <h1 class="page-title">Writing about {{ term.name }}</h1>
+    <p class="page-aside">{{ term.page_count }} {{ "article" if term.page_count == 1 else "articles" }}. <a href="{{ get_url(path='tags/' ~ term.slug ~ '/atom.xml', trailing_slash=false) }}">Follow this topic with RSS</a>.</p>
+  </header>
+  <ol class="index-list">
+    {%- for item in term.pages %}
+    {{ <article_item item={item} /> }}
+    {%- endfor %}
+  </ol>
+</div>
+{% endblock content %}

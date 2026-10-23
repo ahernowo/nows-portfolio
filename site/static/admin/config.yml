@@ -1,0 +1,106 @@
+# Decap CMS settings. Docs: https://decapcms.org/docs/configuration-options/
+# Replace every "your-..." value before the first deploy (docs/setup.md, step 6).
+
+backend:
+  name: github
+  repo: YOUR-LOGIN/nows-portfolio
+  branch: main
+  # The Rust sign-in helper in workers/decap-oauth.
+  base_url: https://decap-oauth.your-subdomain.workers.dev
+  auth_endpoint: auth
+  auth_scope: public_repo
+  commit_messages:
+    create: "Create {{collection}}: {{slug}}"
+    update: "Update {{collection}}: {{slug}}"
+    delete: "Delete {{collection}}: {{slug}}"
+    uploadMedia: "Upload {{path}}"
+    deleteMedia: "Delete {{path}}"
+
+# Each article becomes a pull request first. Cloudflare Pages builds a
+# preview for it, and merging publishes it.
+publish_mode: editorial_workflow
+show_preview_links: true
+
+# Test locally without GitHub: run `npx decap-server` in the repo, then
+# `zola serve` in site/, and open http://127.0.0.1:1111/admin/.
+# Only used when the CMS runs on localhost.
+local_backend: true
+
+site_url: https://your-site.pages.dev
+display_url: https://your-site.pages.dev
+
+media_folder: site/static/images/uploads
+public_folder: /images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    description: Writing for the Writing section. New articles start as drafts.
+    folder: site/content/articles
+    # Only real articles, not the section's _index.md.
+    filter: { field: template, value: article.html }
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: toml-frontmatter
+    summary: "{{title}} ({{date}})"
+    sortable_fields: ["date", "title"]
+    preview_path: "articles/{{slug}}/"
+    fields:
+      - { label: Title, name: title, widget: string, pattern: ["^.{3,120}$", "Use 3 to 120 characters."] }
+      - { label: Template, name: template, widget: hidden, default: article.html }
+      - label: Description
+        name: description
+        widget: text
+        required: false
+        pattern: ["^.{0,300}$", "Keep it under 300 characters."]
+        hint: Shown in article lists, search results and link previews.
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "D MMMM YYYY", time_format: false, picker_utc: true }
+      - { label: Draft, name: draft, widget: boolean, default: true, hint: "Drafts are not published, even after merging." }
+      - label: Topics
+        name: taxonomies
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Tags, name: tags, widget: list, default: [], hint: "Lowercase, separated by commas, up to 8." }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: work
+    label: Work
+    label_singular: Case study
+    description: Case studies for the Work section. Lower weight shows first.
+    folder: site/content/work
+    filter: { field: template, value: work-page.html }
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: toml-frontmatter
+    summary: "{{title}}"
+    sortable_fields: ["weight", "title"]
+    preview_path: "work/{{slug}}/"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Template, name: template, widget: hidden, default: work-page.html }
+      - { label: Description, name: description, widget: text, hint: "One sentence: what it is and why it exists." }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "D MMMM YYYY", time_format: false, picker_utc: true }
+      - { label: Order, name: weight, widget: number, value_type: int, default: 10, hint: "Lower numbers show first." }
+      - { label: Draft, name: draft, widget: boolean, default: true }
+      - { label: Include in feeds, name: include_in_feeds, widget: hidden, default: false }
+      - label: Details
+        name: extra
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Year, name: year, widget: string }
+          - { label: Your role, name: role, widget: string, required: false }
+          - { label: Status, name: status, widget: string, required: false, hint: "For example: Live, Internal tool, Retired." }
+          - { label: Built with, name: stack, widget: list, required: false, default: [] }
+          - { label: Live link, name: link, widget: string, required: false }
+          - { label: Source code link, name: source, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }

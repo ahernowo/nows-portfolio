@@ -1,0 +1,227 @@
+// Home page: the headline and the receipt stack.
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+  padding-block: clamp(3rem, 9vw, 7rem) clamp(2.5rem, 6vw, 5rem);
+}
+
+.hero-title {
+  margin: 0 0 1.75rem;
+  font-size: var(--step-5);
+  font-weight: 760;
+  font-stretch: 70%;
+  line-height: 0.98;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.hero-sub {
+  margin: 0 0 1.75rem;
+  max-width: 34ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.hero-now {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  margin: 0;
+  max-width: 44ch;
+  font-size: 0.9375rem;
+}
+
+.now-pulse {
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--stamp);
+  translate: 0 -0.05rem;
+}
+
+@media (max-width: 52rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+// The receipt stack. One donation, three systems, three copies.
+
+.receipts {
+  position: relative;
+  margin: 0;
+  height: 28rem;
+  max-width: 27rem;
+  width: 100%;
+  justify-self: end;
+  isolation: isolate;
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 52rem) {
+  .receipts {
+    justify-self: start;
+    height: 27rem;
+  }
+}
+
+.slip {
+  position: absolute;
+  width: 78%;
+  padding: 0.85rem 1.1rem 0.9rem;
+  background: var(--slip-bg);
+  border-radius: 3px;
+  box-shadow: var(--slip-shadow);
+  transition: translate 0.4s var(--ease-out);
+}
+
+// The torn top edge of a receipt book page.
+.slip::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: radial-gradient(circle at 3px -1px, transparent 2.5px, var(--slip-bg) 3px) 0 0 / 7px 4px repeat-x;
+  translate: 0 -3px;
+}
+
+.slip-1 {
+  --slip-bg: var(--slip-original);
+  top: 0;
+  left: 0;
+  rotate: -2.5deg;
+  z-index: 1;
+}
+
+.slip-2 {
+  --slip-bg: var(--copy-yellow);
+  top: 9.1rem;
+  left: 11%;
+  rotate: 1.75deg;
+  z-index: 2;
+}
+
+.slip-3 {
+  --slip-bg: var(--copy-pink);
+  top: 18.2rem;
+  left: 22%;
+  rotate: -1deg;
+  z-index: 3;
+}
+
+.slip-system {
+  margin: 0 0 0.45rem;
+  font-weight: 700;
+  font-stretch: 85%;
+  font-size: 0.9375rem;
+}
+
+.slip-lines {
+  margin: 0;
+}
+
+.slip-lines div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.22rem;
+  border-top: 1px solid var(--rule);
+}
+
+.slip-lines dt {
+  color: var(--ink-soft);
+}
+
+.slip-lines dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.stamp {
+  position: absolute;
+  left: 1%;
+  bottom: 0.6rem;
+  z-index: 4;
+  rotate: -9deg;
+  color: var(--stamp);
+  mix-blend-mode: var(--stamp-blend);
+  pointer-events: none;
+}
+
+.stamp span {
+  display: block;
+  padding: 0.35rem 0.85rem 0.4rem;
+  font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+  font-weight: 850;
+  font-stretch: 68%;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  border: 3px solid currentColor;
+  border-radius: 6px;
+  outline: 1.5px solid currentColor;
+  outline-offset: 3px;
+  // Uneven ink, like a real rubber stamp.
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-size: 220px 90px;
+}
+
+// Pointing at the stack fans the copies apart, so you can see each one.
+.receipts:hover .slip-2 {
+  translate: 0.4rem -0.2rem;
+}
+
+.receipts:hover .slip-3 {
+  translate: 0.8rem 0.3rem;
+}
+
+// The one orchestrated moment on the site: the copies land, then the stamp.
+@media (prefers-reduced-motion: no-preference) {
+  .slip {
+    animation: slip-in 0.6s var(--ease-out) backwards;
+  }
+
+  .slip-1 {
+    animation-delay: 0.15s;
+  }
+
+  .slip-2 {
+    animation-delay: 0.32s;
+  }
+
+  .slip-3 {
+    animation-delay: 0.49s;
+  }
+
+  .stamp {
+    animation: stamp-down 0.45s cubic-bezier(0.25, 1.5, 0.45, 1) 1.15s backwards;
+  }
+}
+
+@keyframes slip-in {
+  from {
+    opacity: 0;
+    translate: 0 -1rem;
+  }
+}
+
+@keyframes stamp-down {
+  0% {
+    opacity: 0;
+    scale: 1.8;
+  }
+
+  55% {
+    opacity: 1;
+    scale: 0.95;
+  }
+
+  100% {
+    scale: 1;
+  }
+}

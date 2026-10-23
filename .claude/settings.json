@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(factory *)",
+      "Bash(cargo fmt *)",
+      "Bash(cargo clippy *)",
+      "Bash(cargo test *)",
+      "Bash(cargo check *)",
+      "Bash(cargo build *)",
+      "Bash(cargo tree *)",
+      "Bash(cargo audit *)",
+      "Bash(cargo run -q -p newpost *)",
+      "Bash(cargo run -p newpost *)",
+      "Bash(zola *)",
+      "Bash(node tools/shots/shoot.mjs *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git ls-files *)",
+      "Bash(git check-ignore *)",
+      "Bash(git grep *)",
+      "Bash(git branch --show-current)",
+      "Bash(npx wrangler d1 migrations list *)"
+    ],
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git tag *)",
+      "Bash(git reset *)",
+      "Bash(git checkout *)",
+      "Bash(git restore *)",
+      "Bash(git clean *)",
+      "Bash(git rebase *)",
+      "Bash(npx wrangler deploy *)",
+      "Bash(npx wrangler secret *)",
+      "Bash(npx wrangler d1 execute *)",
+      "Bash(npx wrangler d1 migrations apply *)",
+      "Bash(wrangler *)",
+      "Bash(rm *)",
+      "Bash(cargo install *)",
+      "Bash(npm install *)",
+      "Edit(/.claude/settings.json)",
+      "Edit(/.claude/agents/**)"
+    ],
+    "deny": [
+      "Read(**/.dev.vars)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Edit(**/.dev.vars)",
+      "Edit(**/.env)",
+      "Edit(/.factory/**)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "factory",
+            "args": [
+              "brief"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "planner|builder|ui-ux-reviewer|security-checker|approver",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "factory",
+            "args": [
+              "hook",
+              "subagent-stop"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "factory statusline",
+    "padding": 0
+  }
+}

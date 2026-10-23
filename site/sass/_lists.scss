@@ -1,0 +1,206 @@
+// Section blocks, page headings and the ledger-style index lists used for
+// work and writing.
+
+.block {
+  padding-block: clamp(2.25rem, 5vw, 4rem);
+}
+
+.block-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.block-title {
+  margin: 0;
+  font-size: var(--step-3);
+  font-weight: 720;
+  font-stretch: 78%;
+  line-height: 1.05;
+}
+
+.block-more {
+  color: var(--ink-soft);
+}
+
+.page-head {
+  padding-block: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.page-title {
+  margin: 0 0 1rem;
+  font-size: var(--step-4);
+  font-weight: 750;
+  font-stretch: 76%;
+  line-height: 1.02;
+  letter-spacing: -0.008em;
+  text-wrap: balance;
+}
+
+.page-dek {
+  margin: 0;
+  max-width: 44ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.page-aside {
+  margin: 1.25rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.crumb {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+}
+
+.crumb a {
+  color: var(--ink-soft);
+}
+
+// Index list: one ledger line per entry.
+
+.index-list {
+  list-style: none;
+  margin: 0 -0.75rem;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.index-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) minmax(0, 15rem);
+  gap: 0.35rem 2rem;
+  padding: 1.3rem 0.75rem 1.35rem;
+  border-bottom: 1px solid var(--rule);
+  // A highlighter pen marks the line you point at.
+  background: linear-gradient(var(--highlight), var(--highlight)) no-repeat 0 0 / 0% 100%;
+  transition: background-size 0.32s var(--ease-out);
+}
+
+.index-item:hover,
+.index-item:focus-within {
+  background-size: 100% 100%;
+}
+
+.index-when,
+.index-meta {
+  margin: 0;
+  padding-top: 0.4rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.index-meta {
+  text-align: right;
+}
+
+.index-title {
+  margin: 0 0 0.3rem;
+  font-size: var(--step-2);
+  font-weight: 680;
+  font-stretch: 84%;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.index-link {
+  text-decoration: none;
+}
+
+// The whole line is one link.
+.index-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.index-link:focus-visible {
+  outline: none;
+}
+
+.index-item:has(.index-link:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
+}
+
+.index-desc {
+  margin: 0;
+  max-width: 54ch;
+  color: var(--ink-soft);
+}
+
+.index-empty {
+  padding: 1.25rem 0;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 46rem) {
+  .index-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.2rem;
+  }
+
+  .index-when,
+  .index-meta {
+    padding-top: 0;
+    text-align: left;
+  }
+}
+
+.year-group + .year-group {
+  margin-top: 2.5rem;
+}
+
+.year-title {
+  margin: 0 0 0.75rem;
+  font-size: var(--step-1);
+  font-weight: 700;
+  font-stretch: 80%;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topic-list a {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.topic-list a:hover {
+  background: var(--highlight);
+}
+
+.topic-count {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.missing {
+  padding-block: clamp(3rem, 10vw, 7rem);
+}
+
+.missing-links {
+  margin: 2rem 0 0;
+  padding-left: 1.2rem;
+  line-height: 2;
+}
