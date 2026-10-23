@@ -24,9 +24,9 @@ migrations_dir = "migrations"
 
 [vars]
 # GitHub logins allowed to edit, comma-separated.
-ADMIN_LOGINS = "YOUR-LOGIN"
+ADMIN_LOGINS = "ahernowo"
 # Repository that holds the site, and where articles go inside it.
-GITHUB_REPO = "YOUR-LOGIN/nows-portfolio"
+GITHUB_REPO = "ahernowo/nows-portfolio"
 GITHUB_BRANCH = "main"
 CONTENT_DIR = "site/content/articles"
 # The public site, allowed to read /api/articles from the browser.

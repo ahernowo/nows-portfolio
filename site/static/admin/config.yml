@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: YOUR-LOGIN/nows-portfolio
+  repo: ahernowo/nows-portfolio
   branch: main
   # The Rust sign-in helper in workers/decap-oauth.
   base_url: https://decap-oauth.your-subdomain.workers.dev

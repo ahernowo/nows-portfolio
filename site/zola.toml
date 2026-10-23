@@ -53,9 +53,9 @@ name = "Nows"
 role = "Digital systems for fundraising"
 location = "Indonesia"
 email = "you@example.com"
-github = "https://github.com/YOUR-LOGIN"
+github = "https://github.com/ahernowo"
 linkedin = ""
-source = "https://github.com/YOUR-LOGIN/nows-portfolio"
+source = "https://github.com/ahernowo/nows-portfolio"
 # Used in link previews when a page has no image of its own.
 og_image = "images/og.png"
 # What the "now" line under the headline says. Keep it short.
