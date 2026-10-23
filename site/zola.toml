@@ -1,5 +1,5 @@
 # Site settings. Change base_url to your real address before the first deploy.
-base_url = "https://your-site.pages.dev"
+base_url = "https://nows-portfolio.pages.dev"
 title = "Nows"
 description = "Nows builds the systems behind fundraising: donation forms, payment integrations, reconciliation tools and the reports that follow."
 default_language = "en"

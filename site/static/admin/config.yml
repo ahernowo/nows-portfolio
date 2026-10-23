@@ -26,8 +26,8 @@ show_preview_links: true
 # Only used when the CMS runs on localhost.
 local_backend: true
 
-site_url: https://your-site.pages.dev
-display_url: https://your-site.pages.dev
+site_url: https://nows-portfolio.pages.dev
+display_url: https://nows-portfolio.pages.dev
 
 media_folder: site/static/images/uploads
 public_folder: /images/uploads

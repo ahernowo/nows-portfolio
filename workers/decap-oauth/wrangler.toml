@@ -13,6 +13,6 @@ command = "cargo install -q worker-build --version 0.8.7 --locked && worker-buil
 [vars]
 # The exact origin of your website: scheme and host, no path, no trailing slash.
 # The token is only ever handed to a CMS page on this origin.
-ALLOWED_ORIGIN = "https://your-site.pages.dev"
+ALLOWED_ORIGIN = "https://nows-portfolio.pages.dev"
 # public_repo is enough for a public repository. Use "repo" for a private one.
 GITHUB_SCOPE = "public_repo"

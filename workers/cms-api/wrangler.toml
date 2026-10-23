@@ -30,4 +30,4 @@ GITHUB_REPO = "ahernowo/nows-portfolio"
 GITHUB_BRANCH = "main"
 CONTENT_DIR = "site/content/articles"
 # The public site, allowed to read /api/articles from the browser.
-SITE_ORIGIN = "https://your-site.pages.dev"
+SITE_ORIGIN = "https://nows-portfolio.pages.dev"
