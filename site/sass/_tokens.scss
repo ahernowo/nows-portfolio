@@ -68,6 +68,10 @@
   --code-bg: #280000;
   --code-ink: #fdffff;
   --code-edge: #5a5656;
+  --ok: #7fd0a5;
+  --ok-tint: #1e3a2d;
+  --jn-shirt: #a8394c;
+  --jn-collar: #f2e6cd;
   --slip-shadow: 0 1px 0 rgb(0 0 0 / 20%), 0 14px 28px -14px rgb(0 0 0 / 70%);
   --dialog-shadow: 0 24px 60px -24px rgb(0 0 0 / 70%);
   --backdrop: rgb(0 0 0 / 55%);
@@ -94,6 +98,41 @@
   --code-bg: #280000;
   --code-ink: #fdffff;
   --code-edge: transparent;
+
+  // Done, saved, confirmed: the green of the donor journey's records.
+  --ok: #186a41;
+  --ok-tint: #e3f2ea;
+
+  // The donor-journey illustration (journey.scss). One token per colour in
+  // the picture. The phone always shows a light web page, so its screen
+  // colours stay the same in both themes, like the code slab; only the
+  // shirt and collar change in dark (see dark-tokens).
+  --jn-skin: #c98e69;
+  --jn-skin-shade: #b3785a;
+  --jn-hair: #24161a;
+  --jn-mouth: #5a1b22;
+  --jn-shirt: #6b1520;
+  --jn-collar: #f6ebd3;
+  --jn-bezel: #171112;
+  --jn-bezel-edge: #2e2426;
+  --jn-screen: #ffffff;
+  --jn-screen-off: #0c0809;
+  --jn-screen-ink: #2b1618;
+  --jn-screen-muted: #6b5557;
+  --jn-screen-line: #e6dcdc;
+  --jn-screen-bar: #f4eeec;
+  --jn-screen-seg: #f1eae8;
+  --jn-screen-track: #efe6e4;
+  --jn-screen-fill: #f8f2f0;
+  --jn-screen-accent: #b10f2e;
+  --jn-screen-accent-tint: #fbebee;
+  --jn-keyboard: #d8d0ce;
+  --jn-check-border: #b9aaab;
+  --jn-lock-top: #3a1a22;
+  --jn-lock-bottom: #12090b;
+  --jn-ring: #186a41;
+  --jn-ring-tint: #e3f2ea;
+
   --slip-shadow: 0 1px 0 rgb(43 22 24 / 6%), 0 12px 26px -14px rgb(43 22 24 / 30%);
   --dialog-shadow: 0 24px 60px -24px rgb(43 22 24 / 45%);
   --backdrop: rgb(43 22 24 / 40%);

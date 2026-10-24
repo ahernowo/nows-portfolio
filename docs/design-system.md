@@ -11,7 +11,7 @@ So the home page opens on three slips, one donation recorded by three systems, l
 - **Colour**: a soft palette, set out below. A warm off-white page, white slips, a dark warm ink instead of black, crimson for links and the stamp. Light is what everyone sees first; dark is the carbon sheet, there when you pick it.
 - **Type**: Inter for everything, headings and reading alike. Headings are large and tightly spaced; text has open line spacing. Moving from browsing to reading is a change of size and line height.
 - **Layout**: lists of work and writing are ledger rows (date, entry, detail) ruled in fine warm-grey lines. Pointing at a row draws a highlighter stroke across it.
-- **Motion**: the slips and stamp on load; the highlighter, a page-title morph between a list and the page you open, and a reading-progress line on articles, all in answer to what you do. With reduced motion turned on in your system, all of it stops.
+- **Motion**: the slips and stamp on load; the highlighter, a page-title morph between a list and the page you open, and a reading-progress line on articles, all in answer to what you do. A second moment lives on case studies that switch on the donor journey: a donor on a phone gives one gift, the scroll walks through it step by step, a short recording plays while it is on screen, and before-and-after bars grow. The journey's hero keeps moving (a slow breath, a blink), so it has a Pause animation button. With reduced motion turned on in your system, all of it stops.
 
 ## Colour
 
@@ -61,6 +61,8 @@ The tints are sRGB mixes of the colours above:
 | `--stamp` | `#B10F2E` | `#E8546D` | The "Reconciled" stamp only |
 | `--code-bg`, `--code-ink` | `#280000`, `#FDFFFF` | the same | The code slab |
 | `--code-edge` | none | `#5A5656` | A 1 px edge so the slab shows on the dark page |
+| `--ok` | `#186A41` | `#7FD0A5` | Done and saved, in the donor journey's records |
+| `--ok-tint` | `#E3F2EA` | `#1E3A2D` | A record that is saving |
 
 ### Contrast
 

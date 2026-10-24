@@ -42,6 +42,10 @@ The palette is Nows's choice, one set per theme; everything else is an sRGB tint
 | `--code-bg`, `--code-ink` | `#280000`, `#FDFFFF` | the same | Code slabs, the same in both themes |
 | `--code-edge` | `transparent` | `#5A5656` | 1 px inset edge so the slab shows on the dark page |
 | `--slip-shadow`, `--dialog-shadow`, `--backdrop` | ink-tinted (`rgb(43 22 24 / ...)`) | black-tinted | Slips, the search dialog and its backdrop |
+| `--ok` | `#186A41` | `#7FD0A5` | Done, saved, confirmed: the journey's record status text, done dots and meters |
+| `--ok-tint` | `#E3F2EA` | `#1E3A2D` | The journey's "Saving" dot |
+
+The **donor-journey illustration** (`journey.scss`) has its own group, `--jn-*`: one token per colour in the picture (skin, hair, mouth, shirt, collar, phone bezel, screen colours, keyboard, lock-screen wallpaper, the phone's green success ring). The phone always shows a light web page, so its screen colours are the same in both themes, like the code slab; only `--jn-shirt` and `--jn-collar` change in dark. `--jn-screen-muted` is `#6B5557` (the mock-up's `#7A6A6C` was 4.45:1 on the URL bar). `journey.scss` holds no raw colours: tokens or `color-mix()` of tokens only.
 
 Themes: light for every visitor, whatever their system setting; the site has no `prefers-color-scheme` rule. Dark appears only when the visitor picks it with the Theme button: `site.js` saves `theme` in localStorage and sets `data-theme="dark"` on `<html>`, and `head.js` re-applies a saved choice before first paint. The button cycles light and dark and its label names the theme showing ("Theme: light" / "Theme: dark"). A new token gets a value in both the `:root` block and the `dark-tokens` mixin. The meta `theme-color` is the light page, `#FAF5F3`.
 
@@ -50,7 +54,7 @@ Two rules with no exceptions:
 - `#E8896A` coral and `#E8546D` (the dark stamp) are never text on a light background.
 - `#B10F2E` crimson is never text on a dark background.
 
-**The accent** (`--link` and `--accent`) goes to links in running text (sentences in articles and pages, the footer, crumbs, the older/newer pager, "Back to all writing", "All work" / "All articles") and to the now-pulse, reading line and warning and caution alert edges. Never to headings, the menu, the wordmark, list titles, search results or topic chips; those stay `--ink`. The stamp has its own token, `--stamp`: crimson in light like the accent, `#E8546D` in dark.
+**The accent** (`--link` and `--accent`) goes to links in running text (sentences in articles and pages, the footer, crumbs, the older/newer pager, "Back to all writing", "All work" / "All articles") and to the now-pulse, reading line, warning and caution alert edges, and the "after" bar in the journey's "What changed" block (the "before" bar is `--rule-strong`). Never to headings, the menu, the wordmark, list titles, search results or topic chips; those stay `--ink`. The stamp has its own token, `--stamp`: crimson in light like the accent, `#E8546D` in dark.
 
 **Muted text** (dates, descriptions, captions, meta) is `--ink-soft`: `#6B5557` in light, `#C2B6B3` in dark, always at full opacity (the light value has no room to fade: at 0.8 it falls to 4.00:1). Keep `--link-line` on every running-text link so a link reads as a link without relying on colour. The pager underlines its title (`.pager-title`) and leaves the Older/Newer hint plain, so one link reads as one.
 
@@ -73,6 +77,13 @@ Contrast (WCAG formula, from the hex values; every text pair at least 4.5:1, lar
 | Focus ring, skip link | 15.78 | 14.68 |
 | Code text on slab | 19.19 | 19.19 |
 | Never-as-text pairs | coral 2.36, `#E8546D` 3.28 on `#FAF5F3` | crimson 2.42 on `#1F1B1C` |
+| Journey: `--ok` status text on the panel (`--slip-original`) | 6.61 | 8.19 |
+| Journey: tick (`--slip-original`) on the `--ok` dot | 6.61 | 8.19 (white would be 1.83, hence the token) |
+| Journey: `--ok` on `--ok-tint` (saving dot) | 5.71 | 6.75 |
+| Journey: stamp on the panel (bold, at least 1.2rem: large) | 7.05 | 4.23 |
+| Journey: "after" bar (accent) / "before" bar (`--rule-strong`) against the track (`--ink` 7%) | 5.67 / 1.67 | 5.55 / 1.96 (the value is also written beside the bar) |
+| Journey: video and pause buttons (`--paper` on `--ink`; `--ink` on `--slip-original`) | 15.78; 17.06 | 14.68; 12.91 |
+| Journey phone: muted `#6B5557` on screen / URL bar / receipt; accent on chip tint; white on accent | 6.86 / 5.97 / 6.19; 6.12; 7.05 | the same (the phone screen is light in both themes) |
 
 The thin margins are dark links on peach (4.90) and the dark stamp on rose (3.74, large text only); re-check after any tint change. In light the copies sit only 1.14-1.15:1 off the page, so the slips rely on their shadow and edge. Six `tokyo-night` code token classes stay below 4.5:1 on the slab (`z-4`, `z-5`, `z-6`, `z-9`, `z-16`, `z-23`); a code-theme change is its own order.
 
@@ -117,9 +128,10 @@ Fonts are self-hosted woff2 in `site/static/fonts/` with `LICENSE-Inter.txt`: Fo
 
 ## Motion
 
-One orchestrated moment, then motion only in answer to the visitor:
+Two orchestrated moments, then motion only in answer to the visitor:
 
 - **Page load (home only)**: the three slips land one after another (0.15 s apart), then the stamp thumps down at 1.15 s.
+- **The case-study donor journey** (only on case studies that switch it on with `[[extra.journey.steps]]`; `journey.scss`, `js/journey.js`): the title rises once and the hero scene fades up (under 1.1 s, skipped after the title morph); the hero's first beat (the phone lifts, a thumb picks a gift: 0.7 s wait, 5.2 s beat, then rest); the donor's endless breathing and blinking; the pinned five-step story drawn from scroll position alone; the recording that plays while half visible; and the "What changed" bars on a view timeline. Self-starting motion lasts longer than 5 s, so the hero carries a **Pause animation** button (WCAG 2.2.2) that holds the beat and every CSS animation in the journey; the video has its own Play/Pause button. Without JavaScript the scenes show their finished state and nothing loops. Under reduced motion all of it stops: no pinning, no autoplay, the finished picture, all five steps listed, and no pause button (nothing moves).
 - **In answer to the visitor**: the highlighter stroke on list rows, the slip fan on hover, the title morph between a list and its page (cross-document view transitions), the reading-progress line on articles (scroll-driven).
 - Easing `--ease-out`; durations 0.15–0.6 s.
 - `prefers-reduced-motion: reduce` turns all of it off (`_motion.scss` holds the rule). New motion must be covered by that rule.

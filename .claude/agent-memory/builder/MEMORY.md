@@ -10,6 +10,8 @@ Gotchas that cost time once. Keep under 150 lines; merge and prune.
 
 - Tera 2: `{%- if page.higher or page.lower %}` is safe for guarding the pager (WO-0001).
 - Inline SVG from a file: `load_data(path="static/...svg", format="plain")` + `| replace(...) | safe` works; put `aria-hidden` on a wrapping span (WO-0003).
+- Tera 2 that worked first time (WO-0005): `{% if page.extra?.journey?.steps %}` in `head_extra` and `content` (a top-level `set` outside blocks is not seen inside them), `{% for row in [10, 9, 7] %}`, `range(end=n)`, list literals indexed `targets[i]`. `minify_html` strips `<!-- Nows -->` comments from the output.
+- Any `sass/x.scss` without `_` compiles to `/x.css`: a per-page stylesheet needs no `main.scss` change.
 
 ## Type and colour (Inter, since WO-0002)
 - Inter's `tabular-nums` also widens the hyphen to figure width ("WO - 0002"). Put it only on dates, counts and amounts, never on `body` or text with ids.
@@ -34,6 +36,12 @@ Gotchas that cost time once. Keep under 150 lines; merge and prune.
 
 - `.claude/agent-memory/` is outside the build seal (`tools/factory/src/seal.rs`), so memory can be updated after `factory pass`.
 - A font or type change on the site also changes `workers/cms-api/admin/app.css` (the `.preview` font) and the dashboard CSS; check both.
+
+## Motion and video
+- A class rule `.btn { display: inline-flex }` beats the UA `[hidden]`; add `.btn[hidden] { display: none }` for JS-revealed buttons.
+- A pause control for many animations: `.paused .scope * { animation-play-state: paused !important }`; each `animation:` shorthand resets play-state, so it needs `!important`.
+- Playwright's Chromium can't decode H.264: shots log `journey.mp4 ERR_ABORTED`. For real playback, `chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe" })` works here.
+- Evidence that motion stopped: `el.getAnimations()` play states, plus two `locator.screenshot()` buffers compared with `Buffer.compare`.
 
 ## Workers
 - `Response::redirect` headers are immutable; build a 302 by hand when it must set cookies.

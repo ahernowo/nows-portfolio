@@ -1,0 +1,69 @@
+{#- The donor journey on a case study: the walkthrough, the recording and,
+    once real figures are in the front matter, the before-and-after bars.
+    Included by work-page.html when the page has [[extra.journey.steps]].
+    The intros below describe the fixed illustration and recording, so they
+    live here rather than in each page. -#}
+{%- set steps = page.extra.journey.steps %}
+{%- set targets = [0.05, 0.22, 0.5, 0.77, 1] %}
+
+<section class="jn-section" aria-labelledby="jn-walk-title">
+  <div class="jn-intro">
+    <h2 id="jn-walk-title" class="block-title">One gift, from the donor's side</h2>
+    <p>Scroll to follow Rina, an invented donor, through one gift. The pages, names and amounts are an illustration with sample data.</p>
+  </div>
+  {#- Without JavaScript, or with reduced motion, this is a plain list beside
+      the finished picture. journey.js adds .is-live to pin it and drive the
+      scene from scrolling, and enables the step buttons. #}
+  <div class="jn-story" id="journey-story">
+    <div class="jn-stage">
+      {{ <journey_scene label="a donor opens a donation page on a phone, chooses an amount, fills in a form, pays, then sees the gift saved in three systems." /> }}
+      <div class="jn-steps-wrap">
+        <p class="jn-stepcount" aria-hidden="true"></p>
+        <ol class="jn-steps">
+          {%- for i in [0, 1, 2, 3, 4] %}
+          <li><button class="jn-step" type="button" data-target="{{ targets[i] }}" disabled><span class="jn-step-n">{{ i + 1 }}</span><span class="jn-step-t">{{ steps[i].title }}</span></button><div class="jn-step-body"><div><p>{{ steps[i].body }}</p></div></div></li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="jn-section" aria-labelledby="jn-video-title">
+  <div class="jn-intro">
+    <h2 id="jn-video-title" class="block-title">The whole journey in twelve seconds</h2>
+    <p>A silent recording of the same illustration. It plays while it is on screen; the button pauses it.</p>
+  </div>
+  <figure class="jn-video-fig">
+    <div class="jn-video">
+      <video muted loop playsinline preload="metadata" width="1280" height="720" poster="{{ get_url(path='images/journey-poster.jpg') }}" aria-label="Recording of the same illustration: a donor gives on a phone and the gift is recorded in three systems">
+        <source src="{{ get_url(path='images/journey.mp4') }}" type="video/mp4">
+      </video>
+      {#- journey.js shows the button; without it the poster stays. #}
+      <button class="jn-vbtn" type="button" aria-pressed="false" hidden>
+        <svg class="jn-icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
+        <svg class="jn-icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
+        <span class="jn-vlabel">Play</span>
+      </button>
+    </div>
+    <figcaption>Illustration with sample data. The steps above describe what it shows.</figcaption>
+  </figure>
+</section>
+
+{%- if page.extra.journey?.compare %}
+<section class="jn-section" aria-labelledby="jn-compare-title">
+  <div class="jn-intro">
+    <h2 id="jn-compare-title" class="block-title">What changed</h2>
+  </div>
+  {#- Bar lengths come from data-share (0 to 100); journey.js sets them, so
+      the page needs no style="" attribute. #}
+  <div class="jn-compare">
+    {%- for row in page.extra.journey.compare %}
+    <div class="jn-crow">
+      <p class="jn-crow-lab"><span>{{ row.label }}</span><span>{{ row.value }}</span></p>
+      <div class="jn-track" aria-hidden="true"><div class="jn-fill{% if row.after %} jn-fill-after{% endif %}" data-share="{{ row.share }}"></div></div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}

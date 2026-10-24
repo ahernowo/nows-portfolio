@@ -1,0 +1,1336 @@
+// The donor journey, for case studies that switch it on (work-page.html,
+// partials/journey.html and the journey_scene component). Zola compiles this
+// file to /journey.css, and only those pages load it.
+//
+// Colours come from tokens only (_tokens.scss): the site's own, plus --ok and
+// the --jn-* illustration group. The scene is drawn in its finished state by
+// default, so the page is complete without JavaScript; js/journey.js turns one
+// progress number (0 to 1) into inline style values on the same nodes.
+// Every self-starting animation sits inside prefers-reduced-motion:
+// no-preference, and the hero's Pause animation button holds all of them.
+
+// ---------- The hero: text on the left, the scene on the right ----------
+
+.jn-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  align-items: center;
+  max-width: none;
+}
+
+.jn-hero-fig {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 0;
+}
+
+// The title rises once, as one line: the outer span clips, the inner moves.
+.jn-rise {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.jn-rise > span {
+  display: block;
+}
+
+// The pause control for the hero's motion (WCAG 2.2.2). journey.js shows it
+// when motion is allowed and swaps the icon and label.
+.jn-pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  margin-top: 0.75rem;
+  padding: 0 0.95rem 0 0.8rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--slip-original);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.jn-pause:hover {
+  border-color: var(--ink-soft);
+}
+
+.jn-pause[hidden] {
+  display: none;
+}
+
+.jn-pause svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  fill: currentColor;
+}
+
+.jn-pause .jn-icon-play,
+.jn-pause[data-paused="true"] .jn-icon-pause {
+  display: none;
+}
+
+.jn-pause[data-paused="true"] .jn-icon-play {
+  display: block;
+}
+
+// ---------- The scene ----------
+// Layout follows the room's own shape (a container query), not the screen.
+
+.jn-room {
+  --h: min(94cqh, 130cqw); // height of the person
+  --pnw: min(44cqw, 460px); // width of the "Behind the screen" panel
+  --sh: 1; // 0 = person centred, 1 = person aside and panel shown
+  position: relative;
+  margin: 0;
+  container-type: size;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent) 5%, var(--slip-original));
+  font-family: var(--font-display);
+}
+
+// _base.scss caps every svg at 100% wide; the hands drawing is 150% wide.
+.jn-room svg {
+  max-width: none;
+}
+
+.jn-room p {
+  margin: 0;
+}
+
+.jn-room-hero {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 100 / 112;
+}
+
+.jn-person {
+  position: absolute;
+  bottom: -4cqh;
+  left: 50%;
+  width: calc(var(--h) * 0.75);
+  height: var(--h);
+  margin-left: calc(var(--h) * -0.375);
+  transform-origin: 50% 0;
+  transform: translateY(calc((var(--h) - 102cqh) * var(--sh))) scale(calc(1 - 0.4 * var(--sh)));
+}
+
+.jn-halo {
+  position: absolute;
+  left: -14%;
+  top: 4%;
+  width: 128%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+
+.jn-hop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.jn-body {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.jn-body .jn-skin {
+  fill: var(--jn-skin);
+}
+
+.jn-body .jn-skin2 {
+  fill: var(--jn-skin-shade);
+}
+
+.jn-body .jn-hair {
+  fill: var(--jn-hair);
+}
+
+.jn-body .jn-shirt {
+  fill: var(--jn-shirt);
+}
+
+.jn-body .jn-collar {
+  fill: var(--jn-collar);
+}
+
+.jn-body .jn-stroke {
+  fill: none;
+  stroke: var(--jn-hair);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+}
+
+.jn-body .jn-nose {
+  fill: none;
+  stroke: var(--jn-skin-shade);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+
+.jn-body .jn-eyeball {
+  fill: var(--jn-hair);
+}
+
+.jn-body .jn-cheek {
+  fill: var(--accent);
+}
+
+.jn-body .jn-mouth {
+  fill: var(--jn-mouth);
+  stroke: var(--jn-mouth);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+
+// The finished pose: a little head tilt, raised brows, a big smile.
+.jn-body .jn-head {
+  transform-origin: 150px 150px;
+  transform: rotate(-4deg);
+}
+
+.jn-body .jn-pupils {
+  transform: translate(0, -1.4px);
+}
+
+.jn-body .jn-brows {
+  transform: translateY(-3.2px);
+}
+
+.jn-body .jn-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+// The phone, and the hand that holds it
+
+.jn-phone {
+  position: absolute;
+  left: 27%;
+  top: 34%;
+  width: 46%;
+  aspect-ratio: 160 / 300;
+  transform-origin: 50% 100%;
+  transform: translateY(calc((1 - var(--lift, 1)) * 34%)) rotate(calc((1 - var(--lift, 1)) * -7deg));
+}
+
+.jn-pf {
+  position: absolute;
+  inset: 0;
+  container-type: inline-size;
+}
+
+.jn-bezel {
+  position: absolute;
+  inset: 0;
+  padding: 4.4cqw;
+  border-radius: 10cqw;
+  background: var(--jn-bezel);
+  box-shadow:
+    0 0 0 1cqw var(--jn-bezel-edge) inset,
+    0 3cqw 7cqw -2cqw color-mix(in srgb, var(--jn-bezel) 55%, transparent);
+}
+
+// The phone always shows a light web page, in both themes.
+.jn-scr {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6.4cqw;
+  background: var(--jn-screen);
+  color: var(--jn-screen-ink);
+  font-size: 5.4cqw;
+  line-height: 1.25;
+}
+
+.jn-off {
+  position: absolute;
+  inset: 0;
+  background: var(--jn-screen-off);
+  opacity: 0;
+  pointer-events: none;
+}
+
+// Five screens; the last (thank you) shows until journey.js takes over.
+.jn-pg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--jn-screen);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.jn-p4 {
+  opacity: 1;
+  visibility: visible;
+}
+
+.jn-urlbar {
+  height: 12cqw;
+  padding: 2.4cqw 4cqw 0;
+  background: var(--jn-screen-bar);
+  border-bottom: 0.3cqw solid var(--jn-screen-line);
+}
+
+.jn-urlbar span {
+  display: flex;
+  align-items: center;
+  gap: 1.6cqw;
+  height: 8cqw;
+  padding: 0 3cqw;
+  border-radius: 99px;
+  background: var(--jn-screen);
+  font-size: 4.2cqw;
+  color: var(--jn-screen-muted);
+  white-space: nowrap;
+}
+
+.jn-urlbar svg {
+  flex: none;
+  width: 3.4cqw;
+  height: 3.4cqw;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jn-pb {
+  padding: 4.6cqw 5cqw;
+}
+
+.jn-room .jn-brand {
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  margin-bottom: 3cqw;
+  font-size: 4.6cqw;
+  font-weight: 600;
+}
+
+.jn-brand i {
+  display: block;
+  width: 6cqw;
+  height: 6cqw;
+  border-radius: 50%;
+  background: var(--jn-screen-accent);
+}
+
+.jn-room .jn-ttl {
+  margin: 0 0 1.6cqw;
+  font-size: 9cqw;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.jn-room .jn-sub {
+  margin: 0 0 3.4cqw;
+  font-size: 4.8cqw;
+  color: var(--jn-screen-muted);
+}
+
+.jn-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.6cqw;
+}
+
+.jn-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 14cqw;
+  border: 0.5cqw solid var(--jn-screen-line);
+  border-radius: 3.4cqw;
+  font-size: 5.2cqw;
+  font-weight: 600;
+}
+
+.jn-chip.on {
+  border-color: var(--jn-screen-accent);
+  background: var(--jn-screen-accent-tint);
+  color: var(--jn-screen-accent);
+  box-shadow: 0 0 0 0.5cqw var(--jn-screen-accent) inset;
+}
+
+.jn-seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 3.4cqw 0;
+  padding: 0.9cqw;
+  border-radius: 3.4cqw;
+  background: var(--jn-screen-seg);
+  font-size: 4.8cqw;
+  font-weight: 600;
+  text-align: center;
+}
+
+.jn-seg span {
+  padding: 2cqw 0;
+  border-radius: 2.6cqw;
+  color: var(--jn-screen-muted);
+}
+
+.jn-seg .on {
+  background: var(--jn-screen);
+  color: var(--jn-screen-ink);
+  box-shadow: 0 0.4cqw 1.2cqw color-mix(in srgb, var(--jn-bezel) 14%, transparent);
+}
+
+.jn-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2cqw;
+  height: 13.5cqw;
+  border-radius: 3.6cqw;
+  background: var(--jn-screen-accent);
+  color: var(--jn-screen);
+  font-size: 5.6cqw;
+  font-weight: 700;
+}
+
+.jn-btn.dis {
+  opacity: 0.32;
+}
+
+.jn-room .jn-fl {
+  margin: 0 0 1cqw;
+  font-size: 4.2cqw;
+  color: var(--jn-screen-muted);
+}
+
+.jn-fi {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 12.2cqw;
+  margin-bottom: 3cqw;
+  padding: 0 3.4cqw;
+  overflow: hidden;
+  border: 0.5cqw solid var(--jn-screen-line);
+  border-radius: 3cqw;
+  font-size: 5.4cqw;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.jn-fi.act {
+  border-color: var(--jn-screen-accent);
+  box-shadow: 0 0 0 0.6cqw color-mix(in srgb, var(--jn-screen-accent) 25%, transparent);
+}
+
+.jn-caret {
+  display: none;
+  width: 0.5cqw;
+  height: 6.4cqw;
+  margin-left: 0.6cqw;
+  background: var(--jn-screen-accent);
+}
+
+.jn-fi.act .jn-caret {
+  display: block;
+}
+
+.jn-prog {
+  height: 1.6cqw;
+  margin: 1.6cqw 0 3.6cqw;
+  overflow: hidden;
+  border-radius: 9px;
+  background: var(--jn-screen-track);
+}
+
+.jn-prog i {
+  display: block;
+  width: 50%;
+  height: 100%;
+  border-radius: 9px;
+  background: var(--jn-screen-accent);
+}
+
+.jn-chk {
+  display: flex;
+  align-items: center;
+  gap: 2.6cqw;
+  margin: 0.4cqw 0 3.4cqw;
+  font-size: 4.8cqw;
+}
+
+.jn-chk b {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 6cqw;
+  height: 6cqw;
+  border: 0.6cqw solid var(--jn-check-border);
+  border-radius: 1.6cqw;
+}
+
+.jn-chk b svg {
+  width: 4cqw;
+  height: 4cqw;
+  fill: none;
+  stroke: var(--jn-screen);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.jn-chk.on b {
+  border-color: var(--jn-screen-accent);
+  background: var(--jn-screen-accent);
+}
+
+.jn-chk.on b svg {
+  opacity: 1;
+}
+
+// The keyboard rests below the screen until the form is typed into.
+.jn-kb {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  align-content: start;
+  gap: 2.6cqw;
+  height: 58cqw;
+  padding: 3cqw 1.6cqw;
+  background: var(--jn-keyboard);
+  transform: translateY(100%);
+}
+
+.jn-kr {
+  display: flex;
+  justify-content: center;
+  gap: 1.4cqw;
+}
+
+.jn-kr i {
+  display: block;
+  width: 7.6cqw;
+  height: 9.6cqw;
+  border-radius: 1.6cqw;
+  background: var(--jn-screen);
+  box-shadow: 0 0.4cqw 0 color-mix(in srgb, var(--jn-bezel) 28%, transparent);
+}
+
+.jn-kr-s i {
+  width: 9cqw;
+}
+
+.jn-sum {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3.4cqw;
+  padding: 3.4cqw;
+  border-radius: 3.4cqw;
+  background: var(--jn-screen-fill);
+  font-size: 4.8cqw;
+}
+
+.jn-sum b {
+  font-size: 6cqw;
+}
+
+.jn-pm {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  height: 13cqw;
+  margin-bottom: 2.4cqw;
+  padding: 0 3.4cqw;
+  border: 0.5cqw solid var(--jn-screen-line);
+  border-radius: 3.4cqw;
+  font-size: 5.2cqw;
+  font-weight: 600;
+}
+
+.jn-radio {
+  display: block;
+  flex: none;
+  width: 5.4cqw;
+  height: 5.4cqw;
+  border: 0.6cqw solid var(--jn-check-border);
+  border-radius: 50%;
+}
+
+.jn-pm.on {
+  border-color: var(--jn-screen-accent);
+  background: var(--jn-screen-accent-tint);
+}
+
+.jn-pm.on .jn-radio {
+  border-color: var(--jn-screen-accent);
+  background: radial-gradient(circle, var(--jn-screen-accent) 0 38%, transparent 42%);
+}
+
+.jn-spin {
+  display: none;
+  width: 5.4cqw;
+  height: 5.4cqw;
+  border: 0.8cqw solid color-mix(in srgb, var(--jn-screen) 40%, transparent);
+  border-top-color: var(--jn-screen);
+  border-radius: 50%;
+}
+
+.jn-btn.busy .jn-spin {
+  display: block;
+}
+
+.jn-ok {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12cqw 6cqw 0;
+  text-align: center;
+}
+
+.jn-ring {
+  width: 30cqw;
+  height: 30cqw;
+  margin-bottom: 5cqw;
+  overflow: visible;
+}
+
+.jn-ring circle {
+  fill: var(--jn-ring-tint);
+  stroke: var(--jn-ring);
+  stroke-width: 3.4;
+}
+
+.jn-ring path {
+  fill: none;
+  stroke: var(--jn-ring);
+  stroke-width: 5.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jn-ring line {
+  stroke: var(--jn-ring);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.jn-room .jn-ok .jn-ttl {
+  font-size: 8.4cqw;
+}
+
+.jn-room .jn-oktext {
+  margin: 0 0 3cqw;
+  font-size: 4.8cqw;
+  color: var(--jn-screen-muted);
+}
+
+.jn-rcpt {
+  display: grid;
+  gap: 1cqw;
+  width: 100%;
+  padding: 3cqw;
+  border-radius: 3cqw;
+  background: var(--jn-screen-fill);
+  font-size: 4.4cqw;
+  text-align: left;
+}
+
+.jn-rcpt div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.jn-rcpt b {
+  font-weight: 600;
+}
+
+// The lock screen pictures a phone wallpaper.
+.jn-lock {
+  background: linear-gradient(170deg, var(--jn-lock-top), var(--jn-lock-bottom) 70%);
+  color: var(--jn-screen);
+}
+
+.jn-room .jn-time {
+  margin-top: 15cqw;
+  font-size: 19cqw;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+.jn-room .jn-date {
+  margin-top: 1.4cqw;
+  font-size: 5cqw;
+  text-align: center;
+  opacity: 0.75;
+}
+
+.jn-notif {
+  position: absolute;
+  left: 4cqw;
+  right: 4cqw;
+  top: 82cqw;
+  display: grid;
+  gap: 0.8cqw;
+  padding: 3.4cqw;
+  border-radius: 4.4cqw;
+  background: color-mix(in srgb, var(--jn-screen) 16%, transparent);
+}
+
+.jn-notif small {
+  font-size: 3.9cqw;
+  opacity: 0.8;
+}
+
+.jn-notif b {
+  font-size: 5.6cqw;
+}
+
+.jn-notif span {
+  font-size: 4.5cqw;
+  opacity: 0.92;
+}
+
+.jn-hands {
+  position: absolute;
+  left: -25%;
+  top: 0;
+  width: 150%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.jn-hands .jn-shirtf {
+  fill: var(--jn-shirt);
+}
+
+.jn-hands .jn-arm {
+  stroke: var(--jn-shirt);
+  stroke-linecap: butt;
+}
+
+.jn-hands .jn-hand-o {
+  stroke: var(--jn-skin-shade);
+  stroke-linecap: round;
+}
+
+.jn-hands .jn-hand {
+  stroke: var(--jn-skin);
+  stroke-linecap: round;
+}
+
+.jn-hands .jn-skinf {
+  fill: var(--jn-skin);
+}
+
+.jn-hands .jn-skin2f {
+  fill: var(--jn-skin-shade);
+}
+
+.jn-hands .jn-tap {
+  fill: color-mix(in srgb, var(--jn-screen-accent) 34%, transparent);
+  stroke: var(--jn-screen);
+  stroke-width: 1.6;
+  opacity: 0;
+}
+
+// Behind the screen: the three records of the same gift
+
+.jn-back {
+  position: absolute;
+  left: 3cqw;
+  right: 3cqw;
+  bottom: 2cqh;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: clamp(12px, 2.2cqw, 20px);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--slip-original);
+  box-shadow: var(--slip-shadow);
+  font-size: clamp(11.5px, 1.5cqw, 15px);
+  line-height: 1.5;
+  opacity: var(--sh);
+  transform: translateY(calc((1 - var(--sh)) * 18px));
+  pointer-events: none;
+}
+
+.jn-room .jn-back-title {
+  font-size: 1.05em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.jn-back-title small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.86em;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.jn-back ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jn-back li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 2px 10px;
+  align-items: center;
+}
+
+.jn-dot {
+  display: grid;
+  grid-row: 1 / 3;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--rule);
+  border-radius: 50%;
+}
+
+.jn-dot svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: var(--slip-original);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.jn-back li.saving .jn-dot {
+  border-color: var(--ok);
+  background: var(--ok-tint);
+}
+
+.jn-back li.done .jn-dot {
+  border-color: var(--ok);
+  background: var(--ok);
+}
+
+.jn-back li.done .jn-dot svg {
+  opacity: 1;
+}
+
+.jn-back li b {
+  font-weight: 600;
+}
+
+.jn-back li em {
+  grid-column: 2;
+  font-size: 0.9em;
+  font-style: normal;
+  color: var(--ink-soft);
+}
+
+.jn-st {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.jn-back li.done .jn-st {
+  color: var(--ok);
+}
+
+.jn-meter {
+  display: block;
+  grid-column: 2 / 4;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: var(--rule);
+}
+
+.jn-meter i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--ok);
+}
+
+// Large bold text (1.2rem and up), so 3:1 is the bar; it clears 4.5:1 too.
+.jn-room .jn-stamp {
+  position: absolute;
+  right: 14px;
+  top: -16px;
+  padding: 0.1em 0.55em;
+  border: 3px solid var(--stamp);
+  border-radius: 6px;
+  background: var(--slip-original);
+  color: var(--stamp);
+  font-size: clamp(1.2rem, 2.4cqw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  transform: rotate(-8deg);
+}
+
+// Wide rooms: the person moves left and the panel takes the right.
+@container (min-aspect-ratio: 105 / 100) {
+  .jn-person {
+    --fl: calc((100cqw - (var(--h) * 0.6 + 5cqw + var(--pnw))) / 2);
+    --il: calc((100cqw - var(--h) * 0.75) / 2);
+    left: var(--il);
+    margin-left: 0;
+    transform-origin: 0 100%;
+    transform: translateX(calc((var(--fl) - var(--il)) * var(--sh))) scale(calc(1 - 0.2 * var(--sh)));
+  }
+
+  .jn-back {
+    left: calc((100cqw - (var(--h) * 0.6 + 5cqw + var(--pnw))) / 2 + var(--h) * 0.6 + 5cqw);
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    width: var(--pnw);
+    font-size: clamp(12px, 1.6cqw, 16px);
+    transform: translateY(-50%) translateX(calc((1 - var(--sh)) * 22px));
+  }
+}
+
+// ---------- Sections under the hero ----------
+
+.jn-section {
+  padding-top: clamp(2.5rem, 7vw, 6rem);
+}
+
+.jn-intro {
+  display: grid;
+  gap: 0.875rem;
+  max-width: 36em;
+}
+
+.jn-intro p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+// The walkthrough. Without JavaScript or with reduced motion it is a list
+// beside the finished picture; .is-live pins the stage while the tall story
+// scrolls past, and shows one step at a time.
+
+.jn-story {
+  position: relative;
+  margin-top: 1.75rem;
+}
+
+.jn-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr);
+  gap: clamp(1.25rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.jn-stage .jn-room {
+  width: 100%;
+  height: min(calc(100svh - 56px), 720px);
+}
+
+.jn-story.is-live {
+  height: 280vh;
+  height: 280svh;
+}
+
+.jn-story.is-live .jn-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  padding-block: 24px;
+}
+
+.jn-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jn-steps li {
+  border-top: 1px solid var(--rule);
+}
+
+// Disabled (no JavaScript, reduced motion) the buttons are plain text in ink.
+.jn-step {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  width: 100%;
+  margin: 0;
+  padding: 14px 0 4px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+}
+
+.jn-story.is-live .jn-step {
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.jn-story.is-live .jn-step:hover,
+.jn-story.is-live .jn-step[aria-current="step"] {
+  color: var(--ink);
+}
+
+.jn-step-n {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.jn-step-t {
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.jn-step-body {
+  display: grid;
+  grid-template-rows: 1fr;
+  padding-left: 2.2rem;
+}
+
+.jn-step-body > div {
+  overflow: hidden;
+}
+
+.jn-step-body p {
+  margin: 0;
+  padding: 6px 0 10px;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+}
+
+.jn-story.is-live .jn-step-body {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--ease-out);
+}
+
+.jn-story.is-live .jn-step[aria-current="step"] + .jn-step-body {
+  grid-template-rows: 1fr;
+}
+
+.jn-stepcount {
+  display: none;
+  margin: 0 0 4px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+// The recording
+
+.jn-video-fig {
+  margin: 1.75rem 0 0;
+}
+
+.jn-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--slip-original);
+}
+
+.jn-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jn-vbtn {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px 0 14px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.jn-vbtn[hidden] {
+  display: none;
+}
+
+// The ring sits over the video, so a page-coloured band keeps it visible
+// whatever frame is behind it.
+.jn-vbtn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--paper);
+}
+
+.jn-vbtn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.jn-vbtn .jn-icon-pause,
+.jn-vbtn[aria-pressed="true"] .jn-icon-play {
+  display: none;
+}
+
+.jn-vbtn[aria-pressed="true"] .jn-icon-pause {
+  display: block;
+}
+
+.jn-video-fig figcaption {
+  padding-top: 12px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+// Before and after bars. The value is also written beside each bar, so the
+// bar repeats it. journey.js sets --w from data-share, then shows the tracks.
+
+.jn-compare {
+  display: grid;
+  gap: 22px;
+  max-width: 54rem;
+  margin-top: 1.75rem;
+}
+
+.jn-crow {
+  display: grid;
+  gap: 8px;
+}
+
+.jn-crow-lab {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.jn-crow-lab span:last-child {
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.jn-track {
+  display: none;
+  height: 40px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+.jn-compare.is-ready .jn-track {
+  display: block;
+}
+
+.jn-fill {
+  width: var(--w, 0%);
+  height: 100%;
+  border-radius: var(--radius);
+  background: var(--rule-strong);
+  transform-origin: 0 50%;
+}
+
+.jn-fill-after {
+  background: var(--accent);
+}
+
+// ---------- Narrow screens ----------
+
+@media (max-width: 54rem) {
+  .jn-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .jn-hero-fig {
+    align-items: center;
+  }
+
+  .jn-stage {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .jn-stage .jn-room {
+    height: clamp(440px, calc(100svh - 176px), 680px);
+  }
+
+  .jn-story.is-live .jn-stage {
+    align-content: center;
+    padding-block: 12px;
+  }
+
+  .jn-story.is-live .jn-steps li:not(:has(.jn-step[aria-current="step"])) {
+    display: none;
+  }
+
+  .jn-story.is-live .jn-stepcount {
+    display: block;
+  }
+
+  .jn-story.is-live .jn-step {
+    padding: 8px 0 2px;
+  }
+
+  .jn-story.is-live .jn-step-t {
+    font-size: 1rem;
+  }
+
+  .jn-story.is-live .jn-step-body p {
+    padding: 2px 0 4px;
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+}
+
+// ---------- Motion ----------
+// Self-starting: the title rise and scene fade-up (once, under 1.1 s), the
+// breathing and blinking (endless), and the hero's first beat (journey.js,
+// 5.9 s). The hero's Pause animation button holds all of them. The caret and
+// spinner show only at scroll positions the visitor picked.
+
+@media (prefers-reduced-motion: no-preference) {
+  .jn-rise > span {
+    animation: jn-rise 0.8s var(--ease-out) backwards;
+  }
+
+  // Arriving through the title morph, the title is already moving.
+  .vt-arrival .jn-rise > span {
+    animation: none;
+  }
+
+  .jn-room-hero {
+    animation: jn-fadeup 0.9s var(--ease-out) 0.15s backwards;
+  }
+
+  // Idle motion runs only once journey.js is there to offer the pause.
+  .jn-room.is-live .jn-body {
+    animation: jn-breathe 4.2s ease-in-out infinite alternate;
+  }
+
+  .jn-room.is-live .jn-eyes {
+    animation: jn-blink 5.2s infinite;
+  }
+
+  .jn-fi.act .jn-caret {
+    animation: jn-caret 1s steps(1) infinite;
+  }
+
+  .jn-btn.busy .jn-spin {
+    animation: jn-spin 0.8s linear infinite;
+  }
+
+  @supports (animation-timeline: view()) {
+    .jn-fill {
+      animation: jn-fillin linear both;
+      animation-timeline: view();
+      animation-range: entry 20% entry 90%;
+    }
+  }
+}
+
+// Paused by the visitor (journey.js sets .jn-paused on <html>): every
+// animation in the journey holds where it is. !important because each
+// animation rule above would otherwise set the play state back to running.
+.jn-paused .jn-room,
+.jn-paused .jn-room *,
+.jn-paused .jn-rise > span {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jn-pause {
+    display: none;
+  }
+}
+
+@keyframes jn-rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes jn-fadeup {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes jn-breathe {
+  to {
+    transform: translateY(2.4px);
+  }
+}
+
+@keyframes jn-blink {
+  0%,
+  94%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  96.5% {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes jn-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes jn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes jn-fillin {
+  from {
+    transform: scaleX(0);
+  }
+}

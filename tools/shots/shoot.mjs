@@ -10,9 +10,14 @@
 //   --out     folder for the PNG files         default: target/shots/latest
 //   --drafts  include draft pages
 //   --site    use an already built folder instead of building
+//   --root    the Zola site folder to build (for a test copy)  default: site
 //   --reduced also take reduced-motion shots
 //   --focus   tab through each page and photograph the focus ring
 //   --viewport-only   capture the first screen instead of the whole page
+//   --scroll "<selector>:<f1>,<f2>,..."   after each normal shot, scroll
+//             through the element (0 = its top at the top of the screen,
+//             1 = its end at the bottom) and save a viewport shot at each
+//             fraction, e.g. --scroll "#journey-story:0.05,0.5,0.97"
 //   --no-axe  skip the accessibility scan
 //   --strict  exit with code 1 when anything is reported (for CI)
 //
@@ -59,6 +64,25 @@ const themes = (opts.themes || "light,dark").split(",").filter((t) => t === "lig
 const runAxe = !opts.flags.has("no-axe");
 const fullPage = !opts.flags.has("viewport-only");
 
+// --scroll "<selector>:<fractions>": split at the last colon, so selectors
+// with colons (like :nth-child) still work.
+function parseScroll(spec) {
+  if (!spec) return null;
+  const at = spec.lastIndexOf(":");
+  if (at < 1) return null;
+  const fractions = spec
+    .slice(at + 1)
+    .split(",")
+    .map(Number)
+    .filter((f) => Number.isFinite(f) && f >= 0 && f <= 1);
+  return fractions.length ? { selector: spec.slice(0, at), fractions } : null;
+}
+const scroll = parseScroll(opts.scroll);
+if (opts.scroll && !scroll) {
+  console.error('--scroll needs "<selector>:<fractions>", for example "#journey-story:0.05,0.5".');
+  process.exit(2);
+}
+
 function freePort() {
   return new Promise((resolve, reject) => {
     const probe = net.createServer();
@@ -76,7 +100,8 @@ if (opts.site) {
   site = path.resolve(repo, opts.site);
 } else {
   site = path.join(repo, "target", "shots-site");
-  const args = ["--root", "site", "build", "--base-url", `http://127.0.0.1:${port}`, "--output-dir", site, "--force"];
+  // An argument array, never a shell string, so --root is passed as is.
+  const args = ["--root", opts.root || "site", "build", "--base-url", `http://127.0.0.1:${port}`, "--output-dir", site, "--force"];
   if (opts.flags.has("drafts")) args.push("--drafts");
   const build = spawnSync("zola", args, { cwd: repo, encoding: "utf8" });
   if (build.error || build.status !== 0) {
@@ -195,6 +220,29 @@ for (const p of pages) {
           const result = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
           for (const v of result.violations) {
             axeResults.push({ where: `${p} ${theme}`, id: v.id, impact: v.impact, help: v.help, count: v.nodes.length, target: v.nodes[0]?.target?.join(" ") });
+          }
+        }
+
+        // Scroll shots run with motion on only: with reduced motion the
+        // scroll-driven parts are switched off and every fraction looks alike.
+        if (scroll && !reduced) {
+          for (const f of scroll.fractions) {
+            const found = await page.evaluate(
+              ({ selector, f }) => {
+                const el = document.querySelector(selector);
+                if (!el) return false;
+                const top = el.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo(0, top + (el.offsetHeight - window.innerHeight) * f);
+                return true;
+              },
+              { selector: scroll.selector, f }
+            );
+            // Pages without the element (the others in --pages) are skipped.
+            if (!found) break;
+            await page.waitForTimeout(600);
+            const shot = path.join(out, `${slug(p)}-${width}-${theme}-scroll-${String(f).replace(".", "_")}.png`);
+            await page.screenshot({ path: shot });
+            shots.push(path.relative(repo, shot).replaceAll("\\", "/"));
           }
         }
         await context.close();

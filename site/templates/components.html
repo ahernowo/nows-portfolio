@@ -31,3 +31,81 @@
   {%- if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
 </figure>
 {% endcomponent figure %}
+
+{#- The donor-journey illustration, for case studies that switch the journey
+    on (work-page.html). It is drawn here in its finished state: the thank-you
+    screen, the three saved records and the stamp. So the page is complete
+    without JavaScript; js/journey.js moves the same nodes from one progress
+    number. The scene is one picture to assistive tech (role="img"), and every
+    part inside it is aria-hidden. The people, charity, URLs and amounts are
+    sample data, and the label says so.
+    {{ <journey_scene label="what the picture shows" hero={true} /> }} -#}
+{% component journey_scene(label: string, hero: bool = false) %}
+<figure class="jn-room{% if hero %} jn-room-hero{% endif %}" role="img" aria-label="Illustration with sample data: {{ label }}">
+  <div class="jn-person" aria-hidden="true"><div class="jn-halo"></div><div class="jn-hop">
+    <svg class="jn-body" viewBox="0 0 300 400">
+      <path class="jn-shirt" d="M30 400V268C30 208 74 182 120 176H180C226 182 270 208 270 268V400Z"/>
+      <path class="jn-collar" d="M116 175C128 200 172 200 184 175L200 178C190 214 110 214 100 178Z"/>
+      <rect class="jn-skin2" x="130" y="128" width="40" height="58" rx="16"/>
+      <path class="jn-skin" d="M118 176C128 198 172 198 182 176 175 186 125 186 118 176Z"/>
+      <g class="jn-head">
+        <circle class="jn-skin2" cx="108" cy="100" r="9"/><circle class="jn-skin2" cx="192" cy="100" r="9"/>
+        <ellipse class="jn-skin" cx="150" cy="96" rx="41" ry="48"/>
+        <path class="jn-hair" d="M106 96C98 46 126 28 152 28C182 28 204 48 194 96C190 76 178 62 152 62C126 62 112 76 106 96Z"/>
+        <g class="jn-brows"><path class="jn-stroke" d="M123 86Q133 80 143 85"/><path class="jn-stroke" d="M157 85Q167 80 177 86"/></g>
+        <g class="jn-eyes"><g class="jn-pupils"><ellipse class="jn-eyeball" cx="133" cy="99" rx="4.4" ry="5.4"/><ellipse class="jn-eyeball" cx="167" cy="99" rx="4.4" ry="5.4"/></g></g>
+        <path class="jn-nose" d="M151 102Q146 113 152 115"/>
+        <circle class="jn-cheek jn-c1" cx="124" cy="116" r="8" opacity="0.32"/><circle class="jn-cheek jn-c2" cx="176" cy="116" r="8" opacity="0.32"/>
+        <path class="jn-stroke jn-m0" d="M140 126Q150 129 160 126" opacity="0"/>
+        <path class="jn-stroke jn-m1" d="M137 123Q150 136 163 123" opacity="0"/>
+        <path class="jn-mouth jn-m2" d="M135 122Q150 148 165 122Z"/>
+      </g>
+    </svg>
+    <div class="jn-phone"><div class="jn-pf"><div class="jn-bezel"><div class="jn-scr">
+      <div class="jn-pg jn-lock jn-p0"><p class="jn-time">09:41</p><p class="jn-date">Saturday, 24 October</p>
+        <div class="jn-notif" data-t="notif"><small>Sample Charity · now</small><b>Give monthly</b><span>Keep a child in school. Tap to open the page.</span></div></div>
+      <div class="jn-pg jn-p1"><div class="jn-urlbar"><span><svg viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.6"/><path d="M5.4 7V5a2.6 2.6 0 0 1 5.2 0v2"/></svg>give.sample-charity.org</span></div><div class="jn-pb">
+        <p class="jn-brand"><i></i>Sample Charity</p><p class="jn-ttl">Give monthly</p><p class="jn-sub">Choose an amount</p>
+        <div class="jn-chips"><div class="jn-chip">Rp50.000</div><div class="jn-chip">Rp100.000</div><div class="jn-chip jn-c150 on" data-t="chip">Rp150.000</div><div class="jn-chip">Rp250.000</div></div>
+        <div class="jn-seg"><span class="on">Monthly</span><span>Once</span></div>
+        <div class="jn-btn jn-b1" data-t="cont1">Continue</div></div></div>
+      <div class="jn-pg jn-p2"><div class="jn-urlbar"><span><svg viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.6"/><path d="M5.4 7V5a2.6 2.6 0 0 1 5.2 0v2"/></svg>give.sample-charity.org</span></div><div class="jn-pb">
+        <p class="jn-ttl">Your details</p><div class="jn-prog"><i></i></div>
+        <p class="jn-fl">Full name</p><div class="jn-fi jn-fn" data-t="fname"><span class="jn-tx">Rina Pratama</span><i class="jn-caret"></i></div>
+        <p class="jn-fl">Email</p><div class="jn-fi jn-fe" data-t="femail"><span class="jn-tx">rina@example.com</span><i class="jn-caret"></i></div>
+        <p class="jn-fl">Phone</p><div class="jn-fi jn-fp" data-t="fphone"><span class="jn-tx">0812 3456 7890</span><i class="jn-caret"></i></div>
+        <div class="jn-chk on" data-t="chk"><b><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></b>Email me the receipt</div>
+        <div class="jn-btn jn-b2" data-t="cont2">Continue to payment</div></div>
+        <div class="jn-kb">
+          {%- for row in [10, 9, 7] %}<div class="jn-kr{% if row == 7 %} jn-kr-s{% endif %}">{% for k in range(end=row) %}<i></i>{% endfor %}</div>{% endfor -%}
+        </div></div>
+      <div class="jn-pg jn-p3"><div class="jn-urlbar"><span><svg viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7" rx="1.6"/><path d="M5.4 7V5a2.6 2.6 0 0 1 5.2 0v2"/></svg>pay.sample-charity.org</span></div><div class="jn-pb">
+        <p class="jn-ttl">Pay</p><div class="jn-sum"><span>Monthly gift</span><b>Rp150.000</b></div>
+        <div class="jn-pm on" data-t="ewallet"><span class="jn-radio"></span>E-wallet</div><div class="jn-pm"><span class="jn-radio"></span>Bank transfer</div><div class="jn-pm"><span class="jn-radio"></span>Card</div>
+        <div class="jn-btn jn-b3" data-t="pay"><span class="jn-spin"></span><span class="jn-paylabel">Pay Rp150.000</span></div></div></div>
+      <div class="jn-pg jn-p4"><div class="jn-ok">
+        <svg class="jn-ring" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27"/><path d="M18 31l8 8 17-19" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0"/>
+          <g class="jn-burst"><line x1="63" y1="30" x2="71" y2="30"/><line x1="53.33" y1="53.33" x2="58.99" y2="58.99"/><line x1="30" y1="63" x2="30" y2="71"/><line x1="6.67" y1="53.33" x2="1.01" y2="58.99"/><line x1="-3" y1="30" x2="-11" y2="30"/><line x1="6.67" y1="6.67" x2="1.01" y2="1.01"/><line x1="30" y1="-3" x2="30" y2="-11"/><line x1="53.33" y1="6.67" x2="58.99" y2="1.01"/></g></svg>
+        <p class="jn-ttl">Thank you, Rina</p><p class="jn-oktext">Your first gift of Rp150.000 is confirmed.</p>
+        <div class="jn-rcpt"><div><span>Receipt</span><b>DN-2047</b></div><div><span>Sent to</span><b>rina@example.com</b></div></div></div></div>
+      <div class="jn-off"></div></div></div></div>
+      {#- The thumb and arm at rest; journey.js moves the line ends. -#}
+      <svg class="jn-hands" viewBox="-40 0 240 300">
+        <path class="jn-shirtf" d="M-56 440L-28 244Q-26 224 -10 224L14 230L6 440Z"/>
+        <rect class="jn-skin2f" x="-11" y="213" width="32" height="60" rx="16"/><rect class="jn-skinf" x="-9" y="215" width="28" height="56" rx="14"/>
+        <rect class="jn-skin2f" x="6" y="222" width="30" height="17" rx="8.5" transform="rotate(-16 6 230)"/><rect class="jn-skinf" x="8" y="223.5" width="26" height="14" rx="7" transform="rotate(-16 6 230)"/>
+        <line class="jn-arm" stroke-width="34" x1="196" y1="470" x2="183.95" y2="373.63"/><line class="jn-hand-o" stroke-width="21" x1="183.95" y1="373.63" x2="178" y2="326"/><line class="jn-hand" stroke-width="16.5" x1="183.95" y1="373.63" x2="178" y2="326"/>
+        <circle class="jn-tap" cx="178" cy="326" r="5"/>
+      </svg>
+    </div></div></div>
+  <div class="jn-back" aria-hidden="true">
+    <p class="jn-back-title">Behind the screen<small>Sample records for this one gift</small></p>
+    <ul>
+      <li class="done"><span class="jn-dot"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><b>Donation form</b><span class="jn-st">Saved</span><em>DN-2047, Rp150.000, monthly</em><span class="jn-meter"><i></i></span></li>
+      <li class="done"><span class="jn-dot"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><b>Payment gateway</b><span class="jn-st">Confirmed</span><em>Captured Rp150.000</em><span class="jn-meter"><i></i></span></li>
+      <li class="done"><span class="jn-dot"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><b>CRM</b><span class="jn-st">Saved</span><em>Donor record, recurring, active</em><span class="jn-meter"><i></i></span></li>
+    </ul>
+    <p class="jn-stamp">Reconciled</p>
+  </div>
+</figure>
+{% endcomponent journey_scene %}

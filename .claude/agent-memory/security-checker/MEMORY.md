@@ -12,6 +12,9 @@ Recurring checks and settled questions. Keep under 150 lines; merge and prune.
 - Pure colour/type re-skins (Sass, tool CSS compiled via `include_str!`) touch no auth or CSP; a quick pass once the font and URL checks below are clean. Same for theme logic (WO-0004).
 - `localStorage.theme` is safe as long as `head.js` only applies exact `light`/`dark` and `site.js` reads the attribute through a two-value check. Re-check if either starts using the raw stored value.
 - `shoot.mjs` `context.addInitScript` writing `localStorage` sits inside the Playwright test browser only; not a tooling risk (WO-0004).
+- Reviewers launching real Chrome through Playwright (`channel: "chrome"` or `executablePath`) for H.264 checks get a fresh temp profile, not Nows's; not a finding (WO-0005).
+- Case-study `extra.link`/`extra.source` go into `href` unvalidated; this is the pre-existing pattern and only editors set it. Don't re-raise when a template copies it; raise only if a non-editor source can reach it.
+- Invented sample data labelled as illustration (`rina@example.com`, placeholder phone) is not a privacy finding (WO-0005, Nows's Q4).
 
 ## Worth checking every time
 - New `| safe` in templates; new `innerHTML` in scripts.
@@ -24,6 +27,10 @@ Recurring checks and settled questions. Keep under 150 lines; merge and prune.
 - Inlined SVG (`load_data(..., format="plain") | safe`, header mark since WO-0003): list every tag with `grep -oE '<[/!?]?[A-Za-z][A-Za-z0-9:_-]*'` and every attribute with `grep -oE '[[:space:]][A-Za-z:_-]+='`. Grep for script/on*=/href/style/url(/foreignObject/<!/entities. Byte check: `LC_ALL=C tr -d '\11\12\15\40-\176' < f | wc -c` should be 0. Then hash the rendered mark across `site/public/*.html`. Decap uploads go to `static/images/uploads/`, so they cannot overwrite the logo files.
 
 - Regenerated PNG (`og.png`): check magic and list chunks with a short `python -I` struct loop; only IHDR/IDAT/IEND and 0 trailing bytes means no hidden text or appended payload.
+- Vendored JPEG/MP4 (WO-0005): same idea. Walk JPEG markers (want only APP0 JFIF/DQT/SOF/DHT/SOS, no APP1 EXIF/GPS, 0 bytes after FFD9). Walk MP4 top-level boxes (sum must equal file size; `udta` should hold only the Lavf encoder tag). Hash against the source package too, not just the plan.
+- Outside package ported in (e.g. `design/<name>/`, untracked): grep it for agent-directed text, fetch/XHR/sendBeacon, eval/atob/fromCharCode, outside URLs. WO-0005's was clean (Google Fonts links only, not ported).
+- Scripts that animate (journey.js pattern): CSSOM `el.style.x` / `setProperty` is CSP-safe under `style-src 'self'`; only `setAttribute('style')`, `cssText` and inline `style=""` are blocked. Check that `setAttribute` touches only geometry/aria/data, and that numbers from data-* are parsed and clamped.
+- Tooling flags: new CLI args must go into `spawnSync` arrays (no shell) and into `page.evaluate` as arguments, not spliced into code; numbers used in file names are validated first.
 - Unchanged-surface proof in one line: `git diff HEAD --quiet -- site/static/_headers site/static/admin .gitignore .claude/settings.json .claude/agents .github tools/factory/src && echo unchanged`.
 
 ## Command notes

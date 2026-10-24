@@ -1,10 +1,68 @@
 {% extends "base.html" %}
 
+{#- A case study switches the donor journey on with [[extra.journey.steps]]
+    in its front matter (see content/work/donation-website.md). Without them,
+    the page renders as it always has. An empty list, which Decap may write,
+    leaves the journey off. -#}
+
 {% block og_type %}article{% endblock og_type %}
-{% block head_extra %}<link rel="stylesheet" href="{{ get_url(path='giallo.css', trailing_slash=false) }}">{% endblock head_extra %}
+{% block head_extra %}<link rel="stylesheet" href="{{ get_url(path='giallo.css', trailing_slash=false) }}">
+{%- if page.extra?.journey?.steps %}
+  <link rel="stylesheet" href="{{ get_url(path='journey.css', cachebust=true) }}">
+  <script src="{{ get_url(path='js/journey.js', cachebust=true) }}" defer></script>
+{%- endif %}{% endblock head_extra %}
 {% block body_class %}case-page{% endblock body_class %}
 
 {% block content %}
+{%- set journey = page.extra?.journey %}
+{%- if journey?.steps %}
+<div class="reading-progress" aria-hidden="true"></div>
+<article class="case wrap">
+  <header class="case-head jn-hero">
+    <div class="jn-hero-text">
+      <p class="crumb"><a href="{{ get_url(path='@/work/_index.md') }}">Work</a></p>
+      {#- The title rises once on load; the inner span is what moves. -#}
+      <h1 class="case-title" data-vt="title"><span class="jn-rise"><span>{{ page.title }}</span></span></h1>
+      {%- if page.description %}<p class="case-dek">{{ page.description }}</p>{% endif %}
+      {%- if page.extra.role or page.extra.year or page.extra.status or page.extra.stack or page.extra.link or page.extra.source %}
+      <dl class="case-form">
+        {%- if page.extra.role %}<div class="form-field"><dt>Role</dt><dd>{{ page.extra.role }}</dd></div>{% endif %}
+        {%- if page.extra.year %}<div class="form-field"><dt>Year</dt><dd>{{ page.extra.year }}</dd></div>{% endif %}
+        {%- if page.extra.status %}<div class="form-field"><dt>Status</dt><dd>{{ page.extra.status }}</dd></div>{% endif %}
+        {%- if page.extra.stack %}<div class="form-field form-field-wide"><dt>Built with</dt><dd>{{ page.extra.stack | join(sep=", ") }}</dd></div>{% endif %}
+        {%- if page.extra.link or page.extra.source %}
+        <div class="form-field form-field-wide"><dt>Links</dt><dd class="form-links">
+          {%- if page.extra.link %}<a href="{{ page.extra.link }}">Live version</a>{% endif %}
+          {%- if page.extra.source %}<a href="{{ page.extra.source }}">Source code</a>{% endif %}
+        </dd></div>
+        {%- endif %}
+      </dl>
+      {%- endif %}
+    </div>
+    <div class="jn-hero-fig">
+      {{ <journey_scene label="a donor gives a monthly gift to a charity on her phone." hero={true} /> }}
+      {#- WCAG 2.2.2: the hero moves by itself for longer than 5 seconds, so it
+          has a pause. journey.js shows the button when motion is allowed. #}
+      <button class="jn-pause" type="button" hidden>
+        <svg class="jn-icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
+        <svg class="jn-icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
+        <span class="jn-pause-label">Pause animation</span>
+      </button>
+    </div>
+  </header>
+
+  {% include "partials/journey.html" %}
+
+  <div class="prose case-body">
+    {{ page.content | safe }}
+  </div>
+
+  <nav class="pager" aria-label="More work">
+    {%- if page.lower %}<a class="pager-link" rel="prev" href="{{ page.lower.permalink }}"><span class="pager-hint">Previous</span><span class="pager-title">{{ page.lower.title }}</span></a>{% endif %}
+    {%- if page.higher %}<a class="pager-link pager-next" rel="next" href="{{ page.higher.permalink }}"><span class="pager-hint">Next</span><span class="pager-title">{{ page.higher.title }}</span></a>{% endif %}
+  </nav>
+</article>
+{%- else %}
 <article class="case wrap">
   <header class="case-head">
     <p class="crumb"><a href="{{ get_url(path='@/work/_index.md') }}">Work</a></p>
@@ -35,4 +93,5 @@
     {%- if page.higher %}<a class="pager-link pager-next" rel="next" href="{{ page.higher.permalink }}"><span class="pager-hint">Next</span><span class="pager-title">{{ page.higher.title }}</span></a>{% endif %}
   </nav>
 </article>
+{%- endif %}
 {% endblock content %}

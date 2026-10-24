@@ -55,6 +55,9 @@
   });
 
   window.addEventListener("pagereveal", function (e) {
+    // Arriving through a transition: the title morphs in, so CSS skips the
+    // case-study title rise (.vt-arrival in journey.scss).
+    if (e.viewTransition) document.documentElement.classList.add("vt-arrival");
     var nav = window.navigation;
     if (e.viewTransition && nav && nav.activation && nav.activation.from) {
       clearAfter(e.viewTransition, mark(nav.activation.from.url));
