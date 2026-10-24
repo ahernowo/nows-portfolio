@@ -452,6 +452,15 @@
   text-align: right;
 }
 
+// The way back to the Writing list, under the pager (or the tags when an
+// article has no neighbours). Colour, underline and focus come from `a`.
+
+.back-link {
+  margin: 2.5rem 0 0;
+  font-weight: 650;
+  font-stretch: 88%;
+}
+
 // A thin bar that fills as you read. Driven by scrolling, so it only moves
 // when you do. Browsers without scroll timelines simply don't show it.
 

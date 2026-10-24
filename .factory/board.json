@@ -1,6 +1,163 @@
 {
   "version": 1,
-  "next_id": 1,
+  "next_id": 2,
   "max_rework": 3,
-  "orders": []
+  "orders": [
+    {
+      "id": "WO-0001",
+      "title": "Add a back-to-writing link to every article",
+      "created_at": "2026-10-24T00:45:31Z",
+      "updated_at": "2026-10-24T00:58:10Z",
+      "station": "done",
+      "status": "closed",
+      "rework": 0,
+      "passed": [
+        "plan",
+        "build",
+        "design",
+        "security",
+        "approve"
+      ],
+      "seal": {
+        "hash": "0432a3b66206740346dfb0e9c22513d4526a68a03365f7ad9ffd80ba4eb90bb4",
+        "files": 134,
+        "at": "2026-10-24T00:51:47Z"
+      },
+      "closed_at": "2026-10-24T00:58:10Z",
+      "findings": [],
+      "events": [
+        {
+          "at": "2026-10-24T00:45:31Z",
+          "station": "plan",
+          "kind": "created",
+          "actor": "supervisor",
+          "note": "Add a back-to-writing link to every article"
+        },
+        {
+          "at": "2026-10-24T00:45:42Z",
+          "station": "plan",
+          "kind": "start",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T00:46:51Z",
+          "station": "plan",
+          "kind": "report",
+          "actor": "planner",
+          "note": "plan.md"
+        },
+        {
+          "at": "2026-10-24T00:46:51Z",
+          "station": "plan",
+          "kind": "pass",
+          "actor": "planner",
+          "note": "Add a 'Back to all writing' link at the end of article.html's footer, styled in _prose.scss; hide the empty pager nav"
+        },
+        {
+          "at": "2026-10-24T00:47:06Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T00:47:20Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T00:51:47Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-24T00:51:47Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Back to all writing link at the end of every article; empty pager nav no longer rendered; all checks green"
+        },
+        {
+          "at": "2026-10-24T00:52:10Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T00:52:24Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T00:55:43Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-24T00:55:43Z",
+          "station": "design",
+          "kind": "pass",
+          "actor": "ui-ux-reviewer",
+          "note": "Back link reads as part of the footer in both themes at 390 and 1440, with and without a pager; focus ring, target spacing and axe all clean; no findings"
+        },
+        {
+          "at": "2026-10-24T00:56:04Z",
+          "station": "security",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T00:56:16Z",
+          "station": "security",
+          "kind": "start",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T00:56:55Z",
+          "station": "security",
+          "kind": "report",
+          "actor": "security-checker",
+          "note": "security.md"
+        },
+        {
+          "at": "2026-10-24T00:56:55Z",
+          "station": "security",
+          "kind": "pass",
+          "actor": "security-checker",
+          "note": "One same-origin link via get_url and a pager guard; no unsafe output, no CSP, header, secret, dependency or tooling change; no findings"
+        },
+        {
+          "at": "2026-10-24T00:57:08Z",
+          "station": "approve",
+          "kind": "agent-finished",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T00:57:21Z",
+          "station": "approve",
+          "kind": "start",
+          "actor": "approver"
+        },
+        {
+          "at": "2026-10-24T00:58:10Z",
+          "station": "approve",
+          "kind": "report",
+          "actor": "approver",
+          "note": "approval.md"
+        },
+        {
+          "at": "2026-10-24T00:58:10Z",
+          "station": "approve",
+          "kind": "approve",
+          "actor": "approver",
+          "note": "Back to all writing link on every article; empty pager hidden; all checks reproduced green"
+        }
+      ]
+    }
+  ]
 }

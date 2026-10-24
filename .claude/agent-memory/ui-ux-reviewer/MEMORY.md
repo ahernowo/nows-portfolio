@@ -9,3 +9,7 @@ Patterns worth checking and decisions already made. Keep under 150 lines; merge 
 ## Worth checking every time
 - Long tag lists and stack lists at 390 px.
 - Text on the yellow and pink copies in dark mode.
+- Article footers both with and without `--drafts`: only one article is published, so the pager shows only with drafts.
+
+## How to check
+- [Footer focus check](footer-focus-check.md): `--focus` stops at 10 tab stops, so footer links need an inline Playwright check.

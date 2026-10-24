@@ -31,10 +31,13 @@
       {%- for tag in page.taxonomies.tags %} <a class="tag" href="{{ get_taxonomy_url(kind='tags', term=tag) }}">{{ tag }}</a>{% if not loop.last %},{% endif %}{% endfor %}.
     </p>
     {%- endif %}
+    {%- if page.higher or page.lower %}
     <nav class="pager" aria-label="More writing">
       {%- if page.higher %}<a class="pager-link" rel="prev" href="{{ page.higher.permalink }}"><span class="pager-hint">Older</span>{{ page.higher.title }}</a>{% endif %}
       {%- if page.lower %}<a class="pager-link pager-next" rel="next" href="{{ page.lower.permalink }}"><span class="pager-hint">Newer</span>{{ page.lower.title }}</a>{% endif %}
     </nav>
+    {%- endif %}
+    <p class="back-link"><a href="{{ get_url(path='@/articles/_index.md') }}">Back to all writing</a></p>
   </footer>
 </article>
 {% endblock content %}
