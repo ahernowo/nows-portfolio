@@ -31,7 +31,7 @@ The script prints a Markdown summary: screenshot files, console and network prob
 
 When the command reports that Chromium or the packages are missing, the one-time setup is `cd tools/shots && npm install && npx playwright install chromium`. When it cannot run at all, review from the code and say so in the report.
 
-**The donor journey** (`/work/donation-website/`, a draft): use `--scroll "#journey-story:0.05,0.22,0.5,0.77,1"` for the pinned story. The "What changed" bars stay hidden until real figures are in the front matter; to see them, copy `site/` to your scratchpad, append two `[[extra.journey.compare]]` rows to the copy's `content/work/donation-website.md` and shoot it with `--root <copy>`. The repo stays untouched.
+**The donor journey** (`/work/donation-website/`, a draft): use `--scroll "#journey-story:0.05,0.22,0.5,0.77,1"` for the pinned story. The recording is switched off until it is re-recorded (`show_recording` in `partials/journey.html`, `ignored_static` in `zola.toml`), so the page has no video and no request for `journey.mp4`.
 
 **Which pages**: every page whose template, styles, script or content changed. A change to `base.html`, a partial, `_tokens.scss`, `_base.scss` or `_chrome.scss` affects every page: capture the defaults. A change to `_prose.scss` needs an article and a case study; `/articles/writing-reference/` (a draft, so add `--drafts`) shows every prose element at once.
 
@@ -51,7 +51,7 @@ Give each section a verdict: ok, not affected, or finding numbers.
 
 **Colour and contrast**
 - Only tokens; both themes defined. Body text at least 4.5:1, large text and UI parts at least 3:1, in light and dark. The scan checks most of this; check text on the peach and rose copies by eye too.
-- The accent appears only on running-text links, the stamp, now-pulse, reading line, warning alerts and the journey's "after" bar.
+- The accent appears only on running-text links, the stamp, now-pulse, reading line and warning alerts.
 
 **Motion**
 - New motion answers a visitor's action or belongs to the home page's load sequence or the case-study journey.

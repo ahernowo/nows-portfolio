@@ -19,11 +19,40 @@
   max-width: none;
 }
 
+// The scene, the sample-data note and the Pause animation button, in that
+// order in the markup. On wide screens the note and the button share one line
+// under the scene; the column is as wide as the scene and sits at the right.
 .jn-hero-fig {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "scene scene"
+    "note pause";
+  align-items: center;
+  gap: 0.75rem;
+  justify-self: end;
+  width: 100%;
+  max-width: 520px;
   min-width: 0;
+}
+
+.jn-hero-fig > .jn-room {
+  grid-area: scene;
+}
+
+.jn-hero-fig > .jn-sample {
+  grid-area: note;
+}
+
+.jn-hero-fig > .jn-pause {
+  grid-area: pause;
+}
+
+// Says the donor, the amounts and the reference in the scene are invented.
+.jn-sample {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
 }
 
 // The title rises once, as one line: the outer span clips, the inner moves.
@@ -45,7 +74,6 @@
   align-items: center;
   gap: 0.5rem;
   min-height: 2.75rem;
-  margin-top: 0.75rem;
   padding: 0 0.95rem 0 0.8rem;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
@@ -1124,59 +1152,6 @@
   color: var(--ink-soft);
 }
 
-// Before and after bars. The value is also written beside each bar, so the
-// bar repeats it. journey.js sets --w from data-share, then shows the tracks.
-
-.jn-compare {
-  display: grid;
-  gap: 22px;
-  max-width: 54rem;
-  margin-top: 1.75rem;
-}
-
-.jn-crow {
-  display: grid;
-  gap: 8px;
-}
-
-.jn-crow-lab {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin: 0;
-  font-weight: 600;
-}
-
-.jn-crow-lab span:last-child {
-  font-weight: 500;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
-}
-
-.jn-track {
-  display: none;
-  height: 40px;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: color-mix(in srgb, var(--ink) 7%, transparent);
-}
-
-.jn-compare.is-ready .jn-track {
-  display: block;
-}
-
-.jn-fill {
-  width: var(--w, 0%);
-  height: 100%;
-  border-radius: var(--radius);
-  background: var(--rule-strong);
-  transform-origin: 0 50%;
-}
-
-.jn-fill-after {
-  background: var(--accent);
-}
-
 // ---------- Narrow screens ----------
 
 @media (max-width: 54rem) {
@@ -1184,8 +1159,29 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  // One column, without named areas, so a hidden button (no JavaScript,
+  // reduced motion) makes no row and leaves no empty band. The button moves
+  // above the scene so it arrives on screen with the motion it pauses; the
+  // visual order changes, the tab order (crumb, button, steps) does not.
   .jn-hero-fig {
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: none;
+    justify-self: center;
+  }
+
+  .jn-hero-fig > .jn-room,
+  .jn-hero-fig > .jn-sample,
+  .jn-hero-fig > .jn-pause {
+    grid-area: auto;
+  }
+
+  .jn-hero-fig > .jn-pause {
+    order: -1;
+    justify-self: end;
+  }
+
+  .jn-hero-fig > .jn-sample {
+    justify-self: start;
   }
 
   .jn-stage {
@@ -1261,14 +1257,6 @@
   .jn-btn.busy .jn-spin {
     animation: jn-spin 0.8s linear infinite;
   }
-
-  @supports (animation-timeline: view()) {
-    .jn-fill {
-      animation: jn-fillin linear both;
-      animation-timeline: view();
-      animation-range: entry 20% entry 90%;
-    }
-  }
 }
 
 // Paused by the visitor (journey.js sets .jn-paused on <html>): every
@@ -1326,11 +1314,5 @@
 @keyframes jn-spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes jn-fillin {
-  from {
-    transform: scaleX(0);
   }
 }

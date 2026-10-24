@@ -26,11 +26,16 @@ Notes that make future plans better. Keep under 150 lines; merge and prune.
 - Prefer server-rendered markup (Tera component) over JS `innerHTML` templates: no CSP/XSS question, and the page is complete without JS.
 - Front matter strings are escaped, so `<!-- Nows -->` markers can't live there: use `# Nows:` TOML comments plus one marker block in the body. Decap may write empty lists, so switch a feature on a non-empty list, not on a table's presence.
 - WCAG 2.2.2: motion that starts by itself and runs over 5 s needs a pause control. Check mock-up idle loops and load sequences against it.
-- Playwright's Chromium can't play H.264; video checks need Chrome (`C:/Program Files/Google/Chrome/Application/chrome.exe`, via `CHROMIUM_PATH` or by hand). `shoot.mjs` picks a random port, so `--site` can't reuse a site built with another base URL; WO-0005 planned `--root` and `--scroll` (check they landed).
+- Playwright's Chromium can't play H.264; video checks need Chrome (`C:/Program Files/Google/Chrome/Application/chrome.exe`, via `CHROMIUM_PATH` or by hand). `shoot.mjs` has `--root` (shoot a scratch copy of `site/`) and `--scroll`; `--site` can't reuse a build with another base URL.
+- Mock a content change before planning: copy `site/` to the scratchpad, edit, `shoot.mjs --root <copy> --viewport-only --no-axe`. WO-0006: filling the case-form in the journey hero pushed the 390 scene (and its Pause button) to ~810 px.
+- Anything in `site/static/` deploys even if no page links it, and drafts don't hide it. `ignored_static = [...]` in `zola.toml` keeps a file in the repo but out of the build (tested, Zola 0.23.6). Check `git status -sb` for what's already pushed (= live).
+- "Only inside the illustration" checks: a node one-liner that strips `<figure ... jn-room>...</figure>` from the built HTML and greps the rest (WO-0006 plan, check 5). A `<!-- Nows -->` marker that quotes a removed claim trips the plan's own grep; paraphrase it.
+- Supervisor notes can be stale (WO-0006 said WO-0005 was uncommitted; it was HEAD). Trust `git log`/`git status`.
 
 ## Requests that needed Nows
 - Re-skin with a fixed five-colour palette (WO-0002): secondary text colour in dark (palette had none), which links take the accent, and "generous white space" vs "colours and type only, not layout".
 - Porting a mock-up (WO-0005): which content page gets it, real copy and figures, whether the invented names baked into the scene and video can stay, and how far the mock-up may go against the design system (load or idle motion, colours outside the palette, rounded corners). Ask all of these in one round.
+- Honesty reframes (WO-0006) needed no questions: the request listed the facts. Derive only small things (year from a start date), keep Nows's wording in lists, and remove a feature whose purpose is results (the bars) from the code, docs and Decap, not just the page.
 
 ## Working the line
 - Long `factory report` heredocs fail on Windows ("unexpected EOF while looking for matching `''"): the command is too long. Build the report in the scratchpad with several `cat >>` heredocs of ~3 KB (a 9 KB one failed in WO-0005), then `factory report <id> plan < file`. The Write tool is blocked outside this folder.

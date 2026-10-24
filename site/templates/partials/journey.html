@@ -1,15 +1,19 @@
-{#- The donor journey on a case study: the walkthrough, the recording and,
-    once real figures are in the front matter, the before-and-after bars.
+{#- The donor journey on a case study: the walkthrough and the recording.
     Included by work-page.html when the page has [[extra.journey.steps]].
     The intros below describe the fixed illustration and recording, so they
     live here rather than in each page. -#}
 {%- set steps = page.extra.journey.steps %}
 {%- set targets = [0.05, 0.22, 0.5, 0.77, 1] %}
+{#- The recording is switched off: journey.mp4 still shows a line about how
+    records are kept that this page no longer makes. Turn it back on together
+    with removing the two files from ignored_static in zola.toml, once the
+    recording is re-made without that line (WO-0006). #}
+{%- set show_recording = false %}
 
 <section class="jn-section" aria-labelledby="jn-walk-title">
   <div class="jn-intro">
     <h2 id="jn-walk-title" class="block-title">One gift, from the donor's side</h2>
-    <p>Scroll to follow Rina, an invented donor, through one gift. The pages, names and amounts are an illustration with sample data.</p>
+    <p>Follow one gift from a donor's phone to the records behind it. Illustration with sample data.</p>
   </div>
   {#- Without JavaScript, or with reduced motion, this is a plain list beside
       the finished picture. journey.js adds .is-live to pin it and drive the
@@ -29,6 +33,7 @@
   </div>
 </section>
 
+{%- if show_recording %}
 <section class="jn-section" aria-labelledby="jn-video-title">
   <div class="jn-intro">
     <h2 id="jn-video-title" class="block-title">The whole journey in twelve seconds</h2>
@@ -48,22 +53,5 @@
     </div>
     <figcaption>Illustration with sample data. The steps above describe what it shows.</figcaption>
   </figure>
-</section>
-
-{%- if page.extra.journey?.compare %}
-<section class="jn-section" aria-labelledby="jn-compare-title">
-  <div class="jn-intro">
-    <h2 id="jn-compare-title" class="block-title">What changed</h2>
-  </div>
-  {#- Bar lengths come from data-share (0 to 100); journey.js sets them, so
-      the page needs no style="" attribute. #}
-  <div class="jn-compare">
-    {%- for row in page.extra.journey.compare %}
-    <div class="jn-crow">
-      <p class="jn-crow-lab"><span>{{ row.label }}</span><span>{{ row.value }}</span></p>
-      <div class="jn-track" aria-hidden="true"><div class="jn-fill{% if row.after %} jn-fill-after{% endif %}" data-share="{{ row.share }}"></div></div>
-    </div>
-    {%- endfor %}
-  </div>
 </section>
 {%- endif %}

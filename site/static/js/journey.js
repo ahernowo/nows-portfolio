@@ -5,8 +5,9 @@
 //   1. each scene is drawn from one progress number, 0 to 1 (bindScene);
 //   2. the hero plays its first beat once, with a Pause animation button;
 //   3. the walkthrough is pinned and driven by scrolling;
-//   4. the recording plays while it is on screen, with a Play/Pause button;
-//   5. the "What changed" bars get their lengths.
+//   4. the recording plays while it is on screen, with a Play/Pause button
+//      (it does nothing while the recording is switched off in
+//      partials/journey.html, because there is no <video> to find).
 // Style changes go through element.style only, which the CSP allows.
 
 (function () {
@@ -418,18 +419,6 @@
       ).observe(video);
     }
     paintVideoButton();
-  }
-
-  // ---------- 5. The bars ----------
-
-  var compare = document.querySelector(".jn-compare");
-  if (compare) {
-    [].slice.call(compare.querySelectorAll(".jn-fill")).forEach(function (fill) {
-      // data-share comes from front matter: read it as a number from 0 to 100.
-      var share = clamp(parseFloat(fill.getAttribute("data-share")) || 0, 0, 100);
-      fill.style.setProperty("--w", share + "%");
-    });
-    compare.classList.add("is-ready");
   }
 
   // ---------- Motion on or off ----------

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "next_id": 6,
+  "next_id": 7,
   "max_rework": 3,
   "orders": [
     {
@@ -1234,6 +1234,209 @@
           "kind": "approve",
           "actor": "approver",
           "note": "All checks reproduced; pause, reduced motion, no-JS and morph confirmed in Chrome; 7 low polish findings left open"
+        }
+      ]
+    },
+    {
+      "id": "WO-0006",
+      "title": "Reframe the donation case study as an honest plan",
+      "created_at": "2026-10-24T13:49:49Z",
+      "updated_at": "2026-10-24T14:42:16Z",
+      "station": "done",
+      "status": "closed",
+      "rework": 0,
+      "passed": [
+        "plan",
+        "build",
+        "design",
+        "security",
+        "approve"
+      ],
+      "seal": {
+        "hash": "8c779270248774dbf7cb4dbac887ecce1978f9589e09b4a9d63c1e98c70e8d34",
+        "files": 149,
+        "at": "2026-10-24T14:23:21Z"
+      },
+      "closed_at": "2026-10-24T14:42:16Z",
+      "findings": [
+        {
+          "n": 1,
+          "station": "design",
+          "severity": "low",
+          "title": "Between 865 and 970 px the word 'documentation' in the Role field runs into the ruled column line",
+          "file": "site/sass/_prose.scss:78",
+          "status": "open",
+          "at": "2026-10-24T14:29:09Z"
+        },
+        {
+          "n": 2,
+          "station": "design",
+          "severity": "low",
+          "title": "/work/ intro says 'Systems I've built ... what changed because of it', which the planned donation website will not fit once published",
+          "file": "site/content/work/_index.md",
+          "status": "open",
+          "at": "2026-10-24T14:29:09Z"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-24T13:49:49Z",
+          "station": "plan",
+          "kind": "created",
+          "actor": "supervisor",
+          "note": "Reframe the donation case study as an honest plan"
+        },
+        {
+          "at": "2026-10-24T13:49:49Z",
+          "station": "plan",
+          "kind": "note",
+          "actor": "supervisor",
+          "note": "Supervisor: WO-0005 (the donor-journey port that created this page) is approved but still uncommitted in the working tree; this order builds on top of it. design/journey/ is an untracked outside package; leave it out of the diff."
+        },
+        {
+          "at": "2026-10-24T13:50:02Z",
+          "station": "plan",
+          "kind": "start",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T13:56:59Z",
+          "station": "plan",
+          "kind": "report",
+          "actor": "planner",
+          "note": "plan.md"
+        },
+        {
+          "at": "2026-10-24T13:56:59Z",
+          "station": "plan",
+          "kind": "pass",
+          "actor": "planner",
+          "note": "Reframe donation-website as a plan from Nows's facts; sample data only in the scene plus a visible note; bars feature removed; recording hidden and kept out of the build; Pause above the scene at narrow widths"
+        },
+        {
+          "at": "2026-10-24T13:57:25Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T13:57:36Z",
+          "station": "build",
+          "kind": "note",
+          "actor": "supervisor",
+          "note": "Supervisor correction: WO-0005 is committed and pushed as 40eac14 (HEAD = origin/main); diffs are against HEAD. journey.mp4 and journey-poster.jpg are in that commit, so they are already deployed (unlinked) at /images/."
+        },
+        {
+          "at": "2026-10-24T13:57:51Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T14:23:21Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-24T14:23:21Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Page reframed as a plan from Nows's facts; sample-data note in hero and walkthrough; bars removed; recording hidden and ignored_static; Pause above scene at narrow widths. All checks green, axe 0, no failed requests."
+        },
+        {
+          "at": "2026-10-24T14:23:43Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T14:24:25Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T14:29:09Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#1 Low: Between 865 and 970 px the word 'documentation' in the Role field runs into the ruled column line"
+        },
+        {
+          "at": "2026-10-24T14:29:09Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#2 Low: /work/ intro says 'Systems I've built ... what changed because of it', which the planned donation website will not fit once published"
+        },
+        {
+          "at": "2026-10-24T14:29:38Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-24T14:29:42Z",
+          "station": "design",
+          "kind": "pass",
+          "actor": "ui-ux-reviewer",
+          "note": "Hero note and Pause layout good at 320-1440 in both themes, Pause holds every animation, axe 0, no failed requests; every sentence matches Nows's facts. Two low findings: Role word overruns its field at 865-970 px (#1), /work/ intro says 'Systems I've built' (#2)."
+        },
+        {
+          "at": "2026-10-24T14:30:08Z",
+          "station": "security",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T14:30:27Z",
+          "station": "security",
+          "kind": "start",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T14:34:25Z",
+          "station": "security",
+          "kind": "report",
+          "actor": "security-checker",
+          "note": "security.md"
+        },
+        {
+          "at": "2026-10-24T14:34:25Z",
+          "station": "security",
+          "kind": "pass",
+          "actor": "security-checker",
+          "note": "No security surface changed beyond removing code: no new | safe or innerHTML, no inline script or style in the drafts build, _headers identical, secrets grep clean, recording out of the build. No findings."
+        },
+        {
+          "at": "2026-10-24T14:34:47Z",
+          "station": "approve",
+          "kind": "agent-finished",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T14:35:15Z",
+          "station": "approve",
+          "kind": "start",
+          "actor": "approver"
+        },
+        {
+          "at": "2026-10-24T14:42:12Z",
+          "station": "approve",
+          "kind": "report",
+          "actor": "approver",
+          "note": "approval.md"
+        },
+        {
+          "at": "2026-10-24T14:42:16Z",
+          "station": "approve",
+          "kind": "approve",
+          "actor": "approver",
+          "note": "Honest plan from Nows's facts; sample data inside the scene; bars gone; recording off and out of the build. All checks reproduced."
         }
       ]
     }

@@ -103,8 +103,8 @@ collections:
           - { label: Built with, name: stack, widget: list, required: false, default: [] }
           - { label: Live link, name: link, widget: string, required: false }
           - { label: Source code link, name: source, widget: string, required: false }
-          # The donor journey (work-page.html): five steps switch it on; bars
-          # show only when compare rows exist. Leave it empty elsewhere.
+          # The donor journey (work-page.html): five steps switch it on.
+          # Leave it empty elsewhere.
           - label: Donor journey
             name: journey
             widget: object
@@ -122,14 +122,4 @@ collections:
                 fields:
                   - { label: Title, name: title, widget: string }
                   - { label: Text, name: body, widget: text }
-              - label: Before and after
-                name: compare
-                widget: list
-                required: false
-                hint: "One row per bar. Share is the bar length, 0 to 100; tick After on the new way."
-                fields:
-                  - { label: Label, name: label, widget: string }
-                  - { label: Value, name: value, widget: string, hint: "As shown beside the bar, for example: about 10 minutes a day." }
-                  - { label: Share, name: share, widget: number, value_type: int, min: 0, max: 100 }
-                  - { label: After, name: after, widget: boolean, default: false, required: false }
       - { label: Body, name: body, widget: markdown }

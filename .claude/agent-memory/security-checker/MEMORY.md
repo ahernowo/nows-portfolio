@@ -15,6 +15,8 @@ Recurring checks and settled questions. Keep under 150 lines; merge and prune.
 - Reviewers launching real Chrome through Playwright (`channel: "chrome"` or `executablePath`) for H.264 checks get a fresh temp profile, not Nows's; not a finding (WO-0005).
 - Case-study `extra.link`/`extra.source` go into `href` unvalidated; this is the pre-existing pattern and only editors set it. Don't re-raise when a template copies it; raise only if a non-editor source can reach it.
 - Invented sample data labelled as illustration (`rina@example.com`, placeholder phone) is not a privacy finding (WO-0005, Nows's Q4).
+- Copy/honesty reframes that mostly delete features (WO-0006: bars, Decap `compare` field, hidden video) are a quick pass once the CSP/XSS greps on a drafts build are clean. Removing a Decap field narrows the editor surface; not a finding.
+- `ignored_static` in `zola.toml` keeps media in git but out of the build. Already-pushed files stay in history and caches: tell Nows in the report, but it is not a finding unless the file holds a secret or personal data.
 
 ## Worth checking every time
 - New `| safe` in templates; new `innerHTML` in scripts.
@@ -37,4 +39,6 @@ Recurring checks and settled questions. Keep under 150 lines; merge and prune.
 - Built HTML is minified (`minify_html` reorders attributes): grep metas with `<meta[^>]*theme-color[^>]*>`.
 - `grep -c $'[^\t\r\n -~]'` fails in Git Bash ("Unmatched ["); use the `tr -d` byte count above.
 - Grep woff2 binaries separately from the untracked-text secret grep (`grep -c` gives 0 when clean); binary noise otherwise.
-- The untracked-files secret grep returns rc=123 from `xargs` when nothing matches; that means clean.
+- The untracked-files secret grep returns rc=123 from `xargs` when nothing matches; that means clean. Filter binaries out first: `git ls-files --others --exclude-standard | grep -vE '\.(woff2|mp4|jpg|png)$' | xargs -r grep ...`.
+- Drafts pages: `site/public` lacks them and :1111 may be the supervisor's. Build to an absolute scratch dir: `zola --root site build --drafts --output-dir <repo>/target/sec-<wo> --force`, grep it, then `rm -rf` it. Also check `cmp site/static/_headers <out>/_headers` when `zola.toml` touches static handling.
+- Dormant JS (code kept for a removed element): check each use sits behind the element null-guard, including in the motion on/off handler.

@@ -1,23 +1,22 @@
 +++
 title = "Donation website"
 template = "work-page.html"
-description = "One gift followed from a donor's phone through the donation form, the payment and the three systems that record it."
+description = "What I will build and run on a donation website from November 2026: its development, documentation and monitoring."
 date = 2026-10-24
 weight = 5
-# Stays a draft until Nows has filled in the facts marked below.
+# Stays a draft until Nows confirms the role title below.
 draft = true
 include_in_feeds = false
 
 [extra]
-year = "" # Nows: the year (or years) you built it
-role = "" # Nows: your role, in a few words
-status = "" # Nows: for example Live, Internal tool, Retired
-stack = [] # Nows: the tools and systems you used
+year = "2026"
+role = "Donation website development, documentation and monitoring" # Nows: confirm the exact role title
+status = "Starting soon"
+stack = ["Salesforce (NPSP)", "Payment gateway", "Power BI and Excel automation", "InDiGO"]
 
 # The donor journey. Five steps, one per part of the illustration; the
-# walkthrough scrolls through them in this order. Before-and-after bars appear
-# only when [[extra.journey.compare]] rows are added (label, value, share 0 to
-# 100, after = true on the new way).
+# walkthrough scrolls through them in this order. The donor, the amounts and
+# the reference are sample data and live only inside the illustration.
 [extra.journey]
 
 [[extra.journey.steps]]
@@ -26,7 +25,7 @@ body = "A message arrives with a link to the donation page."
 
 [[extra.journey.steps]]
 title = "Chooses a gift"
-body = "She picks Rp150.000 and keeps the monthly option."
+body = "She picks an amount and keeps the monthly option."
 
 [[extra.journey.steps]]
 title = "Fills in her details"
@@ -41,14 +40,19 @@ title = "Three systems record the gift"
 body = "The donation form, the payment gateway and the CRM each hold a record of the same gift. When the three match, the gift is stamped reconciled."
 +++
 
-<!-- Nows: this case study is a draft. Before it goes public, please add:
-- What you built and your role on the donation website, in your own words (a paragraph or two here, above "How this page moves").
-- The year, your role, the status and the stack, in the front matter above.
-- A description in your words, if the one above doesn't fit.
-- One real sentence per step, if you want the walkthrough to say more than what the illustration shows.
-- The before-and-after figures, as [[extra.journey.compare]] rows (label, value, share 0 to 100, after = true on the new way). The bars stay hidden until then.
-- The recording (images/journey.mp4 and its poster) still shows a line about records being encrypted and access-limited, which the live illustration dropped. Re-record it from this page, or confirm the line is true and keep it.
--->
+<!-- Nows: confirm the exact role title -->
+
+<!-- Nows: the recording (site/static/images/journey.mp4 and journey-poster.jpg) still shows the "Stored safely" line about how records are kept, which this page does not claim. It is hidden from this page and left out of the build (ignored_static in site/zola.toml, show_recording in partials/journey.html) until it is re-recorded without that line. -->
+
+## What I will build and run
+
+From November 2026, I will work on a donation website: its development, its documentation and its monitoring.
+
+My first responsibilities will be SOPs (standard operating procedures) and monitoring tools.
+
+I will work with Salesforce (NPSP), the payment gateway, Power BI and Excel automation, and InDiGO.
+
+There are no results yet, so this page describes the plan, not an outcome. The illustration above follows one gift with sample data; it is not a record from the website.
 
 ## How this page moves
 
@@ -61,6 +65,5 @@ Each effect uses the lightest tool that can do it. The site's security rules all
 | First beat in the hero | The phone lifts, the screen wakes and a thumb picks a gift, once, then the scene rests | About 50 lines, with the pause |
 | Pinned journey | `position: sticky` inside a tall section; one scroll listener turns the position into one progress number, and the scene is drawn from that number alone | About 50 lines, plus the scene |
 | Character and hand | Inline SVG; the head, eyes and mouth change with progress, and the finger is a line whose end moves to each button | About 190 lines (the scene) |
-| Reading line and before-and-after bars | CSS scroll and view timelines; shown finished where unsupported | 8 lines, to set the bar lengths |
-| Recording | A twelve-second H.264 file that plays while half of it is on screen; the button pauses it | About 40 lines |
-| Reduced motion | The page starts from the finished picture; pinning, autoplay and idle motion are off, and the steps are a plain list | About 30 lines, shared |
+| Reading line | A CSS scroll timeline | None |
+| Reduced motion | The page starts from the finished picture; pinning and idle motion are off, and the steps are a plain list | About 30 lines, shared |

@@ -11,6 +11,8 @@ Gotchas that cost time once. Keep under 150 lines; merge and prune.
 - Tera 2: `{%- if page.higher or page.lower %}` is safe for guarding the pager (WO-0001).
 - Inline SVG from a file: `load_data(path="static/...svg", format="plain")` + `| replace(...) | safe` works; put `aria-hidden` on a wrapping span (WO-0003).
 - Tera 2 that worked first time (WO-0005): `{% if page.extra?.journey?.steps %}` in `head_extra` and `content` (a top-level `set` outside blocks is not seen inside them), `{% for row in [10, 9, 7] %}`, `range(end=n)`, list literals indexed `targets[i]`. `minify_html` strips `<!-- Nows -->` comments from the output.
+- Grid with a hidden button: named `grid-template-areas` keep an empty row (and its gap) when the item is `display: none`. For a row that must vanish, drop the areas at that breakpoint and move the item with `order` (WO-0006 hero Pause).
+- `ignored_static = [...]` in zola.toml drops static files from the build; the supervisor's running `zola serve` needs a restart to see it.
 - Any `sass/x.scss` without `_` compiles to `/x.css`: a per-page stylesheet needs no `main.scss` change.
 
 ## Type and colour (Inter, since WO-0002)
@@ -34,6 +36,9 @@ Gotchas that cost time once. Keep under 150 lines; merge and prune.
 - `scripts/make-og-image.py` needs Pillow, which the system Python lacks: `python -m venv <scratchpad>/ogvenv`, then `ogvenv/Scripts/python -m pip install pillow fonttools brotli`.
 - Long heredocs fail in the Bash tool ("unexpected EOF while looking for matching `''"), even quoted ones, e.g. `factory report <<'EOF'` with a long report. Write the report to `target/<wo>-build-report.md` with Write, then `factory report <id> build < target/...md`. For big edits: Read + Edit, or a Python exact-replace script (in target/) with a count check per block.
 
+- Python edit scripts on Windows: `read_text`/`write_text` turn LF files into CRLF (git then warns "CRLF will be replaced"). Use `read_bytes().decode()` / `write_bytes(s.encode())` (WO-0006).
+- In a slice-out script, search the end marker *after* the start: `s.index(end, a)`. config.yml has one `Body` field per collection; `s.index` found the first and duplicated the work collection (WO-0006).
+- After edits, compare against HEAD: a short script printing CRLF and line counts from `git show HEAD:<f>` vs the file catches both of the above.
 - `.claude/agent-memory/` is outside the build seal (`tools/factory/src/seal.rs`), so memory can be updated after `factory pass`.
 - A font or type change on the site also changes `workers/cms-api/admin/app.css` (the `.preview` font) and the dashboard CSS; check both.
 
