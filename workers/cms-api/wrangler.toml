@@ -19,7 +19,7 @@ command = "cargo install -q worker-build --version 0.8.7 --locked && worker-buil
 [[d1_databases]]
 binding = "DB"
 database_name = "portfolio-cms"
-database_id = "REPLACE-WITH-YOUR-DATABASE-ID"
+database_id = "f1383040-a311-4e00-8e99-a952eb3d4bfe"
 migrations_dir = "migrations"
 
 [vars]
