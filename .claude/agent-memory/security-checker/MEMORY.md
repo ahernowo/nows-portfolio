@@ -19,6 +19,9 @@ Recurring checks and settled questions. Keep under 150 lines; merge and prune.
 
 - New font or other vendored binary: curl the pinned upstream file (jsdelivr npm path) into the scratchpad and compare `sha256sum`; check `wOF2` magic. Grep added CSS lines for `url(`, `@import`, `https?://` to confirm self-hosting. Dashboard serves `/fonts/` only for lowercase `*.woff2` names (`server.rs` `font()`), so new font names must fit that.
 
+- Inlined SVG (`load_data(..., format="plain") | safe`, header mark since WO-0003): list every tag with `grep -oE '<[/!?]?[A-Za-z][A-Za-z0-9:_-]*'` and every attribute with `grep -oE '[[:space:]][A-Za-z:_-]+='`. Grep for script/on*=/href/style/url(/foreignObject/<!/entities. Byte check: `LC_ALL=C tr -d '\11\12\15\40-\176' < f | wc -c` should be 0. Then hash the rendered mark across `site/public/*.html`. Decap uploads go to `static/images/uploads/`, so they cannot overwrite the logo files.
+
 ## Command notes
+- `grep -c $'[^\t\r\n -~]'` fails in Git Bash ("Unmatched ["); use the `tr -d` byte count above.
 - Grep woff2 binaries separately from the untracked-text secret grep (`grep -c` gives 0 when clean); binary noise otherwise.
 - The untracked-files secret grep returns rc=123 from `xargs` when nothing matches; that means clean.

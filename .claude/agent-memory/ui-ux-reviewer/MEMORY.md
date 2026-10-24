@@ -9,6 +9,8 @@ Patterns worth checking and decisions already made. Keep under 150 lines; merge 
 - In dark, coral is both secondary text and link colour; links are told apart only by `--link-line` underline. Check the underline is there.
 - Pager: only `.pager-title` is underlined; the Older/Newer hint stays plain (WO-0002 #3). In dark, hint and title are both coral, so the underline is the only difference.
 - Search: the first Escape clears a `type=search` input, the second closes the dialog and restores focus. Native, fine.
+- Header phone layout starts at 43rem (not 40rem) since WO-0003's flow mark; 641-688 px is the phone header by Nows's choice. Footer query stays 40rem.
+- The flow mark's ink sits ~1.5 px low against the caps (viewBox has extra top space). Read as natural at 1x; nudge only if Nows asks.
 
 ## Worth checking every time
 - Long tag lists and stack lists at 390 px.
@@ -18,5 +20,7 @@ Patterns worth checking and decisions already made. Keep under 150 lines; merge 
 - Deks and standfirsts for single-word last lines at 1440 after any font or size change (`text-wrap: pretty` is on them since WO-0002).
 
 ## How to check
+- Header changes: crop `.site-header` at 320/390/641/688/689/705/1440 with an inline Playwright script against `zola serve` (:1111) when it is running; full-page shots are too tall to judge a header. Measure inline SVG ink with `getBBox()` + `getScreenCTM()`.
+- Favicons: render the SVG as `<img>` at 16/32 px on light and dark grey strips; headless shows no real tab.
 - [Footer focus check](footer-focus-check.md): `--focus` stops at 10 tab stops; inline Playwright for footers, and how to crop screenshots.
 - On a rework round, scope re-reading with `find <dirs> -newer <ref>`, where `<ref>` is touched to the last design report time (`touch -d "<UTC>Z"`), then re-check the earlier findings with computed styles and crops.

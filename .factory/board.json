@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "next_id": 3,
+  "next_id": 4,
   "max_rework": 3,
   "orders": [
     {
@@ -494,6 +494,176 @@
           "kind": "approve",
           "actor": "approver",
           "note": "Five-colour palette and Inter, layout untouched; all checks reproduced, contrast recomputed, #1-#4 fixed."
+        }
+      ]
+    },
+    {
+      "id": "WO-0003",
+      "title": "Add the Nows logo to the header and favicon",
+      "created_at": "2026-10-24T03:01:59Z",
+      "updated_at": "2026-10-24T03:53:13Z",
+      "station": "done",
+      "status": "closed",
+      "rework": 0,
+      "passed": [
+        "plan",
+        "build",
+        "design",
+        "security",
+        "approve"
+      ],
+      "seal": {
+        "hash": "cacb49eb8ecbe4fd19d59419127624e63dce2ad6f29210f53d28fc5c02849708",
+        "files": 135,
+        "at": "2026-10-24T03:45:58Z"
+      },
+      "closed_at": "2026-10-24T03:53:13Z",
+      "findings": [],
+      "events": [
+        {
+          "at": "2026-10-24T03:01:59Z",
+          "station": "plan",
+          "kind": "created",
+          "actor": "supervisor",
+          "note": "Add the Nows logo to the header and favicon"
+        },
+        {
+          "at": "2026-10-24T03:01:59Z",
+          "station": "plan",
+          "kind": "note",
+          "actor": "supervisor",
+          "note": "Supervisor: site/static/images also holds nows-flow-mark-dark.svg and nows-flow-mark-light.svg, added at the same time; the request does not mention them."
+        },
+        {
+          "at": "2026-10-24T03:02:12Z",
+          "station": "plan",
+          "kind": "start",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T03:07:13Z",
+          "station": "plan",
+          "kind": "report",
+          "actor": "planner",
+          "note": "plan.md"
+        },
+        {
+          "at": "2026-10-24T03:07:13Z",
+          "station": "plan",
+          "kind": "pass",
+          "actor": "planner",
+          "note": "Inline the currentColor flow mark (via load_data) in the header home link with aria-hidden, point the site and admin favicon at nows-flow-favicon.svg, move the header breakpoint 40rem to 43rem so the row still fits"
+        },
+        {
+          "at": "2026-10-24T03:07:33Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T03:39:34Z",
+          "station": "build",
+          "kind": "note",
+          "actor": "nows",
+          "note": "Decision: The mark doesn't fit the one-row header between about 641 and 688 px; how to make room? → Move the header breakpoint from 40rem to 43rem as planned (mark stays ~36 x 24 px)"
+        },
+        {
+          "at": "2026-10-24T03:39:51Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T03:45:58Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-24T03:45:58Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Flow mark inlined (load_data, aria-hidden span, currentColor) before the name; favicon on site and admin; header breakpoint 43rem; all checks green, axe 0, focus ring ok"
+        },
+        {
+          "at": "2026-10-24T03:46:15Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T03:46:34Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T03:49:52Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-24T03:49:52Z",
+          "station": "design",
+          "kind": "pass",
+          "actor": "ui-ux-reviewer",
+          "note": "Mark in --ink both themes, one focus ring, name read once, 43rem band reads as phone header; axe 0, focus 0, CSP 0; favicon serves; no findings"
+        },
+        {
+          "at": "2026-10-24T03:50:10Z",
+          "station": "security",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T03:50:30Z",
+          "station": "security",
+          "kind": "start",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T03:51:49Z",
+          "station": "security",
+          "kind": "report",
+          "actor": "security-checker",
+          "note": "security.md"
+        },
+        {
+          "at": "2026-10-24T03:51:49Z",
+          "station": "security",
+          "kind": "pass",
+          "actor": "security-checker",
+          "note": "Inlined SVGs hold only svg/g/path/circle/rect/title, no script, handlers, href, style or external refs; no CSP change needed; no findings"
+        },
+        {
+          "at": "2026-10-24T03:52:04Z",
+          "station": "approve",
+          "kind": "agent-finished",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T03:52:22Z",
+          "station": "approve",
+          "kind": "start",
+          "actor": "approver"
+        },
+        {
+          "at": "2026-10-24T03:53:13Z",
+          "station": "approve",
+          "kind": "report",
+          "actor": "approver",
+          "note": "approval.md"
+        },
+        {
+          "at": "2026-10-24T03:53:13Z",
+          "station": "approve",
+          "kind": "approve",
+          "actor": "approver",
+          "note": "Mark inline in --ink with aria-hidden, new favicon on site and admin, 43rem breakpoint as Nows approved; all checks green, seal intact"
         }
       ]
     }

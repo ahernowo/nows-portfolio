@@ -1,7 +1,9 @@
 {%- set here = current_path or "" -%}
+{#- The flow mark is read from the logo file at build time and inlined, because it paints with currentColor: inline, it takes the wordmark's ink colour in both themes; as an <img> it would be drawn black. -#}
+{%- set mark = load_data(path="static/images/nows-flow-mark.svg", format="plain") -%}
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="wordmark" href="{{ get_url(path='/') }}"{% if here == "/" %} aria-current="page"{% endif %}>{{ config.extra.name }}</a>
+    <a class="wordmark" href="{{ get_url(path='/') }}"{% if here == "/" %} aria-current="page"{% endif %}><span class="wordmark-mark" aria-hidden="true">{{ mark | replace(from="<title>Nows</title>", to="") | safe }}</span>{{ config.extra.name }}</a>
     <nav class="site-nav" aria-label="Main">
       <ul>
         {%- for item in [{"label": "Work", "path": "/work/"}, {"label": "Writing", "path": "/articles/"}, {"label": "About", "path": "/about/"}, {"label": "Now", "path": "/now/"}] %}

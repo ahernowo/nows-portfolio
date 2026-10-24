@@ -15,3 +15,7 @@ metadata:
 - `page.screenshot({ clip })` below the fold fails ("Clipped area ... outside"). Add `fullPage: true` and add `scrollY` to the box's y.
 - An element screenshot right after focus can catch a fade (e.g. `.code-copy` opacity 0.15s). Wait 400 ms first.
 - Wait for a background server without sleep: `curl -s --retry 60 --retry-connrefused --retry-delay 1 URL`. Stop it by PID: `netstat -ano | grep "127.0.0.1:PORT .*LISTENING"`, then `taskkill //PID n //F`.
+- `startServer(root, port)` resolves to `{ server, url }`. The site must be built with `--base-url` for that same port, so reusing `target/shots-site` (built for a random port) breaks links. Build your own with a fixed port, e.g. 4733.
+- Before/after layout numbers: `git archive HEAD site | tar -x -C target/base`, build that with zola, measure both with one script. No stash needed.
+- `--focus` shoots light theme only; take the dark focus ring by hand (Tab twice, crop the element).
+- Playwright `forcedColors: "active"` on `newPage` stands in for the DevTools forced-colours emulation.

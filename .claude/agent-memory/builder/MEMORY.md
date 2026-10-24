@@ -8,6 +8,7 @@ Gotchas that cost time once. Keep under 150 lines; merge and prune.
 - `zola build --output-dir` needs an absolute path, or `get_url(..., cachebust=true)` cannot find `main.css`.
 
 - Tera 2: `{%- if page.higher or page.lower %}` is safe for guarding the pager (WO-0001).
+- Inline SVG from a file: `load_data(path="static/...svg", format="plain")` + `| replace(...) | safe` works; put `aria-hidden` on a wrapping span (WO-0003).
 
 ## Type and colour (Inter, since WO-0002)
 - Inter's `tabular-nums` also widens the hyphen to figure width ("WO - 0002"). Put it only on dates, counts and amounts, never on `body` or text with ids.

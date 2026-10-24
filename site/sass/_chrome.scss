@@ -13,6 +13,9 @@
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
   font-size: 1.5rem;
   font-weight: 750;
   letter-spacing: -0.025em;
@@ -20,6 +23,19 @@
   color: var(--ink);
   text-decoration: none;
   padding-block: 0.5rem;
+}
+
+// The flow mark before the name. It has no colour of its own: the SVG paints
+// with currentColor, so it follows the wordmark's --ink. The logo's viewBox is
+// 272.2 by 182.7 (1.49:1), so at 1em tall it is about 36 by 24 px.
+.wordmark-mark {
+  display: flex;
+  flex: none;
+}
+
+.wordmark-mark svg {
+  width: 1.49em;
+  height: 1em;
 }
 
 .site-nav ul {
@@ -84,7 +100,9 @@
   color: var(--ink-soft);
 }
 
-@media (max-width: 40rem) {
+// Phone header: nav on its own row, icon-only tools. 43rem rather than 40rem
+// because the flow mark made the one-row header need about 42 px more.
+@media (max-width: 43rem) {
   .header-inner {
     padding-top: 0.5rem;
   }
