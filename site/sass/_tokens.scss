@@ -1,11 +1,14 @@
-// Design tokens. The palette is still a carbon receipt book, now in five
-// colours: an off-white original (#FDFFFF), a peach copy and a rose copy
-// (tints of coral #DE7C5A and crimson #B10F2E), maroon carbon ink (#280000),
-// deep-red ledger lines (tints of #570000), and a crimson "Reconciled" stamp.
-// Dark mode is the maroon carbon sheet itself: #280000 paper, #570000 slips,
-// off-white ink and a coral accent.
-// Two rules: coral is never text on a light background, and crimson is never
-// text on a dark one. See docs/design-system.md before changing anything here.
+// Design tokens. The palette is still a carbon receipt book, softened:
+// a warm #FAF5F3 page, white top slips, peach and rose copies (tints of the
+// coral #E8896A and crimson #B10F2E), #2B1618 ink with #6B5557 muted text,
+// and a crimson "Reconciled" stamp. Dark is the carbon sheet: a #1F1B1C page,
+// #2C2527 slips, #F2EDEB ink, #C2B6B3 muted text, the coral #E8896A accent and
+// a #E8546D stamp.
+// Light is the default for every visitor; dark applies only when the visitor
+// picks it with the Theme button (data-theme="dark", set by js/head.js).
+// Two rules: #E8896A and #E8546D are never text on a light background, and
+// #B10F2E is never text on a dark one. See docs/design-system.md before
+// changing anything here.
 
 // Inter, variable weight (100 to 900) and optical size (14 to 32), from
 // Fontsource @fontsource-variable/inter 5.3.0. Each style is split into a
@@ -48,22 +51,23 @@
 }
 
 @mixin dark-tokens {
-  --paper: #280000;
-  --slip-original: #570000;
-  --copy-peach: #4c1912;
-  --copy-rose: #5f0612;
-  --highlight: #43130e;
-  --ink: #fdffff;
-  --ink-soft: #de7c5a;
-  --link: #de7c5a;
-  --link-line: #954a36;
-  --rule: #482626;
-  --rule-strong: #684c4c;
-  --stamp: #de7c5a;
+  --paper: #1f1b1c;
+  --slip-original: #2c2527;
+  --copy-peach: #432f2a;
+  --copy-rose: #47262c;
+  --highlight: #332624;
+  --ink: #f2edeb;
+  --ink-soft: #c2b6b3;
+  --link: #e8896a;
+  --link-line: #9c5f4c;
+  --accent: #e8896a;
+  --rule: #3d3839;
+  --rule-strong: #5a5656;
+  --stamp: #e8546d;
   --stamp-blend: screen;
   --code-bg: #280000;
   --code-ink: #fdffff;
-  --code-edge: #684c4c;
+  --code-edge: #5a5656;
   --slip-shadow: 0 1px 0 rgb(0 0 0 / 20%), 0 14px 28px -14px rgb(0 0 0 / 70%);
   --dialog-shadow: 0 24px 60px -24px rgb(0 0 0 / 70%);
   --backdrop: rgb(0 0 0 / 55%);
@@ -71,27 +75,28 @@
 }
 
 :root {
-  // Paper and ink. The tints are sRGB mixes of the five colours, named in
+  // Paper and ink. The tints are sRGB mixes of Nows's colours, named in
   // docs/design-system.md.
-  --paper: #fdffff;
+  --paper: #faf5f3;
   --slip-original: #ffffff;
-  --copy-peach: #f5ded6;
-  --copy-rose: #f2dbe0;
-  --highlight: #f7e5de;
-  --ink: #280000;
-  --ink-soft: #570000;
+  --copy-peach: #f9e3db;
+  --copy-rose: #f6e2e6;
+  --highlight: #fcede9;
+  --ink: #2b1618;
+  --ink-soft: #6b5557;
   --link: #b10f2e;
-  --link-line: #cf6f82;
-  --rule: #e4d9d9;
-  --rule-strong: #bb9999;
+  --link-line: #cd6679;
+  --accent: #b10f2e;
+  --rule: #e1dad9;
+  --rule-strong: #bcb2b1;
   --stamp: #b10f2e;
   --stamp-blend: multiply;
   --code-bg: #280000;
   --code-ink: #fdffff;
   --code-edge: transparent;
-  --slip-shadow: 0 1px 0 rgb(40 0 0 / 6%), 0 12px 26px -14px rgb(40 0 0 / 30%);
-  --dialog-shadow: 0 24px 60px -24px rgb(40 0 0 / 45%);
-  --backdrop: rgb(40 0 0 / 40%);
+  --slip-shadow: 0 1px 0 rgb(43 22 24 / 6%), 0 12px 26px -14px rgb(43 22 24 / 30%);
+  --dialog-shadow: 0 24px 60px -24px rgb(43 22 24 / 45%);
+  --backdrop: rgb(43 22 24 / 40%);
 
   // Type. Both names point at the same family, Inter; the switch from
   // browsing to reading is now size and line height, not a second face.
@@ -121,12 +126,8 @@
   color-scheme: light;
 }
 
+// Dark only by choice: the Theme button saves it, and head.js sets the
+// attribute before the first paint.
 :root[data-theme="dark"] {
   @include dark-tokens;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    @include dark-tokens;
-  }
 }

@@ -1,6 +1,7 @@
-/* Factory board. Same carbon-copy palette as the site (maroon carbon,
-   off-white ink, coral and crimson); dark by default because it lives on a
-   second screen next to the terminal. The lamp colours are the board's own. */
+/* Factory board. Same soft carbon-copy palette as the site (warm carbon
+   #1F1B1C, #F2EDEB ink, peach and rose copies); dark by default because it
+   lives on a second screen next to the terminal. The lamp colours are the
+   board's own. */
 
 @font-face {
   font-family: "Inter";
@@ -11,18 +12,18 @@
 
 :root {
   color-scheme: dark;
-  --bg: #280000;
-  --surface: #3a0c09;
-  --surface-2: #4c1912;
-  --ink: #fdffff;
-  --ink-soft: #de7c5a;
-  --rule: #482626;
-  --rule-strong: #684c4c;
+  --bg: #1f1b1c;
+  --surface: #2c2527;
+  --surface-2: #432f2a;
+  --ink: #f2edeb;
+  --ink-soft: #c2b6b3;
+  --rule: #3d3839;
+  --rule-strong: #5a5656;
   --run: #5fd3a3;
   --wait: #f3cf5b;
   --stop: #ff7b6b;
-  --yellow: #4c1912;
-  --pink: #5f0612;
+  --yellow: #432f2a;
+  --pink: #47262c;
   --radius: 6px;
   --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
@@ -31,18 +32,18 @@
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
-    --bg: #f3f0f0;
-    --surface: #fdffff;
+    --bg: #f0eae8;
+    --surface: #faf5f3;
     --surface-2: #ffffff;
-    --ink: #280000;
-    --ink-soft: #570000;
-    --rule: #e4d9d9;
-    --rule-strong: #bb9999;
+    --ink: #2b1618;
+    --ink-soft: #6b5557;
+    --rule: #e1dad9;
+    --rule-strong: #bcb2b1;
     --run: #146c4c;
     --wait: #835b00;
     --stop: #b10f2e;
-    --yellow: #f5ded6;
-    --pink: #f2dbe0;
+    --yellow: #f9e3db;
+    --pink: #f6e2e6;
   }
 }
 
@@ -101,7 +102,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.015em; }
   align-items: baseline;
   padding: 0.85rem 1.5rem;
   background: var(--stop);
-  /* The page colour reads on the stop lamp in both themes (7.6:1 dark, 6.2:1 light). */
+  /* The page colour reads on the stop lamp in both themes (6.7:1 dark, 5.9:1 light). */
   color: var(--bg);
 }
 .andon code { font-family: var(--mono); font-size: 0.8125rem; background: rgb(0 0 0 / 18%); padding: 0.1rem 0.4rem; border-radius: 4px; }

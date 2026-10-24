@@ -1,14 +1,16 @@
-/* Admin editor. Same carbon-copy palette as the site (maroon carbon,
-   off-white ink, coral and crimson), system fonts so the worker stays small. */
+/* Admin editor. Same soft carbon-copy palette as the site (a #FAF5F3 page,
+   #2B1618 ink, peach and rose copies, crimson; warm carbon #1F1B1C with
+   coral #E8896A in dark), system fonts so the worker stays small. It follows
+   the system setting: the editor has no Theme button. */
 
 :root {
   color-scheme: light dark;
-  --paper: #fdffff;
-  --ink: #280000;
-  --ink-soft: #570000;
-  --canary: #f5ded6;
-  --rose: #f2dbe0;
-  --rule: #e4d9d9;
+  --paper: #faf5f3;
+  --ink: #2b1618;
+  --ink-soft: #6b5557;
+  --canary: #f9e3db;
+  --rose: #f6e2e6;
+  --rule: #e1dad9;
   --stamp: #b10f2e;
   --ok: #1d6b4f;
   --field: #ffffff;
@@ -19,15 +21,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #280000;
-    --ink: #fdffff;
-    --ink-soft: #de7c5a;
-    --canary: #4c1912;
-    --rose: #5f0612;
-    --rule: #482626;
-    --stamp: #de7c5a;
+    --paper: #1f1b1c;
+    --ink: #f2edeb;
+    --ink-soft: #c2b6b3;
+    --canary: #432f2a;
+    --rose: #47262c;
+    --rule: #3d3839;
+    /* Coral, not the site's #E8546D stamp: here --stamp colours error text,
+       and #E8546D on the #2C2527 field is only 4.23:1. */
+    --stamp: #e8896a;
     --ok: #7fd8b4;
-    --field: #570000;
+    --field: #2c2527;
   }
 }
 
@@ -202,7 +206,7 @@ dialog {
   max-width: 28rem;
   padding: 1.25rem 1.5rem;
 }
-dialog::backdrop { background: rgb(40 0 0 / .45); }
+dialog::backdrop { background: rgb(43 22 24 / .45); }
 .wide-dialog { max-width: 40rem; width: 90vw; }
 .activity { padding-left: 1.2rem; max-height: 60vh; overflow: auto; }
 .activity li { margin-bottom: .4rem; }

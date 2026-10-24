@@ -32,8 +32,8 @@ def to_ttf(woff2_name, ttf_name):
 INTER = to_ttf("inter-latin-opsz-normal.woff2", "inter.ttf")
 
 W, H = 1200, 630
-PAPER, INK, SOFT, RULE = "#FDFFFF", "#280000", "#570000", "#E4D9D9"
-PEACH, ROSE, STAMP = "#F5DED6", "#F2DBE0", "#B10F2E"
+PAPER, INK, SOFT, RULE = "#FAF5F3", "#2B1618", "#6B5557", "#E1DAD9"
+PEACH, ROSE, STAMP = "#F9E3DB", "#F6E2E6", "#B10F2E"
 SLIP = "#FFFFFF"
 S = 2  # supersample
 
@@ -88,7 +88,7 @@ def slip(color, label, lines, angle, x, y):
         ld.text(((sw - 18) * S - tw, (yy + 8) * S), v, font=f3, fill=INK)
         yy += 36
     shadow = Image.new("RGBA", layer.size, (0, 0, 0, 0))
-    ImageDraw.Draw(shadow).rounded_rectangle([0, 0, sw * S - 1, sh * S - 1], radius=4 * S, fill=(40, 0, 0, 70))
+    ImageDraw.Draw(shadow).rounded_rectangle([0, 0, sw * S - 1, sh * S - 1], radius=4 * S, fill=(43, 22, 24, 70))
     shadow = shadow.rotate(angle, expand=True, resample=Image.BICUBIC).filter(ImageFilter.GaussianBlur(12 * S))
     img.paste(shadow, ((x + 4) * S, (y + 14) * S), shadow)
     rot = layer.rotate(angle, expand=True, resample=Image.BICUBIC)

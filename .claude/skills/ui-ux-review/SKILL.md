@@ -19,7 +19,7 @@ node tools/shots/shoot.mjs --out target/shots/WO-0007 --pages /,/articles/how-th
 |---|---|
 | `--pages /,/work/` | Paths to capture. Default: home, every top-level section, the 404 page |
 | `--widths 390,1440` | Viewport widths (the default pair: a phone and a laptop) |
-| `--themes light,dark` | Colour schemes (default both) |
+| `--themes light,dark` | Themes (default both). Dark is set as the visitor's saved choice, the way the Theme button does; the system setting no longer changes the site. |
 | `--reduced` | Also capture with reduced motion |
 | `--focus` | Tab through each page; photograph every focus stop; flag stops without a visible ring |
 | `--drafts` | Include draft pages |

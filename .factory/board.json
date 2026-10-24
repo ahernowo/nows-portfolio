@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "next_id": 4,
+  "next_id": 5,
   "max_rework": 3,
   "orders": [
     {
@@ -664,6 +664,239 @@
           "kind": "approve",
           "actor": "approver",
           "note": "Mark inline in --ink with aria-hidden, new favicon on site and admin, 43rem breakpoint as Nows approved; all checks green, seal intact"
+        }
+      ]
+    },
+    {
+      "id": "WO-0004",
+      "title": "Soften the palette and make light the default theme",
+      "created_at": "2026-10-24T04:19:22Z",
+      "updated_at": "2026-10-24T05:59:26Z",
+      "station": "done",
+      "status": "closed",
+      "rework": 1,
+      "passed": [
+        "plan",
+        "build",
+        "design",
+        "security",
+        "approve"
+      ],
+      "seal": {
+        "hash": "418a36060f0fc00bc85a15c0aaae4d5271f96f77e8767a6cd13b70fe207ff7be",
+        "files": 134,
+        "at": "2026-10-24T05:52:51Z"
+      },
+      "closed_at": "2026-10-24T05:59:26Z",
+      "findings": [
+        {
+          "n": 1,
+          "station": "design",
+          "severity": "medium",
+          "title": "Search placeholder falls to 4.00:1 in light: --ink-soft at opacity 0.8 on the new #FAF5F3 page (was 9.02:1)",
+          "file": "site/sass/_chrome.scss:226",
+          "status": "fixed",
+          "note": "Placeholder now --ink-soft at opacity 1 (6.34 light, 8.63 dark; also undoes Firefox's 0.54 default); placeholder row added to the contrast tables in the design-system skill and docs/design-system.md",
+          "at": "2026-10-24T05:49:46Z"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-24T04:19:22Z",
+          "station": "plan",
+          "kind": "created",
+          "actor": "supervisor",
+          "note": "Soften the palette and make light the default theme"
+        },
+        {
+          "at": "2026-10-24T04:19:35Z",
+          "station": "plan",
+          "kind": "start",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T04:26:30Z",
+          "station": "plan",
+          "kind": "report",
+          "actor": "planner",
+          "note": "plan.md"
+        },
+        {
+          "at": "2026-10-24T04:26:34Z",
+          "station": "plan",
+          "kind": "pass",
+          "actor": "planner",
+          "note": "Soft palette tokens (+ --accent), light default with a light/dark Theme button, shots tool dark via saved choice, OG/dashboard/editor colours, design docs"
+        },
+        {
+          "at": "2026-10-24T04:27:03Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T05:31:56Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T05:43:29Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-24T05:43:29Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Soft palette in both themes with --accent; light default, light/dark Theme button; shots dark via saved choice; OG, meta, tool CSS and docs updated; all checks green"
+        },
+        {
+          "at": "2026-10-24T05:44:00Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T05:44:20Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T05:49:46Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#1 Medium: Search placeholder falls to 4.00:1 in light: --ink-soft at opacity 0.8 on the new #FAF5F3 page (was 9.02:1)"
+        },
+        {
+          "at": "2026-10-24T05:50:13Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-24T05:50:13Z",
+          "station": "design",
+          "kind": "fail",
+          "actor": "ui-ux-reviewer",
+          "note": "Fix #1: search placeholder is 4.00:1 in light (_chrome.scss:226 opacity 0.8 on the new muted colour); drop the opacity and add the row to the contrast tables"
+        },
+        {
+          "at": "2026-10-24T05:50:33Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T05:51:21Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T05:52:33Z",
+          "station": "build",
+          "kind": "fix",
+          "actor": "builder",
+          "note": "#1 Placeholder now --ink-soft at opacity 1 (6.34 light, 8.63 dark; also undoes Firefox's 0.54 default); placeholder row added to the contrast tables in the design-system skill and docs/design-system.md"
+        },
+        {
+          "at": "2026-10-24T05:52:51Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-24T05:52:51Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Fixed #1: search placeholder at full opacity (6.34 light / 8.63 dark), placeholder row in both contrast tables; all checks green"
+        },
+        {
+          "at": "2026-10-24T05:53:06Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T05:53:23Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T05:54:50Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-24T05:54:50Z",
+          "station": "design",
+          "kind": "pass",
+          "actor": "ui-ux-reviewer",
+          "note": "#1 verified: search placeholder 6.34 light / 8.63 dark at full opacity; only _chrome.scss and the two docs changed since last review; scan 0 failures"
+        },
+        {
+          "at": "2026-10-24T05:55:02Z",
+          "station": "security",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T05:55:21Z",
+          "station": "security",
+          "kind": "start",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T05:56:18Z",
+          "station": "security",
+          "kind": "report",
+          "actor": "security-checker",
+          "note": "security.md"
+        },
+        {
+          "at": "2026-10-24T05:56:18Z",
+          "station": "security",
+          "kind": "pass",
+          "actor": "security-checker",
+          "note": "Colour/theme change only: no new safe/innerHTML, no CSP/header/settings change, theme storage stays whitelisted, og.png clean; no findings"
+        },
+        {
+          "at": "2026-10-24T05:56:38Z",
+          "station": "approve",
+          "kind": "agent-finished",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T05:56:59Z",
+          "station": "approve",
+          "kind": "start",
+          "actor": "approver"
+        },
+        {
+          "at": "2026-10-24T05:59:26Z",
+          "station": "approve",
+          "kind": "report",
+          "actor": "approver",
+          "note": "approval.md"
+        },
+        {
+          "at": "2026-10-24T05:59:26Z",
+          "station": "approve",
+          "kind": "approve",
+          "actor": "approver",
+          "note": "Soft palette in both themes, light default with a light/dark Theme button; all checks reproduced, contrast recomputed, seal intact"
         }
       ]
     }

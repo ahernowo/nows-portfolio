@@ -5,7 +5,7 @@ description: The site's visual identity, the carbon receipt book, with its token
 
 # Design system: the carbon receipt book
 
-Nows builds the systems behind fundraising: donation forms, payment gateways, CRM records and the reconciliation between them. The site borrows its look from the object at the centre of that work, a **carbon-copy receipt book**: an off-white original, peach and rose copies, maroon carbon ink, deep-red ledger lines, and a crimson "Reconciled" stamp. Dark mode is the maroon carbon sheet itself, with off-white ink and coral.
+Nows builds the systems behind fundraising: donation forms, payment gateways, CRM records and the reconciliation between them. The site borrows its look from the object at the centre of that work, a **carbon-copy receipt book**, in a soft palette: a warm off-white page, a white original, peach and rose copies, dark warm carbon ink, fine ledger lines, and a crimson "Reconciled" stamp. Light is what every visitor sees; dark is the carbon sheet (a warm charcoal page, off-white ink, coral accent and a pink-red stamp), shown only when the visitor picks it.
 
 Every visual choice should read as part of that book. When a choice could appear on any portfolio, find the receipt-book version of it, or leave it out.
 
@@ -13,61 +13,68 @@ Every visual choice should read as part of that book. When a choice could appear
 
 All colours, type and spacing come from custom properties in `site/sass/_tokens.scss`. Use the token, never a raw value.
 
-The palette is five colours, Nows's choice; everything else is an sRGB tint of them (mix noted in brackets):
+The palette is Nows's choice, one set per theme; everything else is an sRGB tint of it (mix noted in brackets):
 
-| Colour | Hex | Light theme | Dark theme |
-|---|---|---|---|
-| Off-white | `#FDFFFF` | Paper | Text, focus rings |
-| Crimson | `#B10F2E` | Running-text links, stamp, now-pulse, reading line, warning edge | Never as text |
-| Deep red | `#570000` | Secondary text | Raised surfaces (top slip) |
-| Near-black maroon | `#280000` | Text, focus rings, code slab | Paper, code slab |
-| Coral | `#DE7C5A` | Never as text; tints only | Secondary text, running-text links, stamp, now-pulse, reading line |
+| Role | Light | Dark |
+|---|---|---|
+| Page | `#FAF5F3` | `#1F1B1C` |
+| Surfaces, the top slip | `#FFFFFF` | `#2C2527` |
+| Text, focus rings | `#2B1618` | `#F2EDEB` |
+| Muted text | `#6B5557` | `#C2B6B3` |
+| Accent: running-text links, now-pulse, reading line, warning edge | `#B10F2E` crimson | `#E8896A` coral |
+| "Reconciled" stamp | `#B10F2E` | `#E8546D` |
+| Code slab (kept from the old palette) | `#280000` with `#FDFFFF` text | the same |
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `--paper` | `#FDFFFF` | `#280000` | Page background |
-| `--slip-original` | `#FFFFFF` | `#570000` | The top slip, raised surfaces |
-| `--copy-peach` | `#F5DED6` (coral 25%) | `#4C1912` (coral 20% on maroon) | Second copy, selection, search marks, inline code, note alerts |
-| `--copy-rose` | `#F2DBE0` (crimson 15%) | `#5F0612` (crimson 40% on maroon) | Third copy, warning alerts |
-| `--highlight` | `#F7E5DE` (coral 20%) | `#43130E` (coral 15% on maroon) | Row highlighter, hovers |
-| `--ink` | `#280000` | `#FDFFFF` | Text and focus rings: maroon, never black |
-| `--ink-soft` | `#570000` | `#DE7C5A` | Secondary text: dates, descriptions, captions, meta, heading anchors (#) |
-| `--link` | `#B10F2E` | `#DE7C5A` | Links in running text |
-| `--link-line` | `#CF6F82` (crimson 60%) | `#954A36` (coral 60% on maroon) | Their underline, 3:1 against the page |
-| `--rule`, `--rule-strong` | `#E4D9D9`, `#BB9999` (deep red 15%, 40%) | `#482626`, `#684C4C` (off-white 15%, 30%) | Ledger lines, borders |
-| `--stamp` | `#B10F2E` | `#DE7C5A` | Stamp, now-pulse, reading line, warning-alert edge |
+| `--paper` | `#FAF5F3` | `#1F1B1C` | Page background |
+| `--slip-original` | `#FFFFFF` | `#2C2527` | The top slip, raised surfaces |
+| `--copy-peach` | `#F9E3DB` (coral 24% on white) | `#432F2A` (coral 18% on `#1F1B1C`) | Second copy, selection, search marks, inline code, note alerts |
+| `--copy-rose` | `#F6E2E6` (crimson 12% on white) | `#47262C` (`#E8546D` 20% on `#1F1B1C`) | Third copy, warning alerts |
+| `--highlight` | `#FCEDE9` (coral 15% on white) | `#332624` (coral 10% on `#1F1B1C`) | Row highlighter, hovers |
+| `--ink` | `#2B1618` | `#F2EDEB` | Text and focus rings: warm, never black |
+| `--ink-soft` | `#6B5557` | `#C2B6B3` | Muted text: dates, descriptions, captions, meta, heading anchors (#) |
+| `--link` | `#B10F2E` | `#E8896A` | Links in running text |
+| `--link-line` | `#CD6679` (crimson 62% on `#FAF5F3`) | `#9C5F4C` (coral 62% on `#1F1B1C`) | Their underline, 3:1 against the page |
+| `--accent` | `#B10F2E` | `#E8896A` | Now-pulse, reading line, warning and caution alert edge |
+| `--rule`, `--rule-strong` | `#E1DAD9`, `#BCB2B1` (text 12%, 30% on the page) | `#3D3839`, `#5A5656` (text 14%, 28% on the page) | Ledger lines, borders |
+| `--stamp` | `#B10F2E` | `#E8546D` | The "Reconciled" stamp only |
 | `--code-bg`, `--code-ink` | `#280000`, `#FDFFFF` | the same | Code slabs, the same in both themes |
-| `--code-edge` | `transparent` | `#684C4C` | 1 px inset edge so the slab shows on the dark page |
-| `--slip-shadow`, `--dialog-shadow`, `--backdrop` | maroon-tinted | black-tinted | Slips, the search dialog and its backdrop |
+| `--code-edge` | `transparent` | `#5A5656` | 1 px inset edge so the slab shows on the dark page |
+| `--slip-shadow`, `--dialog-shadow`, `--backdrop` | ink-tinted (`rgb(43 22 24 / ...)`) | black-tinted | Slips, the search dialog and its backdrop |
 
-Themes: light by default, dark from `prefers-color-scheme`, and `data-theme="light|dark"` on `<html>` when the visitor picks one. A new token gets a value in both the `:root` block and the `dark-tokens` mixin.
+Themes: light for every visitor, whatever their system setting; the site has no `prefers-color-scheme` rule. Dark appears only when the visitor picks it with the Theme button: `site.js` saves `theme` in localStorage and sets `data-theme="dark"` on `<html>`, and `head.js` re-applies a saved choice before first paint. The button cycles light and dark and its label names the theme showing ("Theme: light" / "Theme: dark"). A new token gets a value in both the `:root` block and the `dark-tokens` mixin. The meta `theme-color` is the light page, `#FAF5F3`.
 
 Two rules with no exceptions:
 
-- `#DE7C5A` coral is never text on a light background.
+- `#E8896A` coral and `#E8546D` (the dark stamp) are never text on a light background.
 - `#B10F2E` crimson is never text on a dark background.
 
-**The accent** (`--link` and `--stamp`) goes to links in running text (sentences in articles and pages, the footer, crumbs, the older/newer pager, "Back to all writing", "All work" / "All articles") and to the stamp, now-pulse, reading line and warning alerts. Never to headings, the menu, the wordmark, list titles, search results or topic chips; those stay `--ink`.
+**The accent** (`--link` and `--accent`) goes to links in running text (sentences in articles and pages, the footer, crumbs, the older/newer pager, "Back to all writing", "All work" / "All articles") and to the now-pulse, reading line and warning and caution alert edges. Never to headings, the menu, the wordmark, list titles, search results or topic chips; those stay `--ink`. The stamp has its own token, `--stamp`: crimson in light like the accent, `#E8546D` in dark.
 
-**Secondary text** (dates, descriptions, captions, meta) is `--ink-soft`: deep red in light, coral in dark. In dark, coral is both secondary text and link, so a link is told apart by its underline; keep `--link-line` on every running-text link. The pager underlines its title (`.pager-title`) and leaves the Older/Newer hint plain, so one link reads as one.
+**Muted text** (dates, descriptions, captions, meta) is `--ink-soft`: `#6B5557` in light, `#C2B6B3` in dark, always at full opacity (the light value has no room to fade: at 0.8 it falls to 4.00:1). Keep `--link-line` on every running-text link so a link reads as a link without relying on colour. The pager underlines its title (`.pager-title`) and leaves the Older/Newer hint plain, so one link reads as one.
 
 Focus rings use `--ink` (on the code slab, `--code-ink`).
 
-Contrast (WCAG formula, from the hex values; every text pair at least 4.5:1):
+Contrast (WCAG formula, from the hex values; every text pair at least 4.5:1, large text and non-text parts 3:1):
 
 | Pair | Light | Dark |
 |---|---|---|
-| Text on page / top slip | 19.19 / 19.26 | 19.19 / 14.89 |
-| Text on peach / rose / highlight | 14.95 / 14.66 / 15.79 | 14.38 / 13.75 / 15.64 |
-| Secondary on page / top slip | 14.89 / 14.94 | 6.55 / 5.08 |
-| Heading anchor (#) on page | 14.89 | 6.55 |
-| Secondary on peach / rose / highlight | 11.60 / 11.37 / 12.25 | 4.90 / 4.69 / 5.33 |
-| Link on page | 7.03 | 6.55 |
-| Link on peach / rose / highlight | 5.48 / 5.37 / 5.78 | 4.90 / 4.69 / 5.33 |
-| Link underline against page | 3.35 | 3.04 |
+| Text on page / top slip | 15.78 / 17.06 | 14.68 / 12.91 |
+| Text on peach / rose / highlight | 13.84 / 13.76 / 14.98 | 10.78 / 11.44 / 12.53 |
+| Muted on page / top slip (also heading anchor #) | 6.34 / 6.86 | 8.63 / 7.59 |
+| Search placeholder (`--ink-soft` at full opacity on the dialog's `--paper`) | 6.34 | 8.63 |
+| Muted on peach / rose / highlight | 5.56 / 5.53 / 6.02 | 6.34 / 6.73 / 7.37 |
+| Link on page / top slip | 6.52 / 7.05 | 6.67 / 5.87 |
+| Link on peach / rose / highlight | 5.72 / 5.69 / 6.19 | 4.90 / 5.20 / 5.69 |
+| Link underline against page | 3.36 | 3.37 |
+| Stamp on rose (large bold) / on page | 5.69 / 6.52 | 3.74 (before the screen blend, which only lightens it) / 4.81 |
+| Now-pulse, reading line against page | 6.52 | 6.67 |
+| Focus ring, skip link | 15.78 | 14.68 |
 | Code text on slab | 19.19 | 19.19 |
+| Never-as-text pairs | coral 2.36, `#E8546D` 3.28 on `#FAF5F3` | crimson 2.42 on `#1F1B1C` |
 
-The dark margins on the copies are thin (4.69 on rose); re-check after any tint change. Six `tokyo-night` code token classes stay below 4.5:1 on the slab (`z-4`, `z-5`, `z-6`, `z-9`, `z-16`, `z-23`); a code-theme change is its own order.
+The thin margins are dark links on peach (4.90) and the dark stamp on rose (3.74, large text only); re-check after any tint change. In light the copies sit only 1.14-1.15:1 off the page, so the slips rely on their shadow and edge. Six `tokyo-night` code token classes stay below 4.5:1 on the slab (`z-4`, `z-5`, `z-6`, `z-9`, `z-16`, `z-23`); a code-theme change is its own order.
 
 ## Type
 
@@ -138,9 +145,9 @@ Before passing a visual change, check none of these crept in, since each one mak
 - Gradient washes, glows or glassmorphism used as decoration.
 - Numbered markers (01 / 02 / 03) on content that is not a sequence.
 - Meta joined with middle dots, or an arrow appended to every link.
-- Neutral near-black (`#111`) text, or a neutral black background with one neon accent. (Maroon `#280000` with coral is the brand palette, not this pattern; the receipt stack keeps it specific.)
+- Neutral near-black (`#111`) text, or a neutral black background with one neon accent. (Warm carbon `#1F1B1C` with coral `#E8896A` is the brand's dark theme, not this pattern; the receipt stack keeps it specific.)
 - Fade-and-slide-up on every section as it scrolls into view.
 
 ## Admin pages
 
-`workers/cms-api/admin/` (the stage B editor) and `tools/factory/dashboard/` borrow the palette in a denser, tool-like layout. Each stylesheet carries its own copy of the colours at the top (the editor uses system fonts to keep the worker small; the dashboard adds lamp colours for running, waiting and stopped). When a site token changes, change the matching value there too.
+`workers/cms-api/admin/` (the stage B editor) and `tools/factory/dashboard/` borrow the palette in a denser, tool-like layout. Each stylesheet carries its own copy of the colours at the top (the editor uses system fonts to keep the worker small; the dashboard adds lamp colours for running, waiting and stopped). When a site token changes, change the matching value there too. Their theme behaviour is their own: the dashboard is dark by default, the editor follows the system setting; neither has a Theme button.

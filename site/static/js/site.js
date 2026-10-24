@@ -4,37 +4,37 @@
 (function () {
   "use strict";
 
-  // ---------- Theme: auto, light, dark ----------
+  // ---------- Theme: light by default, dark by choice ----------
 
-  var THEMES = ["auto", "light", "dark"];
+  var THEMES = ["light", "dark"];
 
+  // The theme showing now. head.js has already applied a saved "dark" before
+  // the first paint, so the attribute is the truth; reading it (rather than
+  // storage) keeps the button working when storage is blocked.
   function readTheme() {
-    try {
-      var saved = window.localStorage.getItem("theme");
-      return saved === "light" || saved === "dark" ? saved : "auto";
-    } catch (e) {
-      return "auto";
-    }
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  }
+
+  function showLabel(theme) {
+    var labels = document.querySelectorAll("[data-theme-label]");
+    for (var i = 0; i < labels.length; i++) labels[i].textContent = "Theme: " + theme;
   }
 
   function applyTheme(theme) {
-    var root = document.documentElement;
-    if (theme === "auto") root.removeAttribute("data-theme");
-    else root.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
     try {
-      if (theme === "auto") window.localStorage.removeItem("theme");
-      else window.localStorage.setItem("theme", theme);
+      window.localStorage.setItem("theme", theme);
     } catch (e) {
       // Not saved; the choice lasts for this page only.
     }
-    var labels = document.querySelectorAll("[data-theme-label]");
-    for (var i = 0; i < labels.length; i++) labels[i].textContent = "Theme: " + theme;
+    showLabel(theme);
   }
 
   function initTheme() {
     var buttons = document.querySelectorAll("[data-theme-toggle]");
     if (!buttons.length) return;
-    applyTheme(readTheme());
+    // A first visit stores nothing: only the label is set.
+    showLabel(readTheme());
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener("click", function () {
         var next = THEMES[(THEMES.indexOf(readTheme()) + 1) % THEMES.length];

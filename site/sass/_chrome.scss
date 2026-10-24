@@ -221,9 +221,11 @@
   appearance: none;
 }
 
+// Full muted colour, no fade: at 0.8 the light placeholder fell to 4.00:1.
+// `opacity: 1` also undoes Firefox's own 0.54 placeholder fade.
 .search-input::placeholder {
   color: var(--ink-soft);
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .search-close {

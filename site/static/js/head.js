@@ -1,12 +1,14 @@
 // Loaded in <head>, before the page paints. Keep this file tiny.
 
 // 1. Apply a saved colour theme, so the page never flashes the wrong one.
+// Light is the default: with nothing saved, nothing is set and the light
+// :root tokens apply, whatever the system setting.
 (function () {
   var theme = null;
   try {
     theme = window.localStorage.getItem("theme");
   } catch (e) {
-    // Storage can be blocked; the system setting then decides.
+    // Storage can be blocked; the page then stays light.
   }
   if (theme === "light" || theme === "dark") {
     document.documentElement.setAttribute("data-theme", theme);

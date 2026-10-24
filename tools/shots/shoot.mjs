@@ -6,7 +6,7 @@
 // Options (all optional):
 //   --pages   comma-separated paths            default: every top-level page
 //   --widths  comma-separated viewport widths  default: 390,1440
-//   --themes  light,dark                       default: light,dark
+//   --themes  light,dark (dark is set as the visitor's saved choice)  default: light,dark
 //   --out     folder for the PNG files         default: target/shots/latest
 //   --drafts  include draft pages
 //   --site    use an already built folder instead of building
@@ -143,6 +143,16 @@ async function openPage({ width, theme, reduced }) {
     colorScheme: theme,
     reducedMotion: reduced ? "reduce" : "no-preference",
   });
+  // The site ignores the system setting and is light unless the visitor picked
+  // dark with the Theme button. Save that choice before any page script runs,
+  // the way the button does, so dark shots and dark axe scans really are dark.
+  if (theme === "dark") {
+    await context.addInitScript(() => {
+      try {
+        localStorage.setItem("theme", "dark");
+      } catch (e) {}
+    });
+  }
   const page = await context.newPage();
   return { context, page };
 }
