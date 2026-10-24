@@ -1,112 +1,113 @@
-// Design tokens. The palette comes from a carbon receipt book: the white
-// original, the yellow and pink copies, the indigo carbon ink, the blue
-// ledger lines, and the red of a "paid" stamp. Dark mode is the carbon
-// sheet itself. See docs/design-system.md before changing anything here.
+// Design tokens. The palette is still a carbon receipt book, now in five
+// colours: an off-white original (#FDFFFF), a peach copy and a rose copy
+// (tints of coral #DE7C5A and crimson #B10F2E), maroon carbon ink (#280000),
+// deep-red ledger lines (tints of #570000), and a crimson "Reconciled" stamp.
+// Dark mode is the maroon carbon sheet itself: #280000 paper, #570000 slips,
+// off-white ink and a coral accent.
+// Two rules: coral is never text on a light background, and crimson is never
+// text on a dark one. See docs/design-system.md before changing anything here.
+
+// Inter, variable weight (100 to 900) and optical size (14 to 32), from
+// Fontsource @fontsource-variable/inter 5.3.0. Each style is split into a
+// Latin and a Latin Extended file, so most pages load only the first.
 
 @font-face {
-  font-family: "Archivo";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
-  font-stretch: 62% 125%;
   font-display: swap;
-  src: url("fonts/archivo-latin-wdth-normal.woff2") format("woff2");
+  src: url("fonts/inter-latin-opsz-normal.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: "Archivo";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
-  font-stretch: 62% 125%;
   font-display: swap;
-  src: url("fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2");
+  src: url("fonts/inter-latin-ext-opsz-normal.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
-  font-family: "Newsreader";
-  font-style: normal;
-  font-weight: 200 800;
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("fonts/newsreader-latin-opsz-normal.woff2") format("woff2");
+  src: url("fonts/inter-latin-opsz-italic.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: "Newsreader";
-  font-style: normal;
-  font-weight: 200 800;
-  font-display: swap;
-  src: url("fonts/newsreader-latin-ext-opsz-normal.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: "Newsreader";
+  font-family: "Inter";
   font-style: italic;
-  font-weight: 200 800;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("fonts/newsreader-latin-opsz-italic.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Newsreader";
-  font-style: italic;
-  font-weight: 200 800;
-  font-display: swap;
-  src: url("fonts/newsreader-latin-ext-opsz-italic.woff2") format("woff2");
+  src: url("fonts/inter-latin-ext-opsz-italic.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @mixin dark-tokens {
-  --paper: #141938;
-  --slip-original: #1d2350;
-  --copy-yellow: #3a3826;
-  --copy-pink: #3b2640;
-  --highlight: #2c3166;
-  --ink: #eceef9;
-  --ink-soft: #aeb3da;
-  --rule: #2e356f;
-  --rule-strong: #4a52a0;
-  --stamp: #ff8273;
+  --paper: #280000;
+  --slip-original: #570000;
+  --copy-peach: #4c1912;
+  --copy-rose: #5f0612;
+  --highlight: #43130e;
+  --ink: #fdffff;
+  --ink-soft: #de7c5a;
+  --link: #de7c5a;
+  --link-line: #954a36;
+  --rule: #482626;
+  --rule-strong: #684c4c;
+  --stamp: #de7c5a;
   --stamp-blend: screen;
-  --code-bg: #0e1230;
-  --code-ink: #e6e8f6;
+  --code-bg: #280000;
+  --code-ink: #fdffff;
+  --code-edge: #684c4c;
   --slip-shadow: 0 1px 0 rgb(0 0 0 / 20%), 0 14px 28px -14px rgb(0 0 0 / 70%);
+  --dialog-shadow: 0 24px 60px -24px rgb(0 0 0 / 70%);
+  --backdrop: rgb(0 0 0 / 55%);
   color-scheme: dark;
 }
 
 :root {
-  // Paper and ink
-  --paper: #fcfcfa;
+  // Paper and ink. The tints are sRGB mixes of the five colours, named in
+  // docs/design-system.md.
+  --paper: #fdffff;
   --slip-original: #ffffff;
-  --copy-yellow: #fbf0b4;
-  --copy-pink: #f9dce2;
-  --highlight: #fbf0b4;
-  --ink: #1f2463;
-  --ink-soft: #4a4f86;
-  --rule: #b9c9e6;
-  --rule-strong: #8fa6d3;
-  --stamp: #b4302a;
+  --copy-peach: #f5ded6;
+  --copy-rose: #f2dbe0;
+  --highlight: #f7e5de;
+  --ink: #280000;
+  --ink-soft: #570000;
+  --link: #b10f2e;
+  --link-line: #cf6f82;
+  --rule: #e4d9d9;
+  --rule-strong: #bb9999;
+  --stamp: #b10f2e;
   --stamp-blend: multiply;
-  --code-bg: #161b45;
-  --code-ink: #e6e8f6;
-  --slip-shadow: 0 1px 0 rgb(31 36 99 / 6%), 0 12px 26px -14px rgb(31 36 99 / 35%);
+  --code-bg: #280000;
+  --code-ink: #fdffff;
+  --code-edge: transparent;
+  --slip-shadow: 0 1px 0 rgb(40 0 0 / 6%), 0 12px 26px -14px rgb(40 0 0 / 30%);
+  --dialog-shadow: 0 24px 60px -24px rgb(40 0 0 / 45%);
+  --backdrop: rgb(40 0 0 / 40%);
 
-  // Type
-  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
-  --font-text: "Newsreader", Georgia, "Times New Roman", serif;
+  // Type. Both names point at the same family, Inter; the switch from
+  // browsing to reading is now size and line height, not a second face.
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-text: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
 
-  // Scale: 14, 16, 21, 24, 36, 48 px, and a fluid display size.
+  // Scale: 14, 16, 21, 26, 42 px, then two fluid display sizes
+  // (page titles 40 to 60 px, the home headline 44 to 84 px).
   --step--1: 0.875rem;
   --step-0: 1rem;
   --step-1: 1.3125rem;
-  --step-2: 1.5rem;
-  --step-3: 2.25rem;
-  --step-4: clamp(2.25rem, 3.2vw + 1.25rem, 3.25rem);
-  --step-5: clamp(2.75rem, 6.2vw + 0.6rem, 5.75rem);
+  --step-2: 1.625rem;
+  --step-3: 2.625rem;
+  --step-4: clamp(2.5rem, 3.6vw + 1.4rem, 3.75rem);
+  --step-5: clamp(2.75rem, 6.2vw + 0.6rem, 5.25rem);
 
   // Layout
   --wrap: 72rem;

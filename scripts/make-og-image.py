@@ -5,7 +5,7 @@ Run from the repository folder after changing the name, role or colours:
     pip install pillow fonttools brotli
     python scripts/make-og-image.py
 
-It reads the site's own fonts from site/static/fonts (converting the woff2
+It reads the site's own font, Inter, from site/static/fonts (converting the woff2
 files to TrueType in a temporary folder, since Pillow can't read woff2).
 """
 from pathlib import Path
@@ -29,25 +29,44 @@ def to_ttf(woff2_name, ttf_name):
     return str(path)
 
 
-ARCHIVO = to_ttf("archivo-latin-wdth-normal.woff2", "archivo.ttf")
-NEWSREADER_ITALIC = to_ttf("newsreader-latin-opsz-italic.woff2", "newsreader-italic.ttf")
+INTER = to_ttf("inter-latin-opsz-normal.woff2", "inter.ttf")
 
 W, H = 1200, 630
-PAPER, INK, SOFT, RULE = "#fcfcfa", "#1f2463", "#4a4f86", "#b9c9e6"
-YELLOW, PINK, STAMP = "#fbf0b4", "#f9dce2", "#b4302a"
+PAPER, INK, SOFT, RULE = "#FDFFFF", "#280000", "#570000", "#E4D9D9"
+PEACH, ROSE, STAMP = "#F5DED6", "#F2DBE0", "#B10F2E"
+SLIP = "#FFFFFF"
 S = 2  # supersample
 
-def font(path, size, axes):
+
+def font(path, size, weight, opsz=32):
+    """Inter at a weight (100-900) and optical size (14-32)."""
     f = ImageFont.truetype(path, size * S)
-    f.set_variation_by_axes(axes)
+    # Inter has two axes, opsz and wght. Pillow wants their values in the
+    # font's own axis order, so read that order instead of assuming it.
+    values = []
+    for axis in f.get_variation_axes():
+        label = str(axis["name"]).lower()
+        values.append(weight if "weight" in label else opsz)
+    f.set_variation_by_axes(values)
     return f
+
+
+def fitted(path, text, max_width, size, weight, opsz=32):
+    """The largest size up to `size` at which `text` fits in `max_width` px."""
+    while size > 10:
+        f = font(path, size, weight, opsz)
+        if f.getlength(text) <= max_width * S:
+            return f
+        size -= 1
+    return font(path, size, weight, opsz)
 
 img = Image.new("RGB", (W * S, H * S), PAPER)
 d = ImageDraw.Draw(img)
 
-name = font(ARCHIVO, 168, [800, 68])
-role = font(ARCHIVO, 40, [500, 100])
-tag = font(NEWSREADER_ITALIC, 32, [400, 24])
+# The slips start at x=690, so every line on the left stops by x=660.
+name = font(INTER, 168, 700)
+role = fitted(INTER, "Digital systems for fundraising", 660 - 90, 40, 500)
+tag = fitted(INTER, "Donation forms, payment gateways,", 660 - 90, 30, 400, 24)
 d.text((84 * S, 150 * S), "Nows", font=name, fill=INK)
 d.text((90 * S, 360 * S), "Digital systems for fundraising", font=role, fill=INK)
 d.text((90 * S, 418 * S), "Donation forms, payment gateways,", font=tag, fill=SOFT)
@@ -59,7 +78,7 @@ def slip(color, label, lines, angle, x, y):
     layer = Image.new("RGBA", (sw * S, sh * S), (0, 0, 0, 0))
     ld = ImageDraw.Draw(layer)
     ld.rounded_rectangle([0, 0, sw * S - 1, sh * S - 1], radius=4 * S, fill=color)
-    f1 = font(ARCHIVO, 20, [700, 85]); f2 = font(ARCHIVO, 17, [450, 100]); f3 = font(ARCHIVO, 17, [650, 100])
+    f1 = font(INTER, 20, 650, 20); f2 = font(INTER, 17, 400, 17); f3 = font(INTER, 17, 600, 17)
     ld.text((18 * S, 16 * S), label, font=f1, fill=INK)
     yy = 52
     for k, v in lines:
@@ -69,24 +88,26 @@ def slip(color, label, lines, angle, x, y):
         ld.text(((sw - 18) * S - tw, (yy + 8) * S), v, font=f3, fill=INK)
         yy += 36
     shadow = Image.new("RGBA", layer.size, (0, 0, 0, 0))
-    ImageDraw.Draw(shadow).rounded_rectangle([0, 0, sw * S - 1, sh * S - 1], radius=4 * S, fill=(31, 36, 99, 70))
+    ImageDraw.Draw(shadow).rounded_rectangle([0, 0, sw * S - 1, sh * S - 1], radius=4 * S, fill=(40, 0, 0, 70))
     shadow = shadow.rotate(angle, expand=True, resample=Image.BICUBIC).filter(ImageFilter.GaussianBlur(12 * S))
     img.paste(shadow, ((x + 4) * S, (y + 14) * S), shadow)
     rot = layer.rotate(angle, expand=True, resample=Image.BICUBIC)
     img.paste(rot, (x * S, y * S), rot)
 
-slip("#ffffff", "Donation form", [("Reference", "DN-2041"), ("Amount", "Rp150.000"), ("Plan", "Monthly, card")], 2.5, 690, 42)
-slip(YELLOW, "Payment gateway", [("Reference", "DN-2041"), ("Settled", "Rp150.000"), ("Status", "Captured")], -1.75, 735, 196)
-slip(PINK, "CRM record", [("Reference", "DN-2041"), ("Donor", "Recurring"), ("Gift", "Rp150.000")], 1, 780, 350)
+slip(SLIP, "Donation form", [("Reference", "DN-2041"), ("Amount", "Rp150.000"), ("Plan", "Monthly, card")], 2.5, 690, 42)
+slip(PEACH, "Payment gateway", [("Reference", "DN-2041"), ("Settled", "Rp150.000"), ("Status", "Captured")], -1.75, 735, 196)
+slip(ROSE, "CRM record", [("Reference", "DN-2041"), ("Donor", "Recurring"), ("Gift", "Rp150.000")], 1, 780, 350)
 
 # The stamp, with uneven ink.
 st = Image.new("RGBA", (300 * S, 110 * S), (0, 0, 0, 0))
 sd = ImageDraw.Draw(st)
-sf = font(ARCHIVO, 54, [850, 68])
+# Inter runs wider than the old narrow face; keep the word inside the frame.
+sf = fitted(INTER, "Reconciled", 250, 54, 800)
 sd.rounded_rectangle([10 * S, 14 * S, 290 * S, 96 * S], radius=8 * S, outline=STAMP, width=5 * S)
 sd.rounded_rectangle([3 * S, 7 * S, 297 * S, 103 * S], radius=10 * S, outline=STAMP, width=2 * S)
 tw = sd.textlength("Reconciled", font=sf)
-sd.text(((300 * S - tw) / 2, 22 * S), "Reconciled", font=sf, fill=STAMP)
+top, bottom = sd.textbbox((0, 0), "Reconciled", font=sf)[1::2]
+sd.text(((300 * S - tw) / 2, 55 * S - (top + bottom) / 2), "Reconciled", font=sf, fill=STAMP)
 random.seed(7)
 px = st.load()
 for _ in range(int(st.size[0] * st.size[1] * 0.12)):

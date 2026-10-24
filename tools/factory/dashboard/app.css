@@ -1,48 +1,48 @@
-/* Factory board. Same carbon-copy palette as the site; dark by default
-   because it lives on a second screen next to the terminal. */
+/* Factory board. Same carbon-copy palette as the site (maroon carbon,
+   off-white ink, coral and crimson); dark by default because it lives on a
+   second screen next to the terminal. The lamp colours are the board's own. */
 
 @font-face {
-  font-family: "Archivo";
+  font-family: "Inter";
   font-weight: 100 900;
-  font-stretch: 62% 125%;
   font-display: swap;
-  src: url("/fonts/archivo-latin-wdth-normal.woff2") format("woff2");
+  src: url("/fonts/inter-latin-opsz-normal.woff2") format("woff2");
 }
 
 :root {
   color-scheme: dark;
-  --bg: #121634;
-  --surface: #1a1f4a;
-  --surface-2: #222861;
-  --ink: #eceef9;
-  --ink-soft: #aeb3da;
-  --rule: #2e356f;
-  --rule-strong: #4a52a0;
+  --bg: #280000;
+  --surface: #3a0c09;
+  --surface-2: #4c1912;
+  --ink: #fdffff;
+  --ink-soft: #de7c5a;
+  --rule: #482626;
+  --rule-strong: #684c4c;
   --run: #5fd3a3;
   --wait: #f3cf5b;
   --stop: #ff7b6b;
-  --yellow: #3a3826;
-  --pink: #3b2640;
+  --yellow: #4c1912;
+  --pink: #5f0612;
   --radius: 6px;
-  --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
-    --bg: #f3f4f0;
-    --surface: #fcfcfa;
+    --bg: #f3f0f0;
+    --surface: #fdffff;
     --surface-2: #ffffff;
-    --ink: #1f2463;
-    --ink-soft: #4a4f86;
-    --rule: #c9d5ec;
-    --rule-strong: #8fa6d3;
-    --run: #17805a;
-    --wait: #9a6b00;
-    --stop: #b4302a;
-    --yellow: #fbf0b4;
-    --pink: #f9dce2;
+    --ink: #280000;
+    --ink-soft: #570000;
+    --rule: #e4d9d9;
+    --rule-strong: #bb9999;
+    --run: #146c4c;
+    --wait: #835b00;
+    --stop: #b10f2e;
+    --yellow: #f5ded6;
+    --pink: #f2dbe0;
   }
 }
 
@@ -53,12 +53,15 @@ body {
   background: var(--bg);
   color: var(--ink);
   font: 15px/1.5 var(--font);
-  font-variant-numeric: tabular-nums;
 }
+
+/* Tabular figures only where numbers line up: Inter's tabular set also widens
+   the hyphen, which would space out ids like WO-0002 in running text. */
+.updated, .shift-list dd, .station-count, time { font-variant-numeric: tabular-nums; }
 
 [hidden] { display: none !important; }
 
-h1, h2, h3 { font-stretch: 80%; line-height: 1.15; }
+h1, h2, h3 { line-height: 1.15; letter-spacing: -0.015em; }
 
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
@@ -98,7 +101,8 @@ h1, h2, h3 { font-stretch: 80%; line-height: 1.15; }
   align-items: baseline;
   padding: 0.85rem 1.5rem;
   background: var(--stop);
-  color: #fff;
+  /* The page colour reads on the stop lamp in both themes (7.6:1 dark, 6.2:1 light). */
+  color: var(--bg);
 }
 .andon code { font-family: var(--mono); font-size: 0.8125rem; background: rgb(0 0 0 / 18%); padding: 0.1rem 0.4rem; border-radius: 4px; }
 
@@ -168,7 +172,7 @@ h1, h2, h3 { font-stretch: 80%; line-height: 1.15; }
 .card[data-status="closed"] { opacity: 0.85; border-left-color: var(--rule-strong); }
 
 .card-id { font-size: 0.75rem; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 0.5rem; }
-.card-title { display: block; font-weight: 650; font-stretch: 90%; margin: 0.15rem 0 0.35rem; line-height: 1.25; }
+.card-title { display: block; font-weight: 650; margin: 0.15rem 0 0.35rem; line-height: 1.25; }
 .card-meta { display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; font-size: 0.75rem; color: var(--ink-soft); }
 .card-meta .warn { color: var(--stop); font-weight: 600; }
 
@@ -217,7 +221,7 @@ h1, h2, h3 { font-stretch: 80%; line-height: 1.15; }
   background: var(--surface);
   color: var(--ink);
 }
-.drawer::backdrop { background: rgb(10 12 30 / 55%); }
+.drawer::backdrop { background: rgb(0 0 0 / 55%); }
 .drawer[open] { display: flex; flex-direction: column; }
 .drawer-head { display: flex; justify-content: space-between; align-items: start; gap: 1rem; padding: 1rem 1.25rem 0.5rem; }
 .drawer-head h2 { margin: 0.1rem 0 0; font-size: 1.5rem; }

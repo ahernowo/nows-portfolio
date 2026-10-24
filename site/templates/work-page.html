@@ -31,8 +31,8 @@
   </div>
 
   <nav class="pager" aria-label="More work">
-    {%- if page.lower %}<a class="pager-link" rel="prev" href="{{ page.lower.permalink }}"><span class="pager-hint">Previous</span>{{ page.lower.title }}</a>{% endif %}
-    {%- if page.higher %}<a class="pager-link pager-next" rel="next" href="{{ page.higher.permalink }}"><span class="pager-hint">Next</span>{{ page.higher.title }}</a>{% endif %}
+    {%- if page.lower %}<a class="pager-link" rel="prev" href="{{ page.lower.permalink }}"><span class="pager-hint">Previous</span><span class="pager-title">{{ page.lower.title }}</span></a>{% endif %}
+    {%- if page.higher %}<a class="pager-link pager-next" rel="next" href="{{ page.higher.permalink }}"><span class="pager-hint">Next</span><span class="pager-title">{{ page.higher.title }}</span></a>{% endif %}
   </nav>
 </article>
 {% endblock content %}

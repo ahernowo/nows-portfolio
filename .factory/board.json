@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "next_id": 2,
+  "next_id": 3,
   "max_rework": 3,
   "orders": [
     {
@@ -156,6 +156,344 @@
           "kind": "approve",
           "actor": "approver",
           "note": "Back to all writing link on every article; empty pager hidden; all checks reproduced green"
+        }
+      ]
+    },
+    {
+      "id": "WO-0002",
+      "title": "Re-skin the site with a new palette and Inter",
+      "created_at": "2026-10-24T01:03:57Z",
+      "updated_at": "2026-10-24T02:26:23Z",
+      "station": "done",
+      "status": "closed",
+      "rework": 1,
+      "passed": [
+        "plan",
+        "build",
+        "design",
+        "security",
+        "approve"
+      ],
+      "seal": {
+        "hash": "f4ad112e1b4246b1ef76e3af9e829f17d08efecbbe76ab2e577978e1f013db93",
+        "files": 139,
+        "at": "2026-10-24T02:15:44Z"
+      },
+      "closed_at": "2026-10-24T02:26:23Z",
+      "findings": [
+        {
+          "n": 1,
+          "station": "design",
+          "severity": "medium",
+          "title": "Heading-anchor # fails contrast in both themes: #BB9999 on #FDFFFF 2.57:1, #684C4C on #280000 2.50:1 (needs 4.5:1); use --ink-soft",
+          "file": "site/sass/_prose.scss:173",
+          "status": "fixed",
+          "note": "Heading anchor now uses --ink-soft (_prose.scss): 14.89 light, 6.55 dark; pair added to the contrast tables in docs/design-system.md and the design-system skill.",
+          "at": "2026-10-24T02:11:21Z"
+        },
+        {
+          "n": 2,
+          "station": "design",
+          "severity": "low",
+          "title": "Article standfirst leaves one orphaned word ('run.') on its last line at 1440; add text-wrap: pretty to .article-dek, .case-dek",
+          "file": "site/sass/_prose.scss:17",
+          "status": "fixed",
+          "note": "text-wrap: pretty on .article-dek, .case-dek; 'run.' no longer sits alone at 1440 (dek-1440-*.png).",
+          "at": "2026-10-24T02:11:21Z"
+        },
+        {
+          "n": 3,
+          "station": "design",
+          "severity": "low",
+          "title": "Pager underline runs under the 'Older/Newer' hint as well as the title, so one link reads as two",
+          "file": "site/sass/_prose.scss:436",
+          "status": "fixed",
+          "note": "Pager title wrapped in span.pager-title in article.html and work-page.html; the link drops its underline and the title carries it, with the same hover darkening as a.",
+          "at": "2026-10-24T02:11:21Z"
+        },
+        {
+          "n": 4,
+          "station": "design",
+          "severity": "low",
+          "title": "Editor preview still sets prose in Georgia serif (the old Newsreader stand-in); the site's prose is now Inter, so the preview misleads",
+          "file": "workers/cms-api/admin/app.css:163",
+          "status": "fixed",
+          "note": "Editor .preview uses var(--sans), the system sans stack, instead of Georgia; still no webfont in the worker.",
+          "at": "2026-10-24T02:11:21Z"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-24T01:03:57Z",
+          "station": "plan",
+          "kind": "created",
+          "actor": "supervisor",
+          "note": "Re-skin the site with a new palette and Inter"
+        },
+        {
+          "at": "2026-10-24T01:04:09Z",
+          "station": "plan",
+          "kind": "start",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T01:08:07Z",
+          "station": "plan",
+          "kind": "agent-finished",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T01:10:16Z",
+          "station": "plan",
+          "kind": "note",
+          "actor": "nows",
+          "note": "Decision: Dark-mode secondary text colour → #DE7C5A coral (coral on every date and description)"
+        },
+        {
+          "at": "2026-10-24T01:10:16Z",
+          "station": "plan",
+          "kind": "note",
+          "actor": "nows",
+          "note": "Decision: Which links turn #B10F2E / #DE7C5A → running text only (article and page text, footer, breadcrumbs, previous/next, back to writing); main menu and list titles stay text colour"
+        },
+        {
+          "at": "2026-10-24T01:10:16Z",
+          "station": "plan",
+          "kind": "note",
+          "actor": "nows",
+          "note": "Decision: Generous white space vs not the layout → type only: bigger headings, tighter letter-spacing, more line height; margins, padding and grid unchanged"
+        },
+        {
+          "at": "2026-10-24T01:17:28Z",
+          "station": "plan",
+          "kind": "start",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T01:22:11Z",
+          "station": "plan",
+          "kind": "report",
+          "actor": "planner",
+          "note": "plan.md"
+        },
+        {
+          "at": "2026-10-24T01:22:11Z",
+          "station": "plan",
+          "kind": "pass",
+          "actor": "planner",
+          "note": "Re-skin to Nows's five colours and self-hosted Inter: tokens, type scale, favicon, OG image, dashboard and editor CSS, design-system skill and docs; layout untouched."
+        },
+        {
+          "at": "2026-10-24T01:22:37Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-24T01:23:01Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T02:04:29Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-24T02:04:29Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Five-colour palette and self-hosted Inter across site, OG image, dashboard and editor; all checks green, 0 axe/console/focus problems; layout diff empty."
+        },
+        {
+          "at": "2026-10-24T02:04:44Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T02:05:08Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T02:11:21Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#1 Medium: Heading-anchor # fails contrast in both themes: #BB9999 on #FDFFFF 2.57:1, #684C4C on #280000 2.50:1 (needs 4.5:1); use --ink-soft"
+        },
+        {
+          "at": "2026-10-24T02:11:21Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#2 Low: Article standfirst leaves one orphaned word ('run.') on its last line at 1440; add text-wrap: pretty to .article-dek, .case-dek"
+        },
+        {
+          "at": "2026-10-24T02:11:21Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#3 Low: Pager underline runs under the 'Older/Newer' hint as well as the title, so one link reads as two"
+        },
+        {
+          "at": "2026-10-24T02:11:21Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#4 Low: Editor preview still sets prose in Georgia serif (the old Newsreader stand-in); the site's prose is now Inter, so the preview misleads"
+        },
+        {
+          "at": "2026-10-24T02:11:49Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-24T02:11:49Z",
+          "station": "design",
+          "kind": "fail",
+          "actor": "ui-ux-reviewer",
+          "note": "Fix #1 (heading-anchor # at 2.5:1 in both themes: use --ink-soft and add it to the contrast tables). #2-#4 are low and cheap: text-wrap: pretty on deks, underline only the pager title, sans preview font in the editor."
+        },
+        {
+          "at": "2026-10-24T02:12:12Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T02:13:00Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T02:15:23Z",
+          "station": "build",
+          "kind": "fix",
+          "actor": "builder",
+          "note": "#1 Heading anchor now uses --ink-soft (_prose.scss): 14.89 light, 6.55 dark; pair added to the contrast tables in docs/design-system.md and the design-system skill."
+        },
+        {
+          "at": "2026-10-24T02:15:23Z",
+          "station": "build",
+          "kind": "fix",
+          "actor": "builder",
+          "note": "#2 text-wrap: pretty on .article-dek, .case-dek; 'run.' no longer sits alone at 1440 (dek-1440-*.png)."
+        },
+        {
+          "at": "2026-10-24T02:15:23Z",
+          "station": "build",
+          "kind": "fix",
+          "actor": "builder",
+          "note": "#3 Pager title wrapped in span.pager-title in article.html and work-page.html; the link drops its underline and the title carries it, with the same hover darkening as a."
+        },
+        {
+          "at": "2026-10-24T02:15:23Z",
+          "station": "build",
+          "kind": "fix",
+          "actor": "builder",
+          "note": "#4 Editor .preview uses var(--sans), the system sans stack, instead of Georgia; still no webfont in the worker."
+        },
+        {
+          "at": "2026-10-24T02:15:44Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-24T02:15:44Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Cleared #1-#4: anchor on --ink-soft (14.89/6.55), pretty-wrapped deks, pager underlines the title only, editor preview in system sans; all checks green."
+        },
+        {
+          "at": "2026-10-24T02:15:58Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-24T02:16:35Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T02:20:29Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-24T02:20:29Z",
+          "station": "design",
+          "kind": "pass",
+          "actor": "ui-ux-reviewer",
+          "note": "Rework 1 clears #1-#4: anchor 14.89/6.55, pretty-wrapped deks, pager underlines the title only, editor preview in system sans; shots clean (0 axe, 0 focus, 0 console)."
+        },
+        {
+          "at": "2026-10-24T02:20:47Z",
+          "station": "security",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-24T02:21:06Z",
+          "station": "security",
+          "kind": "start",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T02:22:59Z",
+          "station": "security",
+          "kind": "report",
+          "actor": "security-checker",
+          "note": "security.md"
+        },
+        {
+          "at": "2026-10-24T02:22:59Z",
+          "station": "security",
+          "kind": "pass",
+          "actor": "security-checker",
+          "note": "No findings: fonts are self-hosted and match Fontsource 5.3.0 by SHA-256, CSP and headers unchanged, no new safe/innerHTML, no secrets, no worker/auth/DB/dependency change."
+        },
+        {
+          "at": "2026-10-24T02:23:19Z",
+          "station": "approve",
+          "kind": "agent-finished",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-24T02:23:45Z",
+          "station": "approve",
+          "kind": "start",
+          "actor": "approver"
+        },
+        {
+          "at": "2026-10-24T02:26:19Z",
+          "station": "approve",
+          "kind": "report",
+          "actor": "approver",
+          "note": "approval.md"
+        },
+        {
+          "at": "2026-10-24T02:26:23Z",
+          "station": "approve",
+          "kind": "approve",
+          "actor": "approver",
+          "note": "Five-colour palette and Inter, layout untouched; all checks reproduced, contrast recomputed, #1-#4 fixed."
         }
       ]
     }

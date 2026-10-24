@@ -41,13 +41,13 @@ Give each section a verdict: ok, not affected, or finding numbers.
 - Spacing uses the same rhythm as neighbouring blocks; nothing crowds the receipt stack on the home page.
 
 **Typography**
-- Archivo for interface, Newsreader for reading; weights and widths from the scale.
+- Inter for everything; sizes, weights, tracking and line heights from the type table.
 - Line length 45–80 characters in prose; headings balanced, no orphaned single words on wide screens.
 - Numbers in tables and lists use tabular figures.
 
 **Colour and contrast**
-- Only tokens; both themes defined. Body text at least 4.5:1, large text and UI parts at least 3:1, in light and dark. The scan checks most of this; check text on the yellow and pink copies by eye too.
-- Stamp red stays rare (one accent per view).
+- Only tokens; both themes defined. Body text at least 4.5:1, large text and UI parts at least 3:1, in light and dark. The scan checks most of this; check text on the peach and rose copies by eye too.
+- The accent appears only on running-text links, the stamp, now-pulse, reading line and warning alerts.
 
 **Motion**
 - New motion answers a visitor's action or belongs to the home page's single load sequence.

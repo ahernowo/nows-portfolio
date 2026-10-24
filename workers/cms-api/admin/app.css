@@ -1,15 +1,15 @@
-/* Admin editor. Same carbon-copy palette as the site, system fonts so the
-   worker stays small. */
+/* Admin editor. Same carbon-copy palette as the site (maroon carbon,
+   off-white ink, coral and crimson), system fonts so the worker stays small. */
 
 :root {
   color-scheme: light dark;
-  --paper: #fcfcfa;
-  --ink: #1f2463;
-  --ink-soft: #4a4f86;
-  --canary: #fbf0b4;
-  --rose: #f9dce2;
-  --rule: #b9c9e6;
-  --stamp: #b4302a;
+  --paper: #fdffff;
+  --ink: #280000;
+  --ink-soft: #570000;
+  --canary: #f5ded6;
+  --rose: #f2dbe0;
+  --rule: #e4d9d9;
+  --stamp: #b10f2e;
   --ok: #1d6b4f;
   --field: #ffffff;
   --radius: 4px;
@@ -19,15 +19,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #151a44;
-    --ink: #eef0fa;
-    --ink-soft: #b8bce0;
-    --canary: #4a4320;
-    --rose: #4a2733;
-    --rule: #39408a;
-    --stamp: #ff8a7d;
+    --paper: #280000;
+    --ink: #fdffff;
+    --ink-soft: #de7c5a;
+    --canary: #4c1912;
+    --rose: #5f0612;
+    --rule: #482626;
+    --stamp: #de7c5a;
     --ok: #7fd8b4;
-    --field: #1b2152;
+    --field: #570000;
   }
 }
 
@@ -160,10 +160,10 @@ textarea#body { font: 15px/1.6 var(--mono); resize: vertical; tab-size: 2; }
   padding: 1rem 1.25rem;
   min-height: 20rem;
   background: var(--field);
-  font: 1.0625rem/1.65 Georgia, "Times New Roman", serif;
+  font: 1.0625rem/1.65 var(--sans);
   overflow-wrap: anywhere;
 }
-.preview pre { background: #10143a; color: #e8eaf8; padding: 1rem; border-radius: var(--radius); overflow: auto; font: 14px/1.5 var(--mono); }
+.preview pre { background: #280000; color: #fdffff; padding: 1rem; border-radius: var(--radius); overflow: auto; font: 14px/1.5 var(--mono); }
 .preview code { font-family: var(--mono); font-size: .9em; }
 .preview img { max-width: 100%; }
 .preview table { border-collapse: collapse; }
@@ -202,7 +202,7 @@ dialog {
   max-width: 28rem;
   padding: 1.25rem 1.5rem;
 }
-dialog::backdrop { background: rgb(15 18 50 / .45); }
+dialog::backdrop { background: rgb(40 0 0 / .45); }
 .wide-dialog { max-width: 40rem; width: 90vw; }
 .activity { padding-left: 1.2rem; max-height: 60vh; overflow: auto; }
 .activity li { margin-bottom: .4rem; }
@@ -219,7 +219,7 @@ dialog::backdrop { background: rgb(15 18 50 / .45); }
   border-radius: var(--radius);
   max-width: min(36rem, 90vw);
 }
-.toast.bad { background: var(--stamp); color: #fff; }
+.toast.bad { background: var(--stamp); color: var(--paper); }
 
 @media (prefers-reduced-motion: no-preference) {
   .toast { animation: rise .2s ease-out; }

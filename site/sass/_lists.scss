@@ -17,13 +17,9 @@
 .block-title {
   margin: 0;
   font-size: var(--step-3);
-  font-weight: 720;
-  font-stretch: 78%;
-  line-height: 1.05;
-}
-
-.block-more {
-  color: var(--ink-soft);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.022em;
 }
 
 .page-head {
@@ -33,10 +29,9 @@
 .page-title {
   margin: 0 0 1rem;
   font-size: var(--step-4);
-  font-weight: 750;
-  font-stretch: 76%;
-  line-height: 1.02;
-  letter-spacing: -0.008em;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
@@ -44,7 +39,8 @@
   margin: 0;
   max-width: 44ch;
   font-size: var(--step-1);
-  line-height: 1.45;
+  line-height: 1.5;
+  letter-spacing: -0.017em;
   color: var(--ink-soft);
 }
 
@@ -54,13 +50,10 @@
   font-size: 0.9375rem;
 }
 
+// The crumb link takes the running-text link colour from `a`.
 .crumb {
   margin: 0 0 1rem;
   font-size: 0.9375rem;
-}
-
-.crumb a {
-  color: var(--ink-soft);
 }
 
 // Index list: one ledger line per entry.
@@ -105,13 +98,15 @@
 .index-title {
   margin: 0 0 0.3rem;
   font-size: var(--step-2);
-  font-weight: 680;
-  font-stretch: 84%;
-  line-height: 1.15;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.017em;
   text-wrap: balance;
 }
 
+// List titles stay in the text colour; the highlighter marks the row.
 .index-link {
+  color: var(--ink);
   text-decoration: none;
 }
 
@@ -162,8 +157,8 @@
 .year-title {
   margin: 0 0 0.75rem;
   font-size: var(--step-1);
-  font-weight: 700;
-  font-stretch: 80%;
+  font-weight: 650;
+  letter-spacing: -0.012em;
   color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
 }
@@ -182,6 +177,7 @@
   padding: 0.35rem 0.75rem;
   border: 1px solid var(--rule-strong);
   border-radius: 999px;
+  color: var(--ink);
   text-decoration: none;
 }
 

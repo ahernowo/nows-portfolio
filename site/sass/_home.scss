@@ -11,10 +11,9 @@
 .hero-title {
   margin: 0 0 1.75rem;
   font-size: var(--step-5);
-  font-weight: 760;
-  font-stretch: 70%;
-  line-height: 0.98;
-  letter-spacing: -0.012em;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
@@ -22,7 +21,8 @@
   margin: 0 0 1.75rem;
   max-width: 34ch;
   font-size: var(--step-1);
-  line-height: 1.45;
+  line-height: 1.5;
+  letter-spacing: -0.017em;
   color: var(--ink-soft);
 }
 
@@ -99,7 +99,7 @@
 }
 
 .slip-2 {
-  --slip-bg: var(--copy-yellow);
+  --slip-bg: var(--copy-peach);
   top: 9.1rem;
   left: 11%;
   rotate: 1.75deg;
@@ -107,7 +107,7 @@
 }
 
 .slip-3 {
-  --slip-bg: var(--copy-pink);
+  --slip-bg: var(--copy-rose);
   top: 18.2rem;
   left: 22%;
   rotate: -1deg;
@@ -116,8 +116,8 @@
 
 .slip-system {
   margin: 0 0 0.45rem;
-  font-weight: 700;
-  font-stretch: 85%;
+  font-weight: 650;
+  letter-spacing: -0.01em;
   font-size: 0.9375rem;
 }
 
@@ -140,7 +140,6 @@
 .slip-lines dd {
   margin: 0;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
 }
 
 .stamp {
@@ -158,10 +157,9 @@
   display: block;
   padding: 0.35rem 0.85rem 0.4rem;
   font-size: clamp(1.6rem, 2.6vw, 2.15rem);
-  font-weight: 850;
-  font-stretch: 68%;
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   border: 3px solid currentColor;
   border-radius: 6px;
   outline: 1.5px solid currentColor;

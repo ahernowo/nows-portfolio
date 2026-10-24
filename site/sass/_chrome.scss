@@ -14,10 +14,10 @@
 
 .wordmark {
   font-size: 1.5rem;
-  font-weight: 800;
-  font-stretch: 72%;
-  letter-spacing: -0.01em;
+  font-weight: 750;
+  letter-spacing: -0.025em;
   line-height: 1;
+  color: var(--ink);
   text-decoration: none;
   padding-block: 0.5rem;
 }
@@ -34,11 +34,16 @@
   display: block;
   padding-block: 0.4rem;
   text-decoration: none;
-  color: var(--ink-soft);
+  color: var(--ink);
 }
 
+// The menu stays in the text colour; pointing at an item draws a thin rule
+// under it, and the current page keeps the heavier ink line.
 .site-nav a:hover {
-  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.4em;
+  text-decoration-color: var(--rule-strong);
 }
 
 .site-nav a[aria-current] {
@@ -63,7 +68,7 @@
   padding: 0.35rem 0.6rem;
   font: inherit;
   font-size: 0.9375rem;
-  color: var(--ink-soft);
+  color: var(--ink);
   background: none;
   border: 1px solid transparent;
   border-radius: 6px;
@@ -71,7 +76,6 @@
 }
 
 .tool:hover {
-  color: var(--ink);
   border-color: var(--rule);
 }
 
@@ -124,8 +128,8 @@
 
 .footer-name {
   color: var(--ink);
-  font-weight: 750;
-  font-stretch: 80%;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   font-size: 1.0625rem;
   margin-right: 0.5rem;
 }
@@ -161,7 +165,7 @@
   border-radius: 8px;
   background: var(--paper);
   color: var(--ink);
-  box-shadow: 0 24px 60px -24px rgb(20 25 56 / 55%);
+  box-shadow: var(--dialog-shadow);
   overflow: hidden;
   flex-direction: column;
 }
@@ -171,7 +175,7 @@
 }
 
 .search-dialog::backdrop {
-  background: rgb(20 25 56 / 45%);
+  background: var(--backdrop);
 }
 
 .search-form {
@@ -235,6 +239,7 @@
 .search-results a {
   display: block;
   padding: 0.75rem 1.15rem;
+  color: var(--ink);
   text-decoration: none;
 }
 
@@ -256,7 +261,7 @@
 }
 
 .search-results mark {
-  background: var(--copy-yellow);
+  background: var(--copy-peach);
   color: inherit;
   border-radius: 2px;
 }

@@ -12,8 +12,8 @@
   <meta name="description" content="{{ meta_description }}">
   <link rel="canonical" href="{{ canonical }}">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#fcfcfa" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#141938" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FDFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#280000" media="(prefers-color-scheme: dark)">
 
   <meta property="og:site_name" content="{{ config.title }}">
   <meta property="og:title" content="{{ item_title or config.title }}">
@@ -25,7 +25,7 @@
 
   <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
   <link rel="alternate" type="application/atom+xml" title="{{ config.title }}: writing" href="{{ get_url(path='atom.xml', trailing_slash=false) }}">
-  <link rel="preload" href="{{ get_url(path='fonts/archivo-latin-wdth-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ get_url(path='fonts/inter-latin-opsz-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ get_url(path='main.css', cachebust=true) }}">
   {% block head_extra %}{% endblock head_extra %}
   {#- Saved theme and page-transition setup; must run before first paint. #}

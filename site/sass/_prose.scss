@@ -7,11 +7,10 @@
 .article-title,
 .case-title {
   margin: 0 0 1.25rem;
-  font-size: clamp(2.4rem, 4.6vw + 0.6rem, 4rem);
-  font-weight: 760;
-  font-stretch: 74%;
-  line-height: 1;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.6rem, 5vw + 0.6rem, 4.5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.028em;
   text-wrap: balance;
 }
 
@@ -21,9 +20,10 @@
   max-width: 34em;
   font-family: var(--font-text);
   font-size: 1.375rem;
-  font-style: italic;
-  line-height: 1.4;
+  line-height: 1.5;
+  letter-spacing: -0.017em;
   color: var(--ink-soft);
+  text-wrap: pretty;
 }
 
 .article-meta {
@@ -46,9 +46,6 @@
   color: var(--ink-soft);
 }
 
-.tag {
-  color: var(--ink);
-}
 
 // Case studies: the facts are laid out like a filled-in form.
 
@@ -114,7 +111,8 @@
 .prose {
   font-family: var(--font-text);
   font-size: 1.1875rem;
-  line-height: 1.62;
+  line-height: 1.7;
+  letter-spacing: -0.014em;
   font-optical-sizing: auto;
   hanging-punctuation: first;
   overflow-wrap: break-word;
@@ -145,17 +143,17 @@
 .prose h2 {
   margin: 2.3em 0 0.55em;
   font-size: var(--step-2);
-  font-weight: 700;
-  font-stretch: 84%;
-  line-height: 1.2;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.017em;
 }
 
 .prose h3 {
   margin: 1.9em 0 0.4em;
-  font-size: 1.1875rem;
-  font-weight: 680;
-  font-stretch: 90%;
-  line-height: 1.3;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
 }
 
 .prose h4 {
@@ -173,7 +171,7 @@
   position: absolute;
   left: -1.1em;
   padding-right: 0.3em;
-  color: var(--rule-strong);
+  color: var(--ink-soft);
   font-weight: 400;
   text-decoration: none;
   opacity: 0;
@@ -226,7 +224,7 @@
   font-family: var(--font-mono);
   font-size: 0.82em;
   padding: 0.1em 0.35em;
-  background: var(--copy-yellow);
+  background: var(--copy-peach);
   border-radius: 3px;
 }
 
@@ -244,6 +242,8 @@
   background: var(--code-bg) !important;
   color: var(--code-ink);
   border-radius: 6px;
+  // A hairline edge, so the maroon slab still shows on the maroon dark page.
+  box-shadow: inset 0 0 0 1px var(--code-edge);
   font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.65;
@@ -294,6 +294,12 @@
   transition: opacity 0.15s;
 }
 
+// The ink ring would vanish on the dark slab in light mode, so the button
+// takes the slab's own text colour for its ring.
+.code-copy:focus-visible {
+  outline-color: var(--code-ink);
+}
+
 .prose pre:hover .code-copy,
 .code-copy:focus-visible,
 .code-copy[data-state="done"] {
@@ -310,7 +316,7 @@
   border-collapse: collapse;
   font-family: var(--font-display);
   font-size: 0.9375rem;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .prose th {
@@ -339,7 +345,7 @@
   font-family: var(--font-display);
   font-size: 1rem;
   font-style: normal;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--ink);
 }
 
@@ -355,29 +361,29 @@
 }
 
 .prose .markdown-alert-note {
-  --alert-bg: var(--copy-yellow);
+  --alert-bg: var(--copy-peach);
   --alert-title: "Note";
 }
 
 .prose .markdown-alert-tip {
-  --alert-bg: var(--copy-yellow);
+  --alert-bg: var(--copy-peach);
   --alert-title: "Tip";
 }
 
 .prose .markdown-alert-important {
-  --alert-bg: var(--copy-yellow);
+  --alert-bg: var(--copy-peach);
   --alert-edge: var(--ink);
   --alert-title: "Important";
 }
 
 .prose .markdown-alert-warning {
-  --alert-bg: var(--copy-pink);
+  --alert-bg: var(--copy-rose);
   --alert-edge: var(--stamp);
   --alert-title: "Warning";
 }
 
 .prose .markdown-alert-caution {
-  --alert-bg: var(--copy-pink);
+  --alert-bg: var(--copy-rose);
   --alert-edge: var(--stamp);
   --alert-title: "Caution";
 }
@@ -416,7 +422,9 @@
   }
 }
 
-// Previous and next links.
+// Previous and next links. Running-text links, so the colour comes from `a`.
+// The underline is drawn on the title alone: an underline set on a parent
+// cannot be removed by a child, so the link drops it and the title adds it.
 
 .pager {
   display: flex;
@@ -431,19 +439,26 @@
   display: flex;
   flex-direction: column;
   max-width: 48%;
-  font-weight: 650;
-  font-stretch: 88%;
-  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration-line: none;
 }
 
-.pager-link:hover {
-  text-decoration: underline;
+.pager-title {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--link-line);
+  transition: text-decoration-color 0.15s;
+}
+
+.pager-link:hover .pager-title {
+  text-decoration-color: currentColor;
 }
 
 .pager-hint {
   font-size: var(--step--1);
   font-weight: 400;
-  font-stretch: 100%;
   color: var(--ink-soft);
 }
 
@@ -457,8 +472,8 @@
 
 .back-link {
   margin: 2.5rem 0 0;
-  font-weight: 650;
-  font-stretch: 88%;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 // A thin bar that fills as you read. Driven by scrolling, so it only moves
