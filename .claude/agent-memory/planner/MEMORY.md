@@ -30,6 +30,8 @@ Notes that make future plans better. Keep under 150 lines; merge and prune.
 - Mock a content change before planning: copy `site/` to the scratchpad, edit, `shoot.mjs --root <copy> --viewport-only --no-axe`. WO-0006: filling the case-form in the journey hero pushed the 390 scene (and its Pause button) to ~810 px.
 - Anything in `site/static/` deploys even if no page links it, and drafts don't hide it. `ignored_static = [...]` in `zola.toml` keeps a file in the repo but out of the build (tested, Zola 0.23.6). Check `git status -sb` for what's already pushed (= live).
 - "Only inside the illustration" checks: a node one-liner that strips `<figure ... jn-room>...</figure>` from the built HTML and greps the rest (WO-0006 plan, check 5). A `<!-- Nows -->` marker that quotes a removed claim trips the plan's own grep; paraphrase it.
+- Feature switch-offs leave "switched off" text in many places: the template comment, `zola.toml`, `journey.js` header, `docs/design-system.md`, the design-system and ui-ux-review skills, the case study's "How this page moves" table. Turning one back on: grep the repo for the feature name and plan every stale line (WO-0007).
+- Checking supplied video for claims: `ffmpeg -vf "fps=1,scale=640:-1,tile=4x3" -frames:v 1` gives a one-image contact sheet; `-sseof -0.5` the last frame; `ffprobe -select_streams a` proves "silent". Icons can hint at claims words don't make (WO-0007: a padlock by "All three agree").
 - Supervisor notes can be stale (WO-0006 said WO-0005 was uncommitted; it was HEAD). Trust `git log`/`git status`.
 
 ## Requests that needed Nows
@@ -38,6 +40,6 @@ Notes that make future plans better. Keep under 150 lines; merge and prune.
 - Honesty reframes (WO-0006) needed no questions: the request listed the facts. Derive only small things (year from a start date), keep Nows's wording in lists, and remove a feature whose purpose is results (the bars) from the code, docs and Decap, not just the page.
 
 ## Working the line
-- Long `factory report` heredocs fail on Windows ("unexpected EOF while looking for matching `''"): the command is too long. Build the report in the scratchpad with several `cat >>` heredocs of ~3 KB (a 9 KB one failed in WO-0005), then `factory report <id> plan < file`. The Write tool is blocked outside this folder.
+- Long `factory report` heredocs fail on Windows ("unexpected EOF while looking for matching `''"): the command is too long. Build the report in the scratchpad with several `cat >>` heredocs of ~3 KB (a 9 KB one failed in WO-0005, a ~6 KB one in WO-0007; 2 KB chunks are safe), then `factory report <id> plan < file`. The Write tool is blocked outside this folder.
 - In Git Bash, run `tools/shots/shoot.mjs` with `MSYS_NO_PATHCONV=1`, or `--pages /` becomes `C:/Program Files/Git/` and the run crashes. Baseline shots before a build go in `target/shots/<id>-before/` (git-ignored, seal-safe).
 - Untracked files a request supplies (logos, images) can't be diffed by reviewers; put their sha256 in the scope check.

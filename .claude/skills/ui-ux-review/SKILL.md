@@ -31,7 +31,7 @@ The script prints a Markdown summary: screenshot files, console and network prob
 
 When the command reports that Chromium or the packages are missing, the one-time setup is `cd tools/shots && npm install && npx playwright install chromium`. When it cannot run at all, review from the code and say so in the report.
 
-**The donor journey** (`/work/donation-website/`, a draft): use `--scroll "#journey-story:0.05,0.22,0.5,0.77,1"` for the pinned story. The recording is switched off until it is re-recorded (`show_recording` in `partials/journey.html`, `ignored_static` in `zola.toml`), so the page has no video and no request for `journey.mp4`.
+**The donor journey** (`/work/donation-website/`, a draft): use `--scroll "#journey-story:0.05,0.22,0.5,0.77,1"` for the pinned story. The recording plays while half visible; Playwright's Chromium can't decode H.264 (shots log `journey.mp4 ERR_ABORTED`), so check playback in Chrome (`C:/Program Files/Google/Chrome/Application/chrome.exe`).
 
 **Which pages**: every page whose template, styles, script or content changed. A change to `base.html`, a partial, `_tokens.scss`, `_base.scss` or `_chrome.scss` affects every page: capture the defaults. A change to `_prose.scss` needs an article and a case study; `/articles/writing-reference/` (a draft, so add `--drafts`) shows every prose element at once.
 

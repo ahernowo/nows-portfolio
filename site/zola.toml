@@ -19,11 +19,6 @@ taxonomies = [
 
 # Keep editor backups and notes out of the build.
 ignored_content = ["*.bak", "*.tmp", "_drafts/*"]
-# The donor-journey recording still shows a line about how records are kept
-# that the case study no longer makes, so it stays out of the build until it
-# is re-recorded (WO-0006). Remove these two together with setting
-# show_recording = true in templates/partials/journey.html.
-ignored_static = ["images/journey.mp4", "images/journey-poster.jpg"]
 
 [markdown]
 smart_punctuation = true

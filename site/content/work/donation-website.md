@@ -42,8 +42,6 @@ body = "The donation form, the payment gateway and the CRM each hold a record of
 
 <!-- Nows: confirm the exact role title -->
 
-<!-- Nows: the recording (site/static/images/journey.mp4 and journey-poster.jpg) still shows the "Stored safely" line about how records are kept, which this page does not claim. It is hidden from this page and left out of the build (ignored_static in site/zola.toml, show_recording in partials/journey.html) until it is re-recorded without that line. -->
-
 ## What I will build and run
 
 From November 2026, I will work on a donation website: its development, its documentation and its monitoring.
@@ -66,4 +64,5 @@ Each effect uses the lightest tool that can do it. The site's security rules all
 | Pinned journey | `position: sticky` inside a tall section; one scroll listener turns the position into one progress number, and the scene is drawn from that number alone | About 50 lines, plus the scene |
 | Character and hand | Inline SVG; the head, eyes and mouth change with progress, and the finger is a line whose end moves to each button | About 190 lines (the scene) |
 | Reading line | A CSS scroll timeline | None |
-| Reduced motion | The page starts from the finished picture; pinning and idle motion are off, and the steps are a plain list | About 30 lines, shared |
+| Recording | A twelve-second H.264 file that plays while half of it is on screen; the button pauses it | About 40 lines |
+| Reduced motion | The page starts from the finished picture; pinning, autoplay and idle motion are off, and the steps are a plain list | About 30 lines, shared |

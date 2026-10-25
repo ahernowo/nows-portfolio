@@ -4,11 +4,7 @@
     live here rather than in each page. -#}
 {%- set steps = page.extra.journey.steps %}
 {%- set targets = [0.05, 0.22, 0.5, 0.77, 1] %}
-{#- The recording is switched off: journey.mp4 still shows a line about how
-    records are kept that this page no longer makes. Turn it back on together
-    with removing the two files from ignored_static in zola.toml, once the
-    recording is re-made without that line (WO-0006). #}
-{%- set show_recording = false %}
+{%- set show_recording = true %}
 
 <section class="jn-section" aria-labelledby="jn-walk-title">
   <div class="jn-intro">
@@ -45,7 +41,7 @@
         <source src="{{ get_url(path='images/journey.mp4') }}" type="video/mp4">
       </video>
       {#- journey.js shows the button; without it the poster stays. #}
-      <button class="jn-vbtn" type="button" aria-pressed="false" hidden>
+      <button class="jn-vbtn" type="button" data-playing="false" hidden>
         <svg class="jn-icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
         <svg class="jn-icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>
         <span class="jn-vlabel">Play</span>

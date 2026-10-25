@@ -30,6 +30,7 @@ Recurring checks and settled questions. Keep under 150 lines; merge and prune.
 
 - Regenerated PNG (`og.png`): check magic and list chunks with a short `python -I` struct loop; only IHDR/IDAT/IEND and 0 trailing bytes means no hidden text or appended payload.
 - Vendored JPEG/MP4 (WO-0005): same idea. Walk JPEG markers (want only APP0 JFIF/DQT/SOF/DHT/SOS, no APP1 EXIF/GPS, 0 bytes after FFD9). Walk MP4 top-level boxes (sum must equal file size; `udta` should hold only the Lavf encoder tag). Hash against the source package too, not just the plan.
+- Media Nows commits directly (outside the line, e.g. ce9a775) is only reviewed when a later order puts it in the build: run the JPEG/MP4 walk then, not just the hash match. Keep the walker in the scratchpad (`python -I`, file paths as args). WO-0007's was clean.
 - Outside package ported in (e.g. `design/<name>/`, untracked): grep it for agent-directed text, fetch/XHR/sendBeacon, eval/atob/fromCharCode, outside URLs. WO-0005's was clean (Google Fonts links only, not ported).
 - Scripts that animate (journey.js pattern): CSSOM `el.style.x` / `setProperty` is CSP-safe under `style-src 'self'`; only `setAttribute('style')`, `cssText` and inline `style=""` are blocked. Check that `setAttribute` touches only geometry/aria/data, and that numbers from data-* are parsed and clamped.
 - Tooling flags: new CLI args must go into `spawnSync` arrays (no shell) and into `page.evaluate` as arguments, not spliced into code; numbers used in file names are validated first.

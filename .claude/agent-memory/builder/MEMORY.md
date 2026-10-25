@@ -47,6 +47,10 @@ Gotchas that cost time once. Keep under 150 lines; merge and prune.
 - A pause control for many animations: `.paused .scope * { animation-play-state: paused !important }`; each `animation:` shorthand resets play-state, so it needs `!important`.
 - Playwright's Chromium can't decode H.264: shots log `journey.mp4 ERR_ABORTED`. For real playback, `chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe" })` works here.
 - Evidence that motion stopped: `el.getAnimations()` play states, plus two `locator.screenshot()` buffers compared with `Buffer.compare`.
+- `target/wo7-check.mjs` is a ready Chrome script for the journey video: play at a set % visible, button state, reduced motion, no JS, keyboard. Copy it rather than rewrite.
+- ffmpeg/ffprobe 9 are on PATH (WinGet). Last frame: `-sseof -0.5 -frames:v 1`; contact sheet: `-vf "fps=1,scale=640:-1,tile=4x3"`.
+- Tab-order checks: `locator.focus()` on a `.jn-step` silently failed at 864 px. Focus the target, press Shift+Tab to find the previous stop, then Tab forward (WO-0007).
+- `grep -c $'\r'` in Git Bash counted every line as CRLF in LF files. Check line endings with Python bytes instead.
 
 ## Workers
 - `Response::redirect` headers are immutable; build a 302 by hand when it must set cookies.

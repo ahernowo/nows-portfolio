@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "next_id": 7,
+  "next_id": 8,
   "max_rework": 3,
   "orders": [
     {
@@ -1437,6 +1437,250 @@
           "kind": "approve",
           "actor": "approver",
           "note": "Honest plan from Nows's facts; sample data inside the scene; bars gone; recording off and out of the build. All checks reproduced."
+        }
+      ]
+    },
+    {
+      "id": "WO-0007",
+      "title": "Turn the donor-journey recording back on",
+      "created_at": "2026-10-25T04:55:13Z",
+      "updated_at": "2026-10-25T05:44:29Z",
+      "station": "done",
+      "status": "closed",
+      "rework": 0,
+      "passed": [
+        "plan",
+        "build",
+        "design",
+        "security",
+        "approve"
+      ],
+      "seal": {
+        "hash": "202694c4c68e3deada4b0468b00f3c9d98e029130c3cc2e1e35d81546fc9ca5f",
+        "files": 149,
+        "at": "2026-10-25T05:13:46Z"
+      },
+      "closed_at": "2026-10-25T05:44:29Z",
+      "findings": [
+        {
+          "n": 1,
+          "station": "design",
+          "severity": "low",
+          "title": "In dark, the video button's light --ink fill sits on the always-light recording with almost no edge (returns from WO-0005 #5)",
+          "file": "site/sass/journey.scss:1103",
+          "status": "open",
+          "at": "2026-10-25T05:20:31Z"
+        },
+        {
+          "n": 2,
+          "station": "design",
+          "severity": "low",
+          "title": "A padlock icon beside 'All three agree' in the recording and poster can read as a security claim (Nows's file, for Nows to decide)",
+          "file": "site/static/images/journey-poster.jpg",
+          "status": "open",
+          "at": "2026-10-25T05:20:32Z"
+        },
+        {
+          "n": 3,
+          "station": "design",
+          "severity": "low",
+          "title": "'The whole journey in twelve / seconds' leaves one word on the second line at 1440 (returns from WO-0005 #2)",
+          "file": "site/sass/journey.scss",
+          "status": "open",
+          "at": "2026-10-25T05:20:32Z"
+        },
+        {
+          "n": 4,
+          "station": "design",
+          "severity": "low",
+          "title": "Video intro says 'It plays while it is on screen; the button pauses it', untrue with reduced motion and without JavaScript (no button)",
+          "file": "site/templates/partials/journey.html:36",
+          "status": "open",
+          "at": "2026-10-25T05:20:32Z"
+        },
+        {
+          "n": 5,
+          "station": "design",
+          "severity": "low",
+          "title": "At 390 the recording is 348 px wide: its records panel text is unreadable and the 44 px button covers the phone",
+          "file": "site/sass/journey.scss:1103",
+          "status": "open",
+          "at": "2026-10-25T05:20:32Z"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-25T04:55:13Z",
+          "station": "plan",
+          "kind": "created",
+          "actor": "supervisor",
+          "note": "Turn the donor-journey recording back on"
+        },
+        {
+          "at": "2026-10-25T04:55:28Z",
+          "station": "plan",
+          "kind": "start",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-25T05:00:26Z",
+          "station": "plan",
+          "kind": "report",
+          "actor": "planner",
+          "note": "plan.md"
+        },
+        {
+          "at": "2026-10-25T05:00:26Z",
+          "station": "plan",
+          "kind": "pass",
+          "actor": "planner",
+          "note": "Recording back on: show_recording=true, ignored_static removed, Nows comment removed; stale docs/skills/table row updated; video button uses data-playing + label (one state signal)"
+        },
+        {
+          "at": "2026-10-25T05:00:47Z",
+          "station": "build",
+          "kind": "agent-finished",
+          "actor": "planner"
+        },
+        {
+          "at": "2026-10-25T05:03:25Z",
+          "station": "build",
+          "kind": "note",
+          "actor": "nows",
+          "note": "Decision: Scope of the plan's extras (stale notes + aria-pressed → data-playing) → Full plan"
+        },
+        {
+          "at": "2026-10-25T05:03:38Z",
+          "station": "build",
+          "kind": "start",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-25T05:13:46Z",
+          "station": "build",
+          "kind": "report",
+          "actor": "builder",
+          "note": "build.md"
+        },
+        {
+          "at": "2026-10-25T05:13:46Z",
+          "station": "build",
+          "kind": "pass",
+          "actor": "builder",
+          "note": "Recording back on (flag, ignored_static, Nows comment); docs/skills/table updated; video button uses data-playing. All checks green; Chrome playback, keyboard and axe pass."
+        },
+        {
+          "at": "2026-10-25T05:14:06Z",
+          "station": "design",
+          "kind": "agent-finished",
+          "actor": "builder"
+        },
+        {
+          "at": "2026-10-25T05:14:21Z",
+          "station": "design",
+          "kind": "start",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-25T05:20:31Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#1 Low: In dark, the video button's light --ink fill sits on the always-light recording with almost no edge (returns from WO-0005 #5)"
+        },
+        {
+          "at": "2026-10-25T05:20:32Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#2 Low: A padlock icon beside 'All three agree' in the recording and poster can read as a security claim (Nows's file, for Nows to decide)"
+        },
+        {
+          "at": "2026-10-25T05:20:32Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#3 Low: 'The whole journey in twelve / seconds' leaves one word on the second line at 1440 (returns from WO-0005 #2)"
+        },
+        {
+          "at": "2026-10-25T05:20:32Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#4 Low: Video intro says 'It plays while it is on screen; the button pauses it', untrue with reduced motion and without JavaScript (no button)"
+        },
+        {
+          "at": "2026-10-25T05:20:32Z",
+          "station": "design",
+          "kind": "finding",
+          "actor": "ui-ux-reviewer",
+          "note": "#5 Low: At 390 the recording is 348 px wide: its records panel text is unreadable and the 44 px button covers the phone"
+        },
+        {
+          "at": "2026-10-25T05:21:04Z",
+          "station": "design",
+          "kind": "report",
+          "actor": "ui-ux-reviewer",
+          "note": "design.md"
+        },
+        {
+          "at": "2026-10-25T05:21:04Z",
+          "station": "design",
+          "kind": "pass",
+          "actor": "ui-ux-reviewer",
+          "note": "Recording back and working in Chrome (autoplay at half visible, pause sticks, reduced motion/no-JS ok, data-playing only); axe 0; five lows (#1 dark button edge, #2 padlock for Nows, #3 heading orphan, #4 intro copy, #5 390 legibility)"
+        },
+        {
+          "at": "2026-10-25T05:21:25Z",
+          "station": "security",
+          "kind": "agent-finished",
+          "actor": "ui-ux-reviewer"
+        },
+        {
+          "at": "2026-10-25T05:21:41Z",
+          "station": "security",
+          "kind": "start",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-25T05:39:55Z",
+          "station": "security",
+          "kind": "report",
+          "actor": "security-checker",
+          "note": "security.md"
+        },
+        {
+          "at": "2026-10-25T05:39:55Z",
+          "station": "security",
+          "kind": "pass",
+          "actor": "security-checker",
+          "note": "No security findings: static-only change, CSP/headers unchanged, no inline script/style in drafts build, media hashes match and carry no EXIF or hidden boxes"
+        },
+        {
+          "at": "2026-10-25T05:40:09Z",
+          "station": "approve",
+          "kind": "agent-finished",
+          "actor": "security-checker"
+        },
+        {
+          "at": "2026-10-25T05:40:35Z",
+          "station": "approve",
+          "kind": "start",
+          "actor": "approver"
+        },
+        {
+          "at": "2026-10-25T05:44:29Z",
+          "station": "approve",
+          "kind": "report",
+          "actor": "approver",
+          "note": "approval.md"
+        },
+        {
+          "at": "2026-10-25T05:44:29Z",
+          "station": "approve",
+          "kind": "approve",
+          "actor": "approver",
+          "note": "Recording back on; all 18 checks pass (own Chrome run for playback, keyboard, reduced motion, no-JS); five lows left for Nows"
         }
       ]
     }

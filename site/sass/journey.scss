@@ -1138,11 +1138,11 @@
 }
 
 .jn-vbtn .jn-icon-pause,
-.jn-vbtn[aria-pressed="true"] .jn-icon-play {
+.jn-vbtn[data-playing="true"] .jn-icon-play {
   display: none;
 }
 
-.jn-vbtn[aria-pressed="true"] .jn-icon-pause {
+.jn-vbtn[data-playing="true"] .jn-icon-pause {
   display: block;
 }
 

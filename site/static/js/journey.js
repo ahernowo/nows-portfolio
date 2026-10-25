@@ -5,9 +5,7 @@
 //   1. each scene is drawn from one progress number, 0 to 1 (bindScene);
 //   2. the hero plays its first beat once, with a Pause animation button;
 //   3. the walkthrough is pinned and driven by scrolling;
-//   4. the recording plays while it is on screen, with a Play/Pause button
-//      (it does nothing while the recording is switched off in
-//      partials/journey.html, because there is no <video> to find).
+//   4. the recording plays while it is on screen, with a Play/Pause button;
 // Style changes go through element.style only, which the CSP allows.
 
 (function () {
@@ -383,7 +381,7 @@
 
   function paintVideoButton() {
     var playing = !video.paused;
-    videoButton.setAttribute("aria-pressed", String(playing));
+    videoButton.setAttribute("data-playing", String(playing));
     videoButton.querySelector(".jn-vlabel").textContent = playing ? "Pause" : "Play";
   }
 
